@@ -3,33 +3,71 @@ syntax = "proto3";
 package omilos_grpc;
 option go_package = "gitlab.com/omilos/omilos-grpc";
 
-//import "google/protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-message CastsRequest {
-    google.protobuf.StringValue fid = 1;
+enum ReactionType {
+    UNSPECIFIED = 0;
+    LIKE = 1;
 }
 
-message CastsResponse {
+message GetCastRequest {
+    string hash = 1;
+}
+
+message GetCastsRequest {
+    string stream_id = 1;
+    bool next = 2;
+    google.protobuf.UInt32Value fid = 3;
+    google.protobuf.StringValue username = 4;
+    google.protobuf.StringValue parent = 5;
+    google.protobuf.StringValue thread = 6;
+    google.protobuf.UInt32Value liked_by = 7;
+    bool trending = 8;
+    bool me = 9;
+}
+
+message GetUserRequest {
+    google.protobuf.UInt32Value fid = 1;
+    google.protobuf.StringValue username = 2;
+}
+
+message Casts {
     repeated Cast casts = 1;
+}
+
+message User {
+    uint32 fid = 1;
+    string username = 2;
+    string display_name = 3;
+    ProfilePicture profile_picture = 4;
+    Profile profile = 5;
+    uint32 follower_count = 6;
+    uint32 following_count = 7;
+}
+
+message Profile {
+    string bio = 1;
 }
 
 message Cast {
     string hash = 1;
     string thread_hash = 2;
-    string text = 3;
-    uint64 timestamp = 4;
-    uint64 replies = 5;
-    uint64 reactions = 6;
-    uint64 recasts = 7; // TODO
-    uint64 watches = 8;
-    bool recast = 9;
-    ViewContext view_context = 10;
+    string parent_hash = 3;
+    Author author = 4;
+    string text = 5;
+    google.protobuf.Timestamp published_at = 6;
+    uint64 replies = 7;
+    uint64 reactions = 8;
+    uint64 recasts = 9; // TODO
+    uint64 watches = 10;
+    bool recast = 11;
+    ViewerContext viewer_context = 12;
 }
 
-message ViewContext {
+message ViewerContext {
     bool reacted = 1;
-    bool recasted = 2;
+    bool recast = 2;
     bool watched = 3;
 }
 
@@ -37,7 +75,7 @@ message Author {
     uint64 fid = 1;
     string username = 2;
     string display_name = 3;
-    ProfilePicture pfp = 4;
+    ProfilePicture profile_picture = 4;
     uint64 follower_count = 5;
     uint64 following_count = 6;
 }
@@ -49,5 +87,7 @@ message ProfilePicture {
 
 
 service Omilos {
-    rpc Casts (CastsRequest) returns (stream CastsResponse) {}
+    rpc GetUser (GetUserRequest) returns (User) {}
+    rpc GetCast (GetCastRequest) returns (Cast) {}
+    rpc GetCasts (GetCastsRequest) returns (Casts) {}
 }
