@@ -13,6 +13,7 @@ import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 import { Timestamp } from "./google/protobuf/timestamp";
+import { BoolValue } from "./google/protobuf/wrappers";
 import { StringValue } from "./google/protobuf/wrappers";
 import { UInt32Value } from "./google/protobuf/wrappers";
 /**
@@ -57,11 +58,15 @@ export interface GetCastsRequest {
      */
     likedBy?: UInt32Value;
     /**
-     * @generated from protobuf field: bool trending = 8;
+     * @generated from protobuf field: google.protobuf.BoolValue has_parent = 8;
+     */
+    hasParent?: BoolValue;
+    /**
+     * @generated from protobuf field: bool trending = 9;
      */
     trending: boolean;
     /**
-     * @generated from protobuf field: bool me = 9;
+     * @generated from protobuf field: bool me = 10;
      */
     me: boolean;
 }
@@ -312,8 +317,9 @@ class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
             { no: 5, name: "parent", kind: "message", T: () => StringValue },
             { no: 6, name: "thread", kind: "message", T: () => StringValue },
             { no: 7, name: "liked_by", kind: "message", T: () => UInt32Value },
-            { no: 8, name: "trending", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 9, name: "me", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 8, name: "has_parent", kind: "message", T: () => BoolValue },
+            { no: 9, name: "trending", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 10, name: "me", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<GetCastsRequest>): GetCastsRequest {
@@ -349,10 +355,13 @@ class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
                 case /* google.protobuf.UInt32Value liked_by */ 7:
                     message.likedBy = UInt32Value.internalBinaryRead(reader, reader.uint32(), options, message.likedBy);
                     break;
-                case /* bool trending */ 8:
+                case /* google.protobuf.BoolValue has_parent */ 8:
+                    message.hasParent = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.hasParent);
+                    break;
+                case /* bool trending */ 9:
                     message.trending = reader.bool();
                     break;
-                case /* bool me */ 9:
+                case /* bool me */ 10:
                     message.me = reader.bool();
                     break;
                 default:
@@ -388,12 +397,15 @@ class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
         /* google.protobuf.UInt32Value liked_by = 7; */
         if (message.likedBy)
             UInt32Value.internalBinaryWrite(message.likedBy, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
-        /* bool trending = 8; */
+        /* google.protobuf.BoolValue has_parent = 8; */
+        if (message.hasParent)
+            BoolValue.internalBinaryWrite(message.hasParent, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* bool trending = 9; */
         if (message.trending !== false)
-            writer.tag(8, WireType.Varint).bool(message.trending);
-        /* bool me = 9; */
+            writer.tag(9, WireType.Varint).bool(message.trending);
+        /* bool me = 10; */
         if (message.me !== false)
-            writer.tag(9, WireType.Varint).bool(message.me);
+            writer.tag(10, WireType.Varint).bool(message.me);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

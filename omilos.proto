@@ -23,8 +23,9 @@ message GetCastsRequest {
     google.protobuf.StringValue parent = 5;
     google.protobuf.StringValue thread = 6;
     google.protobuf.UInt32Value liked_by = 7;
-    bool trending = 8;
-    bool me = 9;
+    google.protobuf.BoolValue has_parent = 8;
+    bool trending = 9;
+    bool me = 10;
 }
 
 message GetUserRequest {
