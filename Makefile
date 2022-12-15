@@ -10,7 +10,7 @@ PROTO_GEN_PY_FILES = $(patsubst %.proto, %_pb2.py, $(PROTO_FILES))
 # Protobuf generator
 PROTO_GO_MAKER := protoc --go_out=. --go-grpc_out=. --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative
 
-PROTO_JS_MAKER := npx protoc --ts_out=.
+PROTO_JS_MAKER := npx protoc --ts_out=. --ts_opt long_type_string
 
 GOCMD=go
 GOBUILD=$(GOCMD) build
