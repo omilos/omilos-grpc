@@ -11,6 +11,30 @@ enum ReactionType {
     LIKE = 1;
 }
 
+message GetMeRequest {}
+
+message LoginRequest {
+    uint64 timestamp = 1;
+    bytes signature = 2;
+}
+
+message LoginResponse {
+    string token = 1;
+    google.protobuf.Timestamp expires_at = 2;
+    User me = 3;
+}
+
+message PostCastRequest {
+    string text = 1;
+    google.protobuf.StringValue parent = 2;
+}
+
+message LikeCastRequest {
+    string hash = 1;
+}
+
+message LikeCastResponse {}
+
 message GetCastRequest {
     string hash = 1;
 }
@@ -88,6 +112,10 @@ message ProfilePicture {
 
 
 service Omilos {
+    rpc Login(LoginRequest) returns (LoginResponse) {}
+    rpc PostCast(PostCastRequest) returns (Cast) {}
+    rpc LikeCast(LikeCastRequest) returns (LikeCastResponse) {}
+    rpc GetMe (GetMeRequest) returns (User) {}
     rpc GetUser (GetUserRequest) returns (User) {}
     rpc GetCast (GetCastRequest) returns (Cast) {}
     rpc GetCasts (GetCastsRequest) returns (Casts) {}

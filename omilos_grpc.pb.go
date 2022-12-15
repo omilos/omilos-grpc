@@ -22,6 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OmilosClient interface {
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error)
+	LikeCast(ctx context.Context, in *LikeCastRequest, opts ...grpc.CallOption) (*LikeCastResponse, error)
+	GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*User, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	GetCast(ctx context.Context, in *GetCastRequest, opts ...grpc.CallOption) (*Cast, error)
 	GetCasts(ctx context.Context, in *GetCastsRequest, opts ...grpc.CallOption) (*Casts, error)
@@ -33,6 +37,42 @@ type omilosClient struct {
 
 func NewOmilosClient(cc grpc.ClientConnInterface) OmilosClient {
 	return &omilosClient{cc}
+}
+
+func (c *omilosClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omilosClient) PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error) {
+	out := new(Cast)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/PostCast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omilosClient) LikeCast(ctx context.Context, in *LikeCastRequest, opts ...grpc.CallOption) (*LikeCastResponse, error) {
+	out := new(LikeCastResponse)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/LikeCast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omilosClient) GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/GetMe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *omilosClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error) {
@@ -66,6 +106,10 @@ func (c *omilosClient) GetCasts(ctx context.Context, in *GetCastsRequest, opts .
 // All implementations must embed UnimplementedOmilosServer
 // for forward compatibility
 type OmilosServer interface {
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	PostCast(context.Context, *PostCastRequest) (*Cast, error)
+	LikeCast(context.Context, *LikeCastRequest) (*LikeCastResponse, error)
+	GetMe(context.Context, *GetMeRequest) (*User, error)
 	GetUser(context.Context, *GetUserRequest) (*User, error)
 	GetCast(context.Context, *GetCastRequest) (*Cast, error)
 	GetCasts(context.Context, *GetCastsRequest) (*Casts, error)
@@ -76,6 +120,18 @@ type OmilosServer interface {
 type UnimplementedOmilosServer struct {
 }
 
+func (UnimplementedOmilosServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedOmilosServer) PostCast(context.Context, *PostCastRequest) (*Cast, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCast not implemented")
+}
+func (UnimplementedOmilosServer) LikeCast(context.Context, *LikeCastRequest) (*LikeCastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LikeCast not implemented")
+}
+func (UnimplementedOmilosServer) GetMe(context.Context, *GetMeRequest) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMe not implemented")
+}
 func (UnimplementedOmilosServer) GetUser(context.Context, *GetUserRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
@@ -96,6 +152,78 @@ type UnsafeOmilosServer interface {
 
 func RegisterOmilosServer(s grpc.ServiceRegistrar, srv OmilosServer) {
 	s.RegisterService(&Omilos_ServiceDesc, srv)
+}
+
+func _Omilos_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Omilos_PostCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).PostCast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/PostCast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).PostCast(ctx, req.(*PostCastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Omilos_LikeCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LikeCastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).LikeCast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/LikeCast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).LikeCast(ctx, req.(*LikeCastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Omilos_GetMe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).GetMe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/GetMe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).GetMe(ctx, req.(*GetMeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Omilos_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -159,6 +287,22 @@ var Omilos_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "omilos_grpc.Omilos",
 	HandlerType: (*OmilosServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Login",
+			Handler:    _Omilos_Login_Handler,
+		},
+		{
+			MethodName: "PostCast",
+			Handler:    _Omilos_PostCast_Handler,
+		},
+		{
+			MethodName: "LikeCast",
+			Handler:    _Omilos_LikeCast_Handler,
+		},
+		{
+			MethodName: "GetMe",
+			Handler:    _Omilos_GetMe_Handler,
+		},
 		{
 			MethodName: "GetUser",
 			Handler:    _Omilos_GetUser_Handler,
