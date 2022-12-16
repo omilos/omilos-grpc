@@ -7,8 +7,15 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 enum ReactionType {
-    UNSPECIFIED = 0;
-    LIKE = 1;
+    UNSPECIFIED_REACTION_TYPE = 0;
+    HEART = 1;
+}
+
+enum NotificationType {
+    UNSPECIFIED_NOTIFICATION_TYPE = 0;
+    MENTION = 1;
+    LIKE = 2;
+    REPLY = 3;
 }
 
 message GetMeRequest {}
