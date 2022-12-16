@@ -317,9 +317,9 @@ export enum ReactionType {
      */
     UNSPECIFIED_REACTION_TYPE = 0,
     /**
-     * @generated from protobuf enum value: HEART = 1;
+     * @generated from protobuf enum value: LIKE = 1;
      */
-    HEART = 1
+    LIKE = 1
 }
 /**
  * @generated from protobuf enum omilos_grpc.NotificationType
