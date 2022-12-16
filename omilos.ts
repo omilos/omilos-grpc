@@ -330,17 +330,17 @@ export enum NotificationType {
      */
     UNSPECIFIED_NOTIFICATION_TYPE = 0,
     /**
-     * @generated from protobuf enum value: MENTION = 1;
+     * @generated from protobuf enum value: CAST_MENTION = 1;
      */
-    MENTION = 1,
+    CAST_MENTION = 1,
     /**
-     * @generated from protobuf enum value: LIKE = 2;
+     * @generated from protobuf enum value: CAST_LIKE = 2;
      */
-    LIKE = 2,
+    CAST_LIKE = 2,
     /**
-     * @generated from protobuf enum value: REPLY = 3;
+     * @generated from protobuf enum value: CAST_REPLY = 3;
      */
-    REPLY = 3
+    CAST_REPLY = 3
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class GetMeRequest$Type extends MessageType<GetMeRequest> {
