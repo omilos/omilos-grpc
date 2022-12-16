@@ -313,13 +313,34 @@ export interface ProfilePicture {
  */
 export enum ReactionType {
     /**
-     * @generated from protobuf enum value: UNSPECIFIED = 0;
+     * @generated from protobuf enum value: UNSPECIFIED_REACTION_TYPE = 0;
      */
-    UNSPECIFIED = 0,
+    UNSPECIFIED_REACTION_TYPE = 0,
     /**
-     * @generated from protobuf enum value: LIKE = 1;
+     * @generated from protobuf enum value: HEART = 1;
      */
-    LIKE = 1
+    HEART = 1
+}
+/**
+ * @generated from protobuf enum omilos_grpc.NotificationType
+ */
+export enum NotificationType {
+    /**
+     * @generated from protobuf enum value: UNSPECIFIED_NOTIFICATION_TYPE = 0;
+     */
+    UNSPECIFIED_NOTIFICATION_TYPE = 0,
+    /**
+     * @generated from protobuf enum value: MENTION = 1;
+     */
+    MENTION = 1,
+    /**
+     * @generated from protobuf enum value: LIKE = 2;
+     */
+    LIKE = 2,
+    /**
+     * @generated from protobuf enum value: REPLY = 3;
+     */
+    REPLY = 3
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class GetMeRequest$Type extends MessageType<GetMeRequest> {
