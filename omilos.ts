@@ -92,7 +92,11 @@ export interface GetCastRequest {
  */
 export interface GetNotificationsRequest {
     /**
-     * @generated from protobuf field: bool next = 1;
+     * @generated from protobuf field: string stream_id = 1;
+     */
+    streamId: string;
+    /**
+     * @generated from protobuf field: bool next = 2;
      */
     next: boolean;
 }
@@ -704,11 +708,12 @@ export const GetCastRequest = new GetCastRequest$Type();
 class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> {
     constructor() {
         super("omilos_grpc.GetNotificationsRequest", [
-            { no: 1, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<GetNotificationsRequest>): GetNotificationsRequest {
-        const message = { next: false };
+        const message = { streamId: "", next: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GetNotificationsRequest>(this, message, value);
@@ -719,7 +724,10 @@ class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> 
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* bool next */ 1:
+                case /* string stream_id */ 1:
+                    message.streamId = reader.string();
+                    break;
+                case /* bool next */ 2:
                     message.next = reader.bool();
                     break;
                 default:
@@ -734,9 +742,12 @@ class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> 
         return message;
     }
     internalBinaryWrite(message: GetNotificationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* bool next = 1; */
+        /* string stream_id = 1; */
+        if (message.streamId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
+        /* bool next = 2; */
         if (message.next !== false)
-            writer.tag(1, WireType.Varint).bool(message.next);
+            writer.tag(2, WireType.Varint).bool(message.next);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

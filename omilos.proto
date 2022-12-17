@@ -47,7 +47,8 @@ message GetCastRequest {
 }
 
 message GetNotificationsRequest {
-    bool next = 1;
+    string stream_id = 1;
+    bool next = 2;
 }
 
 message Notifications {
