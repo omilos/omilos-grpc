@@ -46,6 +46,22 @@ message GetCastRequest {
     string hash = 1;
 }
 
+message GetNotificationsRequest {
+    bool next = 1;
+}
+
+message Notifications {
+    repeated Notification notifications = 1;
+}
+
+message Notification {
+    NotificationType type = 1;
+    string cast_hash = 2;
+    string actor_display_name = 3;
+    ProfilePicture actor_profile_picture = 4;
+    uint32 actor_fid = 5;
+}
+
 message GetCastsRequest {
     string stream_id = 1;
     bool next = 2;

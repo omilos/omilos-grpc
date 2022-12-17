@@ -88,6 +88,49 @@ export interface GetCastRequest {
     hash: string;
 }
 /**
+ * @generated from protobuf message omilos_grpc.GetNotificationsRequest
+ */
+export interface GetNotificationsRequest {
+    /**
+     * @generated from protobuf field: bool next = 1;
+     */
+    next: boolean;
+}
+/**
+ * @generated from protobuf message omilos_grpc.Notifications
+ */
+export interface Notifications {
+    /**
+     * @generated from protobuf field: repeated omilos_grpc.Notification notifications = 1;
+     */
+    notifications: Notification[];
+}
+/**
+ * @generated from protobuf message omilos_grpc.Notification
+ */
+export interface Notification {
+    /**
+     * @generated from protobuf field: omilos_grpc.NotificationType type = 1;
+     */
+    type: NotificationType;
+    /**
+     * @generated from protobuf field: string cast_hash = 2;
+     */
+    castHash: string;
+    /**
+     * @generated from protobuf field: string actor_display_name = 3;
+     */
+    actorDisplayName: string;
+    /**
+     * @generated from protobuf field: omilos_grpc.ProfilePicture actor_profile_picture = 4;
+     */
+    actorProfilePicture?: ProfilePicture;
+    /**
+     * @generated from protobuf field: uint32 actor_fid = 5;
+     */
+    actorFid: number;
+}
+/**
  * @generated from protobuf message omilos_grpc.GetCastsRequest
  */
 export interface GetCastsRequest {
@@ -657,6 +700,175 @@ class GetCastRequest$Type extends MessageType<GetCastRequest> {
  * @generated MessageType for protobuf message omilos_grpc.GetCastRequest
  */
 export const GetCastRequest = new GetCastRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> {
+    constructor() {
+        super("omilos_grpc.GetNotificationsRequest", [
+            { no: 1, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+        ]);
+    }
+    create(value?: PartialMessage<GetNotificationsRequest>): GetNotificationsRequest {
+        const message = { next: false };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetNotificationsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetNotificationsRequest): GetNotificationsRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* bool next */ 1:
+                    message.next = reader.bool();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetNotificationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* bool next = 1; */
+        if (message.next !== false)
+            writer.tag(1, WireType.Varint).bool(message.next);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetNotificationsRequest
+ */
+export const GetNotificationsRequest = new GetNotificationsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Notifications$Type extends MessageType<Notifications> {
+    constructor() {
+        super("omilos_grpc.Notifications", [
+            { no: 1, name: "notifications", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Notification }
+        ]);
+    }
+    create(value?: PartialMessage<Notifications>): Notifications {
+        const message = { notifications: [] };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<Notifications>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Notifications): Notifications {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* repeated omilos_grpc.Notification notifications */ 1:
+                    message.notifications.push(Notification.internalBinaryRead(reader, reader.uint32(), options));
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: Notifications, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated omilos_grpc.Notification notifications = 1; */
+        for (let i = 0; i < message.notifications.length; i++)
+            Notification.internalBinaryWrite(message.notifications[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.Notifications
+ */
+export const Notifications = new Notifications$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Notification$Type extends MessageType<Notification> {
+    constructor() {
+        super("omilos_grpc.Notification", [
+            { no: 1, name: "type", kind: "enum", T: () => ["omilos_grpc.NotificationType", NotificationType] },
+            { no: 2, name: "cast_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "actor_display_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "actor_profile_picture", kind: "message", T: () => ProfilePicture },
+            { no: 5, name: "actor_fid", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+        ]);
+    }
+    create(value?: PartialMessage<Notification>): Notification {
+        const message = { type: 0, castHash: "", actorDisplayName: "", actorFid: 0 };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<Notification>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Notification): Notification {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* omilos_grpc.NotificationType type */ 1:
+                    message.type = reader.int32();
+                    break;
+                case /* string cast_hash */ 2:
+                    message.castHash = reader.string();
+                    break;
+                case /* string actor_display_name */ 3:
+                    message.actorDisplayName = reader.string();
+                    break;
+                case /* omilos_grpc.ProfilePicture actor_profile_picture */ 4:
+                    message.actorProfilePicture = ProfilePicture.internalBinaryRead(reader, reader.uint32(), options, message.actorProfilePicture);
+                    break;
+                case /* uint32 actor_fid */ 5:
+                    message.actorFid = reader.uint32();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: Notification, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* omilos_grpc.NotificationType type = 1; */
+        if (message.type !== 0)
+            writer.tag(1, WireType.Varint).int32(message.type);
+        /* string cast_hash = 2; */
+        if (message.castHash !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.castHash);
+        /* string actor_display_name = 3; */
+        if (message.actorDisplayName !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.actorDisplayName);
+        /* omilos_grpc.ProfilePicture actor_profile_picture = 4; */
+        if (message.actorProfilePicture)
+            ProfilePicture.internalBinaryWrite(message.actorProfilePicture, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* uint32 actor_fid = 5; */
+        if (message.actorFid !== 0)
+            writer.tag(5, WireType.Varint).uint32(message.actorFid);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.Notification
+ */
+export const Notification = new Notification$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
     constructor() {
