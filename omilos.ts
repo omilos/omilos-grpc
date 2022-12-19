@@ -15,6 +15,7 @@ import { MessageType } from "@protobuf-ts/runtime";
 import { BoolValue } from "./google/protobuf/wrappers";
 import { UInt32Value } from "./google/protobuf/wrappers";
 import { StringValue } from "./google/protobuf/wrappers";
+import { UInt64Value } from "./google/protobuf/wrappers";
 import { Timestamp } from "./google/protobuf/timestamp";
 /**
  * @generated from protobuf message omilos_grpc.GetMeRequest
@@ -60,18 +61,18 @@ export interface PostCastRequest {
      */
     text: string;
     /**
-     * @generated from protobuf field: google.protobuf.StringValue parent = 2;
+     * @generated from protobuf field: google.protobuf.UInt64Value parent_id = 2;
      */
-    parent?: StringValue;
+    parentId?: UInt64Value;
 }
 /**
  * @generated from protobuf message omilos_grpc.LikeCastRequest
  */
 export interface LikeCastRequest {
     /**
-     * @generated from protobuf field: string hash = 1;
+     * @generated from protobuf field: uint64 id = 1;
      */
-    hash: string;
+    id: number;
 }
 /**
  * @generated from protobuf message omilos_grpc.LikeCastResponse
@@ -83,9 +84,13 @@ export interface LikeCastResponse {
  */
 export interface GetCastRequest {
     /**
-     * @generated from protobuf field: string hash = 1;
+     * @generated from protobuf field: google.protobuf.UInt64Value id = 1;
      */
-    hash: string;
+    id?: UInt64Value;
+    /**
+     * @generated from protobuf field: google.protobuf.StringValue hash = 2;
+     */
+    hash?: StringValue;
 }
 /**
  * @generated from protobuf message omilos_grpc.GetNotificationsRequest
@@ -118,9 +123,9 @@ export interface Notification {
      */
     type: NotificationType;
     /**
-     * @generated from protobuf field: string cast_hash = 2;
+     * @generated from protobuf field: uint64 cast_id = 2;
      */
-    castHash: string;
+    castId: number;
     /**
      * @generated from protobuf field: string actor_display_name = 3;
      */
@@ -133,6 +138,10 @@ export interface Notification {
      * @generated from protobuf field: uint32 actor_fid = 5;
      */
     actorFid: number;
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp timestamp = 6;
+     */
+    timestamp?: Timestamp;
 }
 /**
  * @generated from protobuf message omilos_grpc.GetCastsRequest
@@ -248,53 +257,65 @@ export interface Profile {
  */
 export interface Cast {
     /**
-     * @generated from protobuf field: string hash = 1;
+     * @generated from protobuf field: uint64 id = 1;
+     */
+    id: number;
+    /**
+     * @generated from protobuf field: string hash = 2;
      */
     hash: string;
     /**
-     * @generated from protobuf field: string thread_hash = 2;
+     * @generated from protobuf field: string thread_hash = 3;
      */
     threadHash: string;
     /**
-     * @generated from protobuf field: string parent_hash = 3;
+     * @generated from protobuf field: google.protobuf.UInt64Value parent_id = 4;
      */
-    parentHash: string;
+    parentId?: UInt64Value;
     /**
-     * @generated from protobuf field: omilos_grpc.Author author = 4;
+     * @generated from protobuf field: omilos_grpc.Author author = 5;
      */
     author?: Author;
     /**
-     * @generated from protobuf field: string text = 5;
+     * @generated from protobuf field: string text = 6;
      */
     text: string;
     /**
-     * @generated from protobuf field: google.protobuf.Timestamp published_at = 6;
+     * @generated from protobuf field: google.protobuf.Timestamp published_at = 7;
      */
     publishedAt?: Timestamp;
     /**
-     * @generated from protobuf field: uint64 replies = 7;
+     * @generated from protobuf field: uint64 replies = 8;
      */
     replies: number;
     /**
-     * @generated from protobuf field: uint64 reactions = 8;
+     * @generated from protobuf field: uint64 reactions = 9;
      */
     reactions: number;
     /**
-     * @generated from protobuf field: uint64 recasts = 9;
+     * @generated from protobuf field: uint64 recasts = 10;
      */
     recasts: number; // TODO
     /**
-     * @generated from protobuf field: uint64 watches = 10;
+     * @generated from protobuf field: uint64 watches = 11;
      */
     watches: number;
     /**
-     * @generated from protobuf field: bool recast = 11;
+     * @generated from protobuf field: bool recast = 12;
      */
     recast: boolean;
     /**
-     * @generated from protobuf field: omilos_grpc.ViewerContext viewer_context = 12;
+     * @generated from protobuf field: omilos_grpc.ViewerContext viewer_context = 13;
      */
     viewerContext?: ViewerContext;
+    /**
+     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 14;
+     */
+    parentAuthorDisplayName?: StringValue;
+    /**
+     * @generated from protobuf field: google.protobuf.UInt64Value parent_author_fid = 15;
+     */
+    parentAuthorFid?: UInt64Value;
 }
 /**
  * @generated from protobuf message omilos_grpc.ViewerContext
@@ -535,7 +556,7 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
     constructor() {
         super("omilos_grpc.PostCastRequest", [
             { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "parent", kind: "message", T: () => StringValue }
+            { no: 2, name: "parent_id", kind: "message", T: () => UInt64Value }
         ]);
     }
     create(value?: PartialMessage<PostCastRequest>): PostCastRequest {
@@ -553,8 +574,8 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
                 case /* string text */ 1:
                     message.text = reader.string();
                     break;
-                case /* google.protobuf.StringValue parent */ 2:
-                    message.parent = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.parent);
+                case /* google.protobuf.UInt64Value parent_id */ 2:
+                    message.parentId = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -571,9 +592,9 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
         /* string text = 1; */
         if (message.text !== "")
             writer.tag(1, WireType.LengthDelimited).string(message.text);
-        /* google.protobuf.StringValue parent = 2; */
-        if (message.parent)
-            StringValue.internalBinaryWrite(message.parent, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.UInt64Value parent_id = 2; */
+        if (message.parentId)
+            UInt64Value.internalBinaryWrite(message.parentId, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -588,11 +609,11 @@ export const PostCastRequest = new PostCastRequest$Type();
 class LikeCastRequest$Type extends MessageType<LikeCastRequest> {
     constructor() {
         super("omilos_grpc.LikeCastRequest", [
-            { no: 1, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ }
         ]);
     }
     create(value?: PartialMessage<LikeCastRequest>): LikeCastRequest {
-        const message = { hash: "" };
+        const message = { id: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<LikeCastRequest>(this, message, value);
@@ -603,8 +624,8 @@ class LikeCastRequest$Type extends MessageType<LikeCastRequest> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string hash */ 1:
-                    message.hash = reader.string();
+                case /* uint64 id */ 1:
+                    message.id = reader.uint64().toNumber();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -618,9 +639,9 @@ class LikeCastRequest$Type extends MessageType<LikeCastRequest> {
         return message;
     }
     internalBinaryWrite(message: LikeCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string hash = 1; */
-        if (message.hash !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.hash);
+        /* uint64 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).uint64(message.id);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -661,11 +682,12 @@ export const LikeCastResponse = new LikeCastResponse$Type();
 class GetCastRequest$Type extends MessageType<GetCastRequest> {
     constructor() {
         super("omilos_grpc.GetCastRequest", [
-            { no: 1, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "message", T: () => UInt64Value },
+            { no: 2, name: "hash", kind: "message", T: () => StringValue }
         ]);
     }
     create(value?: PartialMessage<GetCastRequest>): GetCastRequest {
-        const message = { hash: "" };
+        const message = {};
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GetCastRequest>(this, message, value);
@@ -676,8 +698,11 @@ class GetCastRequest$Type extends MessageType<GetCastRequest> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string hash */ 1:
-                    message.hash = reader.string();
+                case /* google.protobuf.UInt64Value id */ 1:
+                    message.id = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.id);
+                    break;
+                case /* google.protobuf.StringValue hash */ 2:
+                    message.hash = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.hash);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -691,9 +716,12 @@ class GetCastRequest$Type extends MessageType<GetCastRequest> {
         return message;
     }
     internalBinaryWrite(message: GetCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string hash = 1; */
-        if (message.hash !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.hash);
+        /* google.protobuf.UInt64Value id = 1; */
+        if (message.id)
+            UInt64Value.internalBinaryWrite(message.id, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue hash = 2; */
+        if (message.hash)
+            StringValue.internalBinaryWrite(message.hash, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -810,14 +838,15 @@ class Notification$Type extends MessageType<Notification> {
     constructor() {
         super("omilos_grpc.Notification", [
             { no: 1, name: "type", kind: "enum", T: () => ["omilos_grpc.NotificationType", NotificationType] },
-            { no: 2, name: "cast_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "cast_id", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
             { no: 3, name: "actor_display_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "actor_profile_picture", kind: "message", T: () => ProfilePicture },
-            { no: 5, name: "actor_fid", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+            { no: 5, name: "actor_fid", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 6, name: "timestamp", kind: "message", T: () => Timestamp }
         ]);
     }
     create(value?: PartialMessage<Notification>): Notification {
-        const message = { type: 0, castHash: "", actorDisplayName: "", actorFid: 0 };
+        const message = { type: 0, castId: 0, actorDisplayName: "", actorFid: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Notification>(this, message, value);
@@ -831,8 +860,8 @@ class Notification$Type extends MessageType<Notification> {
                 case /* omilos_grpc.NotificationType type */ 1:
                     message.type = reader.int32();
                     break;
-                case /* string cast_hash */ 2:
-                    message.castHash = reader.string();
+                case /* uint64 cast_id */ 2:
+                    message.castId = reader.uint64().toNumber();
                     break;
                 case /* string actor_display_name */ 3:
                     message.actorDisplayName = reader.string();
@@ -842,6 +871,9 @@ class Notification$Type extends MessageType<Notification> {
                     break;
                 case /* uint32 actor_fid */ 5:
                     message.actorFid = reader.uint32();
+                    break;
+                case /* google.protobuf.Timestamp timestamp */ 6:
+                    message.timestamp = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.timestamp);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -858,9 +890,9 @@ class Notification$Type extends MessageType<Notification> {
         /* omilos_grpc.NotificationType type = 1; */
         if (message.type !== 0)
             writer.tag(1, WireType.Varint).int32(message.type);
-        /* string cast_hash = 2; */
-        if (message.castHash !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.castHash);
+        /* uint64 cast_id = 2; */
+        if (message.castId !== 0)
+            writer.tag(2, WireType.Varint).uint64(message.castId);
         /* string actor_display_name = 3; */
         if (message.actorDisplayName !== "")
             writer.tag(3, WireType.LengthDelimited).string(message.actorDisplayName);
@@ -870,6 +902,9 @@ class Notification$Type extends MessageType<Notification> {
         /* uint32 actor_fid = 5; */
         if (message.actorFid !== 0)
             writer.tag(5, WireType.Varint).uint32(message.actorFid);
+        /* google.protobuf.Timestamp timestamp = 6; */
+        if (message.timestamp)
+            Timestamp.internalBinaryWrite(message.timestamp, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1231,22 +1266,25 @@ export const Profile = new Profile$Type();
 class Cast$Type extends MessageType<Cast> {
     constructor() {
         super("omilos_grpc.Cast", [
-            { no: 1, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "thread_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "parent_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "author", kind: "message", T: () => Author },
-            { no: 5, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 6, name: "published_at", kind: "message", T: () => Timestamp },
-            { no: 7, name: "replies", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 8, name: "reactions", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 9, name: "recasts", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 10, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 11, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 12, name: "viewer_context", kind: "message", T: () => ViewerContext }
+            { no: 1, name: "id", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 2, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "thread_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "parent_id", kind: "message", T: () => UInt64Value },
+            { no: 5, name: "author", kind: "message", T: () => Author },
+            { no: 6, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 7, name: "published_at", kind: "message", T: () => Timestamp },
+            { no: 8, name: "replies", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 9, name: "reactions", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 10, name: "recasts", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 11, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 12, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 13, name: "viewer_context", kind: "message", T: () => ViewerContext },
+            { no: 14, name: "parent_author_display_name", kind: "message", T: () => StringValue },
+            { no: 15, name: "parent_author_fid", kind: "message", T: () => UInt64Value }
         ]);
     }
     create(value?: PartialMessage<Cast>): Cast {
-        const message = { hash: "", threadHash: "", parentHash: "", text: "", replies: 0, reactions: 0, recasts: 0, watches: 0, recast: false };
+        const message = { id: 0, hash: "", threadHash: "", text: "", replies: 0, reactions: 0, recasts: 0, watches: 0, recast: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Cast>(this, message, value);
@@ -1257,41 +1295,50 @@ class Cast$Type extends MessageType<Cast> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string hash */ 1:
+                case /* uint64 id */ 1:
+                    message.id = reader.uint64().toNumber();
+                    break;
+                case /* string hash */ 2:
                     message.hash = reader.string();
                     break;
-                case /* string thread_hash */ 2:
+                case /* string thread_hash */ 3:
                     message.threadHash = reader.string();
                     break;
-                case /* string parent_hash */ 3:
-                    message.parentHash = reader.string();
+                case /* google.protobuf.UInt64Value parent_id */ 4:
+                    message.parentId = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
                     break;
-                case /* omilos_grpc.Author author */ 4:
+                case /* omilos_grpc.Author author */ 5:
                     message.author = Author.internalBinaryRead(reader, reader.uint32(), options, message.author);
                     break;
-                case /* string text */ 5:
+                case /* string text */ 6:
                     message.text = reader.string();
                     break;
-                case /* google.protobuf.Timestamp published_at */ 6:
+                case /* google.protobuf.Timestamp published_at */ 7:
                     message.publishedAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.publishedAt);
                     break;
-                case /* uint64 replies */ 7:
+                case /* uint64 replies */ 8:
                     message.replies = reader.uint64().toNumber();
                     break;
-                case /* uint64 reactions */ 8:
+                case /* uint64 reactions */ 9:
                     message.reactions = reader.uint64().toNumber();
                     break;
-                case /* uint64 recasts */ 9:
+                case /* uint64 recasts */ 10:
                     message.recasts = reader.uint64().toNumber();
                     break;
-                case /* uint64 watches */ 10:
+                case /* uint64 watches */ 11:
                     message.watches = reader.uint64().toNumber();
                     break;
-                case /* bool recast */ 11:
+                case /* bool recast */ 12:
                     message.recast = reader.bool();
                     break;
-                case /* omilos_grpc.ViewerContext viewer_context */ 12:
+                case /* omilos_grpc.ViewerContext viewer_context */ 13:
                     message.viewerContext = ViewerContext.internalBinaryRead(reader, reader.uint32(), options, message.viewerContext);
+                    break;
+                case /* google.protobuf.StringValue parent_author_display_name */ 14:
+                    message.parentAuthorDisplayName = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorDisplayName);
+                    break;
+                case /* google.protobuf.UInt64Value parent_author_fid */ 15:
+                    message.parentAuthorFid = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorFid);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1305,42 +1352,51 @@ class Cast$Type extends MessageType<Cast> {
         return message;
     }
     internalBinaryWrite(message: Cast, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string hash = 1; */
+        /* uint64 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).uint64(message.id);
+        /* string hash = 2; */
         if (message.hash !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.hash);
-        /* string thread_hash = 2; */
+            writer.tag(2, WireType.LengthDelimited).string(message.hash);
+        /* string thread_hash = 3; */
         if (message.threadHash !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.threadHash);
-        /* string parent_hash = 3; */
-        if (message.parentHash !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.parentHash);
-        /* omilos_grpc.Author author = 4; */
+            writer.tag(3, WireType.LengthDelimited).string(message.threadHash);
+        /* google.protobuf.UInt64Value parent_id = 4; */
+        if (message.parentId)
+            UInt64Value.internalBinaryWrite(message.parentId, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* omilos_grpc.Author author = 5; */
         if (message.author)
-            Author.internalBinaryWrite(message.author, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* string text = 5; */
+            Author.internalBinaryWrite(message.author, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* string text = 6; */
         if (message.text !== "")
-            writer.tag(5, WireType.LengthDelimited).string(message.text);
-        /* google.protobuf.Timestamp published_at = 6; */
+            writer.tag(6, WireType.LengthDelimited).string(message.text);
+        /* google.protobuf.Timestamp published_at = 7; */
         if (message.publishedAt)
-            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
-        /* uint64 replies = 7; */
+            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* uint64 replies = 8; */
         if (message.replies !== 0)
-            writer.tag(7, WireType.Varint).uint64(message.replies);
-        /* uint64 reactions = 8; */
+            writer.tag(8, WireType.Varint).uint64(message.replies);
+        /* uint64 reactions = 9; */
         if (message.reactions !== 0)
-            writer.tag(8, WireType.Varint).uint64(message.reactions);
-        /* uint64 recasts = 9; */
+            writer.tag(9, WireType.Varint).uint64(message.reactions);
+        /* uint64 recasts = 10; */
         if (message.recasts !== 0)
-            writer.tag(9, WireType.Varint).uint64(message.recasts);
-        /* uint64 watches = 10; */
+            writer.tag(10, WireType.Varint).uint64(message.recasts);
+        /* uint64 watches = 11; */
         if (message.watches !== 0)
-            writer.tag(10, WireType.Varint).uint64(message.watches);
-        /* bool recast = 11; */
+            writer.tag(11, WireType.Varint).uint64(message.watches);
+        /* bool recast = 12; */
         if (message.recast !== false)
-            writer.tag(11, WireType.Varint).bool(message.recast);
-        /* omilos_grpc.ViewerContext viewer_context = 12; */
+            writer.tag(12, WireType.Varint).bool(message.recast);
+        /* omilos_grpc.ViewerContext viewer_context = 13; */
         if (message.viewerContext)
-            ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
+            ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(13, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue parent_author_display_name = 14; */
+        if (message.parentAuthorDisplayName)
+            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(14, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.UInt64Value parent_author_fid = 15; */
+        if (message.parentAuthorFid)
+            UInt64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(15, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1556,6 +1612,7 @@ export const Omilos = new ServiceType("omilos_grpc.Omilos", [
     { name: "PostCast", options: {}, I: PostCastRequest, O: Cast },
     { name: "LikeCast", options: {}, I: LikeCastRequest, O: LikeCastResponse },
     { name: "GetMe", options: {}, I: GetMeRequest, O: User },
+    { name: "GetNotifications", options: {}, I: GetNotificationsRequest, O: Notifications },
     { name: "GetUser", options: {}, I: GetUserRequest, O: User },
     { name: "GetCast", options: {}, I: GetCastRequest, O: Cast },
     { name: "GetCasts", options: {}, I: GetCastsRequest, O: Casts }

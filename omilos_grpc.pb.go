@@ -26,6 +26,7 @@ type OmilosClient interface {
 	PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error)
 	LikeCast(ctx context.Context, in *LikeCastRequest, opts ...grpc.CallOption) (*LikeCastResponse, error)
 	GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*User, error)
+	GetNotifications(ctx context.Context, in *GetNotificationsRequest, opts ...grpc.CallOption) (*Notifications, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	GetCast(ctx context.Context, in *GetCastRequest, opts ...grpc.CallOption) (*Cast, error)
 	GetCasts(ctx context.Context, in *GetCastsRequest, opts ...grpc.CallOption) (*Casts, error)
@@ -75,6 +76,15 @@ func (c *omilosClient) GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc
 	return out, nil
 }
 
+func (c *omilosClient) GetNotifications(ctx context.Context, in *GetNotificationsRequest, opts ...grpc.CallOption) (*Notifications, error) {
+	out := new(Notifications)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/GetNotifications", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *omilosClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/GetUser", in, out, opts...)
@@ -110,6 +120,7 @@ type OmilosServer interface {
 	PostCast(context.Context, *PostCastRequest) (*Cast, error)
 	LikeCast(context.Context, *LikeCastRequest) (*LikeCastResponse, error)
 	GetMe(context.Context, *GetMeRequest) (*User, error)
+	GetNotifications(context.Context, *GetNotificationsRequest) (*Notifications, error)
 	GetUser(context.Context, *GetUserRequest) (*User, error)
 	GetCast(context.Context, *GetCastRequest) (*Cast, error)
 	GetCasts(context.Context, *GetCastsRequest) (*Casts, error)
@@ -131,6 +142,9 @@ func (UnimplementedOmilosServer) LikeCast(context.Context, *LikeCastRequest) (*L
 }
 func (UnimplementedOmilosServer) GetMe(context.Context, *GetMeRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMe not implemented")
+}
+func (UnimplementedOmilosServer) GetNotifications(context.Context, *GetNotificationsRequest) (*Notifications, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNotifications not implemented")
 }
 func (UnimplementedOmilosServer) GetUser(context.Context, *GetUserRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
@@ -226,6 +240,24 @@ func _Omilos_GetMe_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Omilos_GetNotifications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNotificationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).GetNotifications(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/GetNotifications",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).GetNotifications(ctx, req.(*GetNotificationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Omilos_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserRequest)
 	if err := dec(in); err != nil {
@@ -302,6 +334,10 @@ var Omilos_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMe",
 			Handler:    _Omilos_GetMe_Handler,
+		},
+		{
+			MethodName: "GetNotifications",
+			Handler:    _Omilos_GetNotifications_Handler,
 		},
 		{
 			MethodName: "GetUser",

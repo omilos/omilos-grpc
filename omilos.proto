@@ -33,17 +33,18 @@ message LoginResponse {
 
 message PostCastRequest {
     string text = 1;
-    google.protobuf.StringValue parent = 2;
+    google.protobuf.UInt64Value parent_id = 2;
 }
 
 message LikeCastRequest {
-    string hash = 1;
+    uint64 id = 1;
 }
 
 message LikeCastResponse {}
 
 message GetCastRequest {
-    string hash = 1;
+    google.protobuf.UInt64Value id = 1;
+    google.protobuf.StringValue hash = 2;
 }
 
 message GetNotificationsRequest {
@@ -57,10 +58,11 @@ message Notifications {
 
 message Notification {
     NotificationType type = 1;
-    string cast_hash = 2;
+    uint64 cast_id = 2;
     string actor_display_name = 3;
     ProfilePicture actor_profile_picture = 4;
     uint32 actor_fid = 5;
+    google.protobuf.Timestamp timestamp = 6;
 }
 
 message GetCastsRequest {
@@ -100,18 +102,21 @@ message Profile {
 }
 
 message Cast {
-    string hash = 1;
-    string thread_hash = 2;
-    string parent_hash = 3;
-    Author author = 4;
-    string text = 5;
-    google.protobuf.Timestamp published_at = 6;
-    uint64 replies = 7;
-    uint64 reactions = 8;
-    uint64 recasts = 9; // TODO
-    uint64 watches = 10;
-    bool recast = 11;
-    ViewerContext viewer_context = 12;
+    uint64 id = 1;
+    string hash = 2;
+    string thread_hash = 3;
+    google.protobuf.UInt64Value parent_id = 4;
+    Author author = 5;
+    string text = 6;
+    google.protobuf.Timestamp published_at = 7;
+    uint64 replies = 8;
+    uint64 reactions = 9;
+    uint64 recasts = 10; // TODO
+    uint64 watches = 11;
+    bool recast = 12;
+    ViewerContext viewer_context = 13;
+    google.protobuf.StringValue parent_author_display_name = 14;
+    google.protobuf.UInt64Value parent_author_fid = 15;
 }
 
 message ViewerContext {
@@ -140,6 +145,7 @@ service Omilos {
     rpc PostCast(PostCastRequest) returns (Cast) {}
     rpc LikeCast(LikeCastRequest) returns (LikeCastResponse) {}
     rpc GetMe (GetMeRequest) returns (User) {}
+    rpc GetNotifications (GetNotificationsRequest) returns (Notifications) {}
     rpc GetUser (GetUserRequest) returns (User) {}
     rpc GetCast (GetCastRequest) returns (Cast) {}
     rpc GetCasts (GetCastsRequest) returns (Casts) {}
