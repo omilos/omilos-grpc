@@ -446,7 +446,11 @@ export enum CastStreamType {
     /**
      * @generated from protobuf enum value: TRENDING = 7;
      */
-    TRENDING = 7
+    TRENDING = 7,
+    /**
+     * @generated from protobuf enum value: HIGHLIGHTS = 8;
+     */
+    HIGHLIGHTS = 8
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class GetMeRequest$Type extends MessageType<GetMeRequest> {
