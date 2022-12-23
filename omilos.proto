@@ -42,9 +42,13 @@ message LikeCastRequest {
 
 message LikeCastResponse {}
 
-message GetCastRequest {
+message CastIdentifier {
     google.protobuf.UInt64Value id = 1;
     google.protobuf.StringValue hash = 2;
+}
+
+message GetCastRequest {
+    CastIdentifier cast = 1;
 }
 
 message GetNotificationsRequest {
@@ -65,17 +69,28 @@ message Notification {
     google.protobuf.Timestamp timestamp = 6;
 }
 
+message UserIdentifier {
+    google.protobuf.UInt32Value fid = 1;
+    google.protobuf.StringValue username = 2;
+}
+
+enum CastStreamType {
+    UNSPECIFIED_CAST_STREAM_TYPE = 0;
+    CHILDREN = 1;
+    THREAD_CASTS = 2;
+    USER_THREADS = 3;
+    USER_LIKES = 4;
+    USER_REPLIES = 5;
+    TIMELINE = 6;
+    TRENDING = 7;
+}
+
 message GetCastsRequest {
     string stream_id = 1;
     bool next = 2;
-    google.protobuf.UInt32Value fid = 3;
-    google.protobuf.StringValue username = 4;
-    google.protobuf.StringValue parent = 5;
-    google.protobuf.StringValue thread = 6;
-    google.protobuf.UInt32Value liked_by = 7;
-    google.protobuf.BoolValue has_parent = 8;
-    bool trending = 9;
-    bool me = 10;
+    UserIdentifier user = 3;
+    CastIdentifier cast = 4;
+    CastStreamType type = 5;
 }
 
 message GetUserRequest {
