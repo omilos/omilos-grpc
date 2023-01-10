@@ -440,9 +440,9 @@ export enum CastStreamType {
      */
     USER_REPLIES = 5,
     /**
-     * @generated from protobuf enum value: TIMELINE = 6;
+     * @generated from protobuf enum value: LATEST = 6;
      */
-    TIMELINE = 6,
+    LATEST = 6,
     /**
      * @generated from protobuf enum value: TRENDING = 7;
      */
@@ -450,7 +450,11 @@ export enum CastStreamType {
     /**
      * @generated from protobuf enum value: HIGHLIGHTS = 8;
      */
-    HIGHLIGHTS = 8
+    HIGHLIGHTS = 8,
+    /**
+     * @generated from protobuf enum value: RECOMMENDED = 9;
+     */
+    RECOMMENDED = 9
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class GetMeRequest$Type extends MessageType<GetMeRequest> {

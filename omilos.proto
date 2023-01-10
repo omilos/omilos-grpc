@@ -81,9 +81,10 @@ enum CastStreamType {
     USER_THREADS = 3;
     USER_LIKES = 4;
     USER_REPLIES = 5;
-    TIMELINE = 6;
+    LATEST = 6;
     TRENDING = 7;
     HIGHLIGHTS = 8;
+    RECOMMENDED = 9;
 }
 
 message GetCastsRequest {
