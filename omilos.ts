@@ -154,6 +154,10 @@ export interface Notification {
      * @generated from protobuf field: google.protobuf.Timestamp timestamp = 6;
      */
     timestamp?: Timestamp;
+    /**
+     * @generated from protobuf field: bool acknowledged = 7;
+     */
+    acknowledged: boolean;
 }
 /**
  * @generated from protobuf message omilos_grpc.UserIdentifier
@@ -963,11 +967,12 @@ class Notification$Type extends MessageType<Notification> {
             { no: 3, name: "actor_display_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "actor_profile_picture", kind: "message", T: () => ProfilePicture },
             { no: 5, name: "actor_fid", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
-            { no: 6, name: "timestamp", kind: "message", T: () => Timestamp }
+            { no: 6, name: "timestamp", kind: "message", T: () => Timestamp },
+            { no: 7, name: "acknowledged", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<Notification>): Notification {
-        const message = { type: 0, castId: 0, actorDisplayName: "", actorFid: 0 };
+        const message = { type: 0, castId: 0, actorDisplayName: "", actorFid: 0, acknowledged: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Notification>(this, message, value);
@@ -995,6 +1000,9 @@ class Notification$Type extends MessageType<Notification> {
                     break;
                 case /* google.protobuf.Timestamp timestamp */ 6:
                     message.timestamp = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.timestamp);
+                    break;
+                case /* bool acknowledged */ 7:
+                    message.acknowledged = reader.bool();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1026,6 +1034,9 @@ class Notification$Type extends MessageType<Notification> {
         /* google.protobuf.Timestamp timestamp = 6; */
         if (message.timestamp)
             Timestamp.internalBinaryWrite(message.timestamp, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
+        /* bool acknowledged = 7; */
+        if (message.acknowledged !== false)
+            writer.tag(7, WireType.Varint).bool(message.acknowledged);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

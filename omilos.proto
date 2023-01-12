@@ -68,6 +68,7 @@ message Notification {
     ProfilePicture actor_profile_picture = 4;
     uint32 actor_fid = 5;
     google.protobuf.Timestamp timestamp = 6;
+    bool acknowledged = 7;
 }
 
 message UserIdentifier {
