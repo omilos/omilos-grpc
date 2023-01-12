@@ -54,6 +54,7 @@ message GetCastRequest {
 message GetNotificationsRequest {
     string stream_id = 1;
     bool next = 2;
+    NotificationStreamType type = 3;
 }
 
 message Notifications {
@@ -85,6 +86,12 @@ enum CastStreamType {
     TRENDING = 7;
     HIGHLIGHTS = 8;
     RECOMMENDED = 9;
+}
+
+enum NotificationStreamType {
+    UNSPECIFIED_NOTIFICATION_STREAM_TYPE = 0;
+    ALL = 1;
+    CONVERSATIONS = 2;
 }
 
 message GetCastsRequest {

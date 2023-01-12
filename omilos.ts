@@ -112,6 +112,10 @@ export interface GetNotificationsRequest {
      * @generated from protobuf field: bool next = 2;
      */
     next: boolean;
+    /**
+     * @generated from protobuf field: omilos_grpc.NotificationStreamType type = 3;
+     */
+    type: NotificationStreamType;
 }
 /**
  * @generated from protobuf message omilos_grpc.Notifications
@@ -455,6 +459,23 @@ export enum CastStreamType {
      * @generated from protobuf enum value: RECOMMENDED = 9;
      */
     RECOMMENDED = 9
+}
+/**
+ * @generated from protobuf enum omilos_grpc.NotificationStreamType
+ */
+export enum NotificationStreamType {
+    /**
+     * @generated from protobuf enum value: UNSPECIFIED_NOTIFICATION_STREAM_TYPE = 0;
+     */
+    UNSPECIFIED_NOTIFICATION_STREAM_TYPE = 0,
+    /**
+     * @generated from protobuf enum value: ALL = 1;
+     */
+    ALL = 1,
+    /**
+     * @generated from protobuf enum value: CONVERSATIONS = 2;
+     */
+    CONVERSATIONS = 2
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class GetMeRequest$Type extends MessageType<GetMeRequest> {
@@ -830,11 +851,12 @@ class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> 
     constructor() {
         super("omilos_grpc.GetNotificationsRequest", [
             { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "type", kind: "enum", T: () => ["omilos_grpc.NotificationStreamType", NotificationStreamType] }
         ]);
     }
     create(value?: PartialMessage<GetNotificationsRequest>): GetNotificationsRequest {
-        const message = { streamId: "", next: false };
+        const message = { streamId: "", next: false, type: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GetNotificationsRequest>(this, message, value);
@@ -850,6 +872,9 @@ class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> 
                     break;
                 case /* bool next */ 2:
                     message.next = reader.bool();
+                    break;
+                case /* omilos_grpc.NotificationStreamType type */ 3:
+                    message.type = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -869,6 +894,9 @@ class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> 
         /* bool next = 2; */
         if (message.next !== false)
             writer.tag(2, WireType.Varint).bool(message.next);
+        /* omilos_grpc.NotificationStreamType type = 3; */
+        if (message.type !== 0)
+            writer.tag(3, WireType.Varint).int32(message.type);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
