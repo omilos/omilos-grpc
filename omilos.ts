@@ -16,6 +16,7 @@ import { UInt32Value } from "./google/protobuf/wrappers";
 import { StringValue } from "./google/protobuf/wrappers";
 import { UInt64Value } from "./google/protobuf/wrappers";
 import { Timestamp } from "./google/protobuf/timestamp";
+import { BoolValue } from "./google/protobuf/wrappers";
 /**
  * @generated from protobuf message omilos_grpc.BaseResponse
  */
@@ -25,6 +26,31 @@ export interface BaseResponse {
  * @generated from protobuf message omilos_grpc.GetMeRequest
  */
 export interface GetMeRequest {
+}
+/**
+ * @generated from protobuf message omilos_grpc.UserCastContextUpdate
+ */
+export interface UserCastContextUpdate {
+    /**
+     * @generated from protobuf field: omilos_grpc.CastIdentifier cast = 1;
+     */
+    cast?: CastIdentifier;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue liked = 2;
+     */
+    liked?: BoolValue;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue viewed = 3;
+     */
+    viewed?: BoolValue;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue watched = 4;
+     */
+    watched?: BoolValue;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue bookmarked = 5;
+     */
+    bookmarked?: BoolValue;
 }
 /**
  * @generated from protobuf message omilos_grpc.LoginRequest
@@ -532,6 +558,81 @@ class GetMeRequest$Type extends MessageType<GetMeRequest> {
  * @generated MessageType for protobuf message omilos_grpc.GetMeRequest
  */
 export const GetMeRequest = new GetMeRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UserCastContextUpdate$Type extends MessageType<UserCastContextUpdate> {
+    constructor() {
+        super("omilos_grpc.UserCastContextUpdate", [
+            { no: 1, name: "cast", kind: "message", T: () => CastIdentifier },
+            { no: 2, name: "liked", kind: "message", T: () => BoolValue },
+            { no: 3, name: "viewed", kind: "message", T: () => BoolValue },
+            { no: 4, name: "watched", kind: "message", T: () => BoolValue },
+            { no: 5, name: "bookmarked", kind: "message", T: () => BoolValue }
+        ]);
+    }
+    create(value?: PartialMessage<UserCastContextUpdate>): UserCastContextUpdate {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<UserCastContextUpdate>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: UserCastContextUpdate): UserCastContextUpdate {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* omilos_grpc.CastIdentifier cast */ 1:
+                    message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
+                    break;
+                case /* google.protobuf.BoolValue liked */ 2:
+                    message.liked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.liked);
+                    break;
+                case /* google.protobuf.BoolValue viewed */ 3:
+                    message.viewed = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.viewed);
+                    break;
+                case /* google.protobuf.BoolValue watched */ 4:
+                    message.watched = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.watched);
+                    break;
+                case /* google.protobuf.BoolValue bookmarked */ 5:
+                    message.bookmarked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.bookmarked);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: UserCastContextUpdate, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* omilos_grpc.CastIdentifier cast = 1; */
+        if (message.cast)
+            CastIdentifier.internalBinaryWrite(message.cast, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue liked = 2; */
+        if (message.liked)
+            BoolValue.internalBinaryWrite(message.liked, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue viewed = 3; */
+        if (message.viewed)
+            BoolValue.internalBinaryWrite(message.viewed, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue watched = 4; */
+        if (message.watched)
+            BoolValue.internalBinaryWrite(message.watched, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue bookmarked = 5; */
+        if (message.bookmarked)
+            BoolValue.internalBinaryWrite(message.bookmarked, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.UserCastContextUpdate
+ */
+export const UserCastContextUpdate = new UserCastContextUpdate$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class LoginRequest$Type extends MessageType<LoginRequest> {
     constructor() {
@@ -1706,8 +1807,7 @@ export const ProfilePicture = new ProfilePicture$Type();
 export const Omilos = new ServiceType("omilos_grpc.Omilos", [
     { name: "Login", options: {}, I: LoginRequest, O: LoginResponse },
     { name: "PostCast", options: {}, I: PostCastRequest, O: Cast },
-    { name: "BookmarkCast", options: {}, I: CastIdentifier, O: BaseResponse },
-    { name: "LikeCast", options: {}, I: CastIdentifier, O: LikeCastResponse },
+    { name: "UpdateUserCastContext", options: {}, I: UserCastContextUpdate, O: BaseResponse },
     { name: "GetMe", options: {}, I: GetMeRequest, O: User },
     { name: "GetNotifications", options: {}, I: GetNotificationsRequest, O: Notifications },
     { name: "GetUser", options: {}, I: GetUserRequest, O: User },

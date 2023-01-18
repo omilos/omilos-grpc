@@ -22,6 +22,14 @@ message BaseResponse {}
 
 message GetMeRequest {}
 
+message UserCastContextUpdate {
+    CastIdentifier cast = 1;
+    google.protobuf.BoolValue liked = 2;
+    google.protobuf.BoolValue viewed = 3;
+    google.protobuf.BoolValue watched = 4;
+    google.protobuf.BoolValue bookmarked = 5;
+}
+
 message LoginRequest {
     uint64 timestamp = 1;
     bytes signature = 2;
@@ -165,8 +173,7 @@ message ProfilePicture {
 service Omilos {
     rpc Login(LoginRequest) returns (LoginResponse) {}
     rpc PostCast(PostCastRequest) returns (Cast) {}
-    rpc BookmarkCast(CastIdentifier) returns (BaseResponse) {}
-    rpc LikeCast(CastIdentifier) returns (LikeCastResponse) {}
+    rpc UpdateUserCastContext(UserCastContextUpdate) returns (BaseResponse) {}
     rpc GetMe (GetMeRequest) returns (User) {}
     rpc GetNotifications (GetNotificationsRequest) returns (Notifications) {}
     rpc GetUser (GetUserRequest) returns (User) {}
