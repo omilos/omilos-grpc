@@ -24,11 +24,12 @@ const _ = grpc.SupportPackageIsVersion7
 type OmilosClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error)
-	LikeCast(ctx context.Context, in *LikeCastRequest, opts ...grpc.CallOption) (*LikeCastResponse, error)
+	BookmarkCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*BaseResponse, error)
+	LikeCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*LikeCastResponse, error)
 	GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*User, error)
 	GetNotifications(ctx context.Context, in *GetNotificationsRequest, opts ...grpc.CallOption) (*Notifications, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
-	GetCast(ctx context.Context, in *GetCastRequest, opts ...grpc.CallOption) (*Cast, error)
+	GetCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*Cast, error)
 	GetCasts(ctx context.Context, in *GetCastsRequest, opts ...grpc.CallOption) (*Casts, error)
 }
 
@@ -58,7 +59,16 @@ func (c *omilosClient) PostCast(ctx context.Context, in *PostCastRequest, opts .
 	return out, nil
 }
 
-func (c *omilosClient) LikeCast(ctx context.Context, in *LikeCastRequest, opts ...grpc.CallOption) (*LikeCastResponse, error) {
+func (c *omilosClient) BookmarkCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*BaseResponse, error) {
+	out := new(BaseResponse)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/BookmarkCast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omilosClient) LikeCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*LikeCastResponse, error) {
 	out := new(LikeCastResponse)
 	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/LikeCast", in, out, opts...)
 	if err != nil {
@@ -94,7 +104,7 @@ func (c *omilosClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...
 	return out, nil
 }
 
-func (c *omilosClient) GetCast(ctx context.Context, in *GetCastRequest, opts ...grpc.CallOption) (*Cast, error) {
+func (c *omilosClient) GetCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*Cast, error) {
 	out := new(Cast)
 	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/GetCast", in, out, opts...)
 	if err != nil {
@@ -118,11 +128,12 @@ func (c *omilosClient) GetCasts(ctx context.Context, in *GetCastsRequest, opts .
 type OmilosServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	PostCast(context.Context, *PostCastRequest) (*Cast, error)
-	LikeCast(context.Context, *LikeCastRequest) (*LikeCastResponse, error)
+	BookmarkCast(context.Context, *CastIdentifier) (*BaseResponse, error)
+	LikeCast(context.Context, *CastIdentifier) (*LikeCastResponse, error)
 	GetMe(context.Context, *GetMeRequest) (*User, error)
 	GetNotifications(context.Context, *GetNotificationsRequest) (*Notifications, error)
 	GetUser(context.Context, *GetUserRequest) (*User, error)
-	GetCast(context.Context, *GetCastRequest) (*Cast, error)
+	GetCast(context.Context, *CastIdentifier) (*Cast, error)
 	GetCasts(context.Context, *GetCastsRequest) (*Casts, error)
 	mustEmbedUnimplementedOmilosServer()
 }
@@ -137,7 +148,10 @@ func (UnimplementedOmilosServer) Login(context.Context, *LoginRequest) (*LoginRe
 func (UnimplementedOmilosServer) PostCast(context.Context, *PostCastRequest) (*Cast, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCast not implemented")
 }
-func (UnimplementedOmilosServer) LikeCast(context.Context, *LikeCastRequest) (*LikeCastResponse, error) {
+func (UnimplementedOmilosServer) BookmarkCast(context.Context, *CastIdentifier) (*BaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BookmarkCast not implemented")
+}
+func (UnimplementedOmilosServer) LikeCast(context.Context, *CastIdentifier) (*LikeCastResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LikeCast not implemented")
 }
 func (UnimplementedOmilosServer) GetMe(context.Context, *GetMeRequest) (*User, error) {
@@ -149,7 +163,7 @@ func (UnimplementedOmilosServer) GetNotifications(context.Context, *GetNotificat
 func (UnimplementedOmilosServer) GetUser(context.Context, *GetUserRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedOmilosServer) GetCast(context.Context, *GetCastRequest) (*Cast, error) {
+func (UnimplementedOmilosServer) GetCast(context.Context, *CastIdentifier) (*Cast, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCast not implemented")
 }
 func (UnimplementedOmilosServer) GetCasts(context.Context, *GetCastsRequest) (*Casts, error) {
@@ -204,8 +218,26 @@ func _Omilos_PostCast_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Omilos_BookmarkCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CastIdentifier)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).BookmarkCast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/BookmarkCast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).BookmarkCast(ctx, req.(*CastIdentifier))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Omilos_LikeCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LikeCastRequest)
+	in := new(CastIdentifier)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -217,7 +249,7 @@ func _Omilos_LikeCast_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/omilos_grpc.Omilos/LikeCast",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmilosServer).LikeCast(ctx, req.(*LikeCastRequest))
+		return srv.(OmilosServer).LikeCast(ctx, req.(*CastIdentifier))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -277,7 +309,7 @@ func _Omilos_GetUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 }
 
 func _Omilos_GetCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCastRequest)
+	in := new(CastIdentifier)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -289,7 +321,7 @@ func _Omilos_GetCast_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: "/omilos_grpc.Omilos/GetCast",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmilosServer).GetCast(ctx, req.(*GetCastRequest))
+		return srv.(OmilosServer).GetCast(ctx, req.(*CastIdentifier))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -326,6 +358,10 @@ var Omilos_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostCast",
 			Handler:    _Omilos_PostCast_Handler,
+		},
+		{
+			MethodName: "BookmarkCast",
+			Handler:    _Omilos_BookmarkCast_Handler,
 		},
 		{
 			MethodName: "LikeCast",

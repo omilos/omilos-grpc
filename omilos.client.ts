@@ -6,14 +6,14 @@ import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { Omilos } from "./omilos";
 import type { Casts } from "./omilos";
 import type { GetCastsRequest } from "./omilos";
-import type { GetCastRequest } from "./omilos";
 import type { GetUserRequest } from "./omilos";
 import type { Notifications } from "./omilos";
 import type { GetNotificationsRequest } from "./omilos";
 import type { User } from "./omilos";
 import type { GetMeRequest } from "./omilos";
 import type { LikeCastResponse } from "./omilos";
-import type { LikeCastRequest } from "./omilos";
+import type { BaseResponse } from "./omilos";
+import type { CastIdentifier } from "./omilos";
 import type { Cast } from "./omilos";
 import type { PostCastRequest } from "./omilos";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
@@ -34,9 +34,13 @@ export interface IOmilosClient {
      */
     postCast(input: PostCastRequest, options?: RpcOptions): UnaryCall<PostCastRequest, Cast>;
     /**
-     * @generated from protobuf rpc: LikeCast(omilos_grpc.LikeCastRequest) returns (omilos_grpc.LikeCastResponse);
+     * @generated from protobuf rpc: BookmarkCast(omilos_grpc.CastIdentifier) returns (omilos_grpc.BaseResponse);
      */
-    likeCast(input: LikeCastRequest, options?: RpcOptions): UnaryCall<LikeCastRequest, LikeCastResponse>;
+    bookmarkCast(input: CastIdentifier, options?: RpcOptions): UnaryCall<CastIdentifier, BaseResponse>;
+    /**
+     * @generated from protobuf rpc: LikeCast(omilos_grpc.CastIdentifier) returns (omilos_grpc.LikeCastResponse);
+     */
+    likeCast(input: CastIdentifier, options?: RpcOptions): UnaryCall<CastIdentifier, LikeCastResponse>;
     /**
      * @generated from protobuf rpc: GetMe(omilos_grpc.GetMeRequest) returns (omilos_grpc.User);
      */
@@ -50,9 +54,9 @@ export interface IOmilosClient {
      */
     getUser(input: GetUserRequest, options?: RpcOptions): UnaryCall<GetUserRequest, User>;
     /**
-     * @generated from protobuf rpc: GetCast(omilos_grpc.GetCastRequest) returns (omilos_grpc.Cast);
+     * @generated from protobuf rpc: GetCast(omilos_grpc.CastIdentifier) returns (omilos_grpc.Cast);
      */
-    getCast(input: GetCastRequest, options?: RpcOptions): UnaryCall<GetCastRequest, Cast>;
+    getCast(input: CastIdentifier, options?: RpcOptions): UnaryCall<CastIdentifier, Cast>;
     /**
      * @generated from protobuf rpc: GetCasts(omilos_grpc.GetCastsRequest) returns (omilos_grpc.Casts);
      */
@@ -82,45 +86,52 @@ export class OmilosClient implements IOmilosClient, ServiceInfo {
         return stackIntercept<PostCastRequest, Cast>("unary", this._transport, method, opt, input);
     }
     /**
-     * @generated from protobuf rpc: LikeCast(omilos_grpc.LikeCastRequest) returns (omilos_grpc.LikeCastResponse);
+     * @generated from protobuf rpc: BookmarkCast(omilos_grpc.CastIdentifier) returns (omilos_grpc.BaseResponse);
      */
-    likeCast(input: LikeCastRequest, options?: RpcOptions): UnaryCall<LikeCastRequest, LikeCastResponse> {
+    bookmarkCast(input: CastIdentifier, options?: RpcOptions): UnaryCall<CastIdentifier, BaseResponse> {
         const method = this.methods[2], opt = this._transport.mergeOptions(options);
-        return stackIntercept<LikeCastRequest, LikeCastResponse>("unary", this._transport, method, opt, input);
+        return stackIntercept<CastIdentifier, BaseResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * @generated from protobuf rpc: LikeCast(omilos_grpc.CastIdentifier) returns (omilos_grpc.LikeCastResponse);
+     */
+    likeCast(input: CastIdentifier, options?: RpcOptions): UnaryCall<CastIdentifier, LikeCastResponse> {
+        const method = this.methods[3], opt = this._transport.mergeOptions(options);
+        return stackIntercept<CastIdentifier, LikeCastResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: GetMe(omilos_grpc.GetMeRequest) returns (omilos_grpc.User);
      */
     getMe(input: GetMeRequest, options?: RpcOptions): UnaryCall<GetMeRequest, User> {
-        const method = this.methods[3], opt = this._transport.mergeOptions(options);
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetMeRequest, User>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: GetNotifications(omilos_grpc.GetNotificationsRequest) returns (omilos_grpc.Notifications);
      */
     getNotifications(input: GetNotificationsRequest, options?: RpcOptions): UnaryCall<GetNotificationsRequest, Notifications> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options);
+        const method = this.methods[5], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetNotificationsRequest, Notifications>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: GetUser(omilos_grpc.GetUserRequest) returns (omilos_grpc.User);
      */
     getUser(input: GetUserRequest, options?: RpcOptions): UnaryCall<GetUserRequest, User> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetUserRequest, User>("unary", this._transport, method, opt, input);
     }
     /**
-     * @generated from protobuf rpc: GetCast(omilos_grpc.GetCastRequest) returns (omilos_grpc.Cast);
+     * @generated from protobuf rpc: GetCast(omilos_grpc.CastIdentifier) returns (omilos_grpc.Cast);
      */
-    getCast(input: GetCastRequest, options?: RpcOptions): UnaryCall<GetCastRequest, Cast> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options);
-        return stackIntercept<GetCastRequest, Cast>("unary", this._transport, method, opt, input);
+    getCast(input: CastIdentifier, options?: RpcOptions): UnaryCall<CastIdentifier, Cast> {
+        const method = this.methods[7], opt = this._transport.mergeOptions(options);
+        return stackIntercept<CastIdentifier, Cast>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: GetCasts(omilos_grpc.GetCastsRequest) returns (omilos_grpc.Casts);
      */
     getCasts(input: GetCastsRequest, options?: RpcOptions): UnaryCall<GetCastsRequest, Casts> {
-        const method = this.methods[7], opt = this._transport.mergeOptions(options);
+        const method = this.methods[8], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetCastsRequest, Casts>("unary", this._transport, method, opt, input);
     }
 }

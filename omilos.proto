@@ -18,6 +18,8 @@ enum NotificationType {
     CAST_REPLY = 3;
 }
 
+message BaseResponse {}
+
 message GetMeRequest {}
 
 message LoginRequest {
@@ -36,19 +38,11 @@ message PostCastRequest {
     google.protobuf.UInt64Value parent_id = 2;
 }
 
-message LikeCastRequest {
-    uint64 id = 1;
-}
-
 message LikeCastResponse {}
 
 message CastIdentifier {
     google.protobuf.UInt64Value id = 1;
     google.protobuf.StringValue hash = 2;
-}
-
-message GetCastRequest {
-    CastIdentifier cast = 1;
 }
 
 message GetNotificationsRequest {
@@ -87,6 +81,7 @@ enum CastStreamType {
     TRENDING = 7;
     HIGHLIGHTS = 8;
     RECOMMENDED = 9;
+    BOOKMARKED = 10;
 }
 
 enum NotificationStreamType {
@@ -145,9 +140,11 @@ message Cast {
 }
 
 message ViewerContext {
-    bool reacted = 1;
+    bool viewed = 1;
     bool recast = 2;
     bool watched = 3;
+    bool bookmarked = 4;
+    bool liked = 5;
 }
 
 message Author {
@@ -168,10 +165,11 @@ message ProfilePicture {
 service Omilos {
     rpc Login(LoginRequest) returns (LoginResponse) {}
     rpc PostCast(PostCastRequest) returns (Cast) {}
-    rpc LikeCast(LikeCastRequest) returns (LikeCastResponse) {}
+    rpc BookmarkCast(CastIdentifier) returns (BaseResponse) {}
+    rpc LikeCast(CastIdentifier) returns (LikeCastResponse) {}
     rpc GetMe (GetMeRequest) returns (User) {}
     rpc GetNotifications (GetNotificationsRequest) returns (Notifications) {}
     rpc GetUser (GetUserRequest) returns (User) {}
-    rpc GetCast (GetCastRequest) returns (Cast) {}
+    rpc GetCast (CastIdentifier) returns (Cast) {}
     rpc GetCasts (GetCastsRequest) returns (Casts) {}
 }

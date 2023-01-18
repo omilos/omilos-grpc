@@ -17,6 +17,11 @@ import { StringValue } from "./google/protobuf/wrappers";
 import { UInt64Value } from "./google/protobuf/wrappers";
 import { Timestamp } from "./google/protobuf/timestamp";
 /**
+ * @generated from protobuf message omilos_grpc.BaseResponse
+ */
+export interface BaseResponse {
+}
+/**
  * @generated from protobuf message omilos_grpc.GetMeRequest
  */
 export interface GetMeRequest {
@@ -65,15 +70,6 @@ export interface PostCastRequest {
     parentId?: UInt64Value;
 }
 /**
- * @generated from protobuf message omilos_grpc.LikeCastRequest
- */
-export interface LikeCastRequest {
-    /**
-     * @generated from protobuf field: uint64 id = 1;
-     */
-    id: number;
-}
-/**
  * @generated from protobuf message omilos_grpc.LikeCastResponse
  */
 export interface LikeCastResponse {
@@ -90,15 +86,6 @@ export interface CastIdentifier {
      * @generated from protobuf field: google.protobuf.StringValue hash = 2;
      */
     hash?: StringValue;
-}
-/**
- * @generated from protobuf message omilos_grpc.GetCastRequest
- */
-export interface GetCastRequest {
-    /**
-     * @generated from protobuf field: omilos_grpc.CastIdentifier cast = 1;
-     */
-    cast?: CastIdentifier;
 }
 /**
  * @generated from protobuf message omilos_grpc.GetNotificationsRequest
@@ -331,9 +318,9 @@ export interface Cast {
  */
 export interface ViewerContext {
     /**
-     * @generated from protobuf field: bool reacted = 1;
+     * @generated from protobuf field: bool viewed = 1;
      */
-    reacted: boolean;
+    viewed: boolean;
     /**
      * @generated from protobuf field: bool recast = 2;
      */
@@ -342,6 +329,14 @@ export interface ViewerContext {
      * @generated from protobuf field: bool watched = 3;
      */
     watched: boolean;
+    /**
+     * @generated from protobuf field: bool bookmarked = 4;
+     */
+    bookmarked: boolean;
+    /**
+     * @generated from protobuf field: bool liked = 5;
+     */
+    liked: boolean;
 }
 /**
  * @generated from protobuf message omilos_grpc.Author
@@ -462,7 +457,11 @@ export enum CastStreamType {
     /**
      * @generated from protobuf enum value: RECOMMENDED = 9;
      */
-    RECOMMENDED = 9
+    RECOMMENDED = 9,
+    /**
+     * @generated from protobuf enum value: BOOKMARKED = 10;
+     */
+    BOOKMARKED = 10
 }
 /**
  * @generated from protobuf enum omilos_grpc.NotificationStreamType
@@ -481,6 +480,32 @@ export enum NotificationStreamType {
      */
     CONVERSATIONS = 2
 }
+// @generated message type with reflection information, may provide speed optimized methods
+class BaseResponse$Type extends MessageType<BaseResponse> {
+    constructor() {
+        super("omilos_grpc.BaseResponse", []);
+    }
+    create(value?: PartialMessage<BaseResponse>): BaseResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BaseResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BaseResponse): BaseResponse {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: BaseResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.BaseResponse
+ */
+export const BaseResponse = new BaseResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class GetMeRequest$Type extends MessageType<GetMeRequest> {
     constructor() {
@@ -677,53 +702,6 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
  */
 export const PostCastRequest = new PostCastRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class LikeCastRequest$Type extends MessageType<LikeCastRequest> {
-    constructor() {
-        super("omilos_grpc.LikeCastRequest", [
-            { no: 1, name: "id", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ }
-        ]);
-    }
-    create(value?: PartialMessage<LikeCastRequest>): LikeCastRequest {
-        const message = { id: 0 };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<LikeCastRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LikeCastRequest): LikeCastRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* uint64 id */ 1:
-                    message.id = reader.uint64().toNumber();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: LikeCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* uint64 id = 1; */
-        if (message.id !== 0)
-            writer.tag(1, WireType.Varint).uint64(message.id);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.LikeCastRequest
- */
-export const LikeCastRequest = new LikeCastRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
 class LikeCastResponse$Type extends MessageType<LikeCastResponse> {
     constructor() {
         super("omilos_grpc.LikeCastResponse", []);
@@ -803,53 +781,6 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
  * @generated MessageType for protobuf message omilos_grpc.CastIdentifier
  */
 export const CastIdentifier = new CastIdentifier$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GetCastRequest$Type extends MessageType<GetCastRequest> {
-    constructor() {
-        super("omilos_grpc.GetCastRequest", [
-            { no: 1, name: "cast", kind: "message", T: () => CastIdentifier }
-        ]);
-    }
-    create(value?: PartialMessage<GetCastRequest>): GetCastRequest {
-        const message = {};
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<GetCastRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetCastRequest): GetCastRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* omilos_grpc.CastIdentifier cast */ 1:
-                    message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: GetCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* omilos_grpc.CastIdentifier cast = 1; */
-        if (message.cast)
-            CastIdentifier.internalBinaryWrite(message.cast, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.GetCastRequest
- */
-export const GetCastRequest = new GetCastRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> {
     constructor() {
@@ -1562,13 +1493,15 @@ export const Cast = new Cast$Type();
 class ViewerContext$Type extends MessageType<ViewerContext> {
     constructor() {
         super("omilos_grpc.ViewerContext", [
-            { no: 1, name: "reacted", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 1, name: "viewed", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 2, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 3, name: "watched", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 3, name: "watched", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 4, name: "bookmarked", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 5, name: "liked", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<ViewerContext>): ViewerContext {
-        const message = { reacted: false, recast: false, watched: false };
+        const message = { viewed: false, recast: false, watched: false, bookmarked: false, liked: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<ViewerContext>(this, message, value);
@@ -1579,14 +1512,20 @@ class ViewerContext$Type extends MessageType<ViewerContext> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* bool reacted */ 1:
-                    message.reacted = reader.bool();
+                case /* bool viewed */ 1:
+                    message.viewed = reader.bool();
                     break;
                 case /* bool recast */ 2:
                     message.recast = reader.bool();
                     break;
                 case /* bool watched */ 3:
                     message.watched = reader.bool();
+                    break;
+                case /* bool bookmarked */ 4:
+                    message.bookmarked = reader.bool();
+                    break;
+                case /* bool liked */ 5:
+                    message.liked = reader.bool();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1600,15 +1539,21 @@ class ViewerContext$Type extends MessageType<ViewerContext> {
         return message;
     }
     internalBinaryWrite(message: ViewerContext, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* bool reacted = 1; */
-        if (message.reacted !== false)
-            writer.tag(1, WireType.Varint).bool(message.reacted);
+        /* bool viewed = 1; */
+        if (message.viewed !== false)
+            writer.tag(1, WireType.Varint).bool(message.viewed);
         /* bool recast = 2; */
         if (message.recast !== false)
             writer.tag(2, WireType.Varint).bool(message.recast);
         /* bool watched = 3; */
         if (message.watched !== false)
             writer.tag(3, WireType.Varint).bool(message.watched);
+        /* bool bookmarked = 4; */
+        if (message.bookmarked !== false)
+            writer.tag(4, WireType.Varint).bool(message.bookmarked);
+        /* bool liked = 5; */
+        if (message.liked !== false)
+            writer.tag(5, WireType.Varint).bool(message.liked);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1761,10 +1706,11 @@ export const ProfilePicture = new ProfilePicture$Type();
 export const Omilos = new ServiceType("omilos_grpc.Omilos", [
     { name: "Login", options: {}, I: LoginRequest, O: LoginResponse },
     { name: "PostCast", options: {}, I: PostCastRequest, O: Cast },
-    { name: "LikeCast", options: {}, I: LikeCastRequest, O: LikeCastResponse },
+    { name: "BookmarkCast", options: {}, I: CastIdentifier, O: BaseResponse },
+    { name: "LikeCast", options: {}, I: CastIdentifier, O: LikeCastResponse },
     { name: "GetMe", options: {}, I: GetMeRequest, O: User },
     { name: "GetNotifications", options: {}, I: GetNotificationsRequest, O: Notifications },
     { name: "GetUser", options: {}, I: GetUserRequest, O: User },
-    { name: "GetCast", options: {}, I: GetCastRequest, O: Cast },
+    { name: "GetCast", options: {}, I: CastIdentifier, O: Cast },
     { name: "GetCasts", options: {}, I: GetCastsRequest, O: Casts }
 ]);
