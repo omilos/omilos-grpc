@@ -4,6 +4,8 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { Omilos } from "./omilos";
+import type { Publications } from "./omilos";
+import type { GetPublicationsRequest } from "./omilos";
 import type { Casts } from "./omilos";
 import type { GetCastsRequest } from "./omilos";
 import type { CastIdentifier } from "./omilos";
@@ -57,6 +59,10 @@ export interface IOmilosClient {
      * @generated from protobuf rpc: GetCasts(omilos_grpc.GetCastsRequest) returns (omilos_grpc.Casts);
      */
     getCasts(input: GetCastsRequest, options?: RpcOptions): UnaryCall<GetCastsRequest, Casts>;
+    /**
+     * @generated from protobuf rpc: GetPublications(omilos_grpc.GetPublicationsRequest) returns (omilos_grpc.Publications);
+     */
+    getPublications(input: GetPublicationsRequest, options?: RpcOptions): UnaryCall<GetPublicationsRequest, Publications>;
 }
 /**
  * @generated from protobuf service omilos_grpc.Omilos
@@ -122,5 +128,12 @@ export class OmilosClient implements IOmilosClient, ServiceInfo {
     getCasts(input: GetCastsRequest, options?: RpcOptions): UnaryCall<GetCastsRequest, Casts> {
         const method = this.methods[7], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetCastsRequest, Casts>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * @generated from protobuf rpc: GetPublications(omilos_grpc.GetPublicationsRequest) returns (omilos_grpc.Publications);
+     */
+    getPublications(input: GetPublicationsRequest, options?: RpcOptions): UnaryCall<GetPublicationsRequest, Publications> {
+        const method = this.methods[8], opt = this._transport.mergeOptions(options);
+        return stackIntercept<GetPublicationsRequest, Publications>("unary", this._transport, method, opt, input);
     }
 }
