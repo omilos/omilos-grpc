@@ -186,6 +186,57 @@ export interface UserIdentifier {
     username?: StringValue;
 }
 /**
+ * @generated from protobuf message omilos_grpc.GetPublicationsRequest
+ */
+export interface GetPublicationsRequest {
+    /**
+     * @generated from protobuf field: string stream_id = 1;
+     */
+    streamId: string;
+    /**
+     * @generated from protobuf field: bool next = 2;
+     */
+    next: boolean;
+    /**
+     * @generated from protobuf field: omilos_grpc.UserIdentifier user = 3;
+     */
+    user?: UserIdentifier;
+}
+/**
+ * @generated from protobuf message omilos_grpc.Publications
+ */
+export interface Publications {
+    /**
+     * @generated from protobuf field: repeated omilos_grpc.Publication publications = 1;
+     */
+    publications: Publication[];
+}
+/**
+ * @generated from protobuf message omilos_grpc.Publication
+ */
+export interface Publication {
+    /**
+     * @generated from protobuf field: uint64 id = 1;
+     */
+    id: number;
+    /**
+     * @generated from protobuf field: string title = 2;
+     */
+    title: string;
+    /**
+     * @generated from protobuf field: string excerpt = 3;
+     */
+    excerpt: string;
+    /**
+     * @generated from protobuf field: string url = 4;
+     */
+    url: string;
+    /**
+     * @generated from protobuf field: omilos_grpc.Author author = 5;
+     */
+    author?: Author;
+}
+/**
  * @generated from protobuf message omilos_grpc.GetCastsRequest
  */
 export interface GetCastsRequest {
@@ -1134,6 +1185,189 @@ class UserIdentifier$Type extends MessageType<UserIdentifier> {
  */
 export const UserIdentifier = new UserIdentifier$Type();
 // @generated message type with reflection information, may provide speed optimized methods
+class GetPublicationsRequest$Type extends MessageType<GetPublicationsRequest> {
+    constructor() {
+        super("omilos_grpc.GetPublicationsRequest", [
+            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "user", kind: "message", T: () => UserIdentifier }
+        ]);
+    }
+    create(value?: PartialMessage<GetPublicationsRequest>): GetPublicationsRequest {
+        const message = { streamId: "", next: false };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetPublicationsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetPublicationsRequest): GetPublicationsRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string stream_id */ 1:
+                    message.streamId = reader.string();
+                    break;
+                case /* bool next */ 2:
+                    message.next = reader.bool();
+                    break;
+                case /* omilos_grpc.UserIdentifier user */ 3:
+                    message.user = UserIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.user);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetPublicationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string stream_id = 1; */
+        if (message.streamId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
+        /* bool next = 2; */
+        if (message.next !== false)
+            writer.tag(2, WireType.Varint).bool(message.next);
+        /* omilos_grpc.UserIdentifier user = 3; */
+        if (message.user)
+            UserIdentifier.internalBinaryWrite(message.user, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetPublicationsRequest
+ */
+export const GetPublicationsRequest = new GetPublicationsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Publications$Type extends MessageType<Publications> {
+    constructor() {
+        super("omilos_grpc.Publications", [
+            { no: 1, name: "publications", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Publication }
+        ]);
+    }
+    create(value?: PartialMessage<Publications>): Publications {
+        const message = { publications: [] };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<Publications>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Publications): Publications {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* repeated omilos_grpc.Publication publications */ 1:
+                    message.publications.push(Publication.internalBinaryRead(reader, reader.uint32(), options));
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: Publications, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated omilos_grpc.Publication publications = 1; */
+        for (let i = 0; i < message.publications.length; i++)
+            Publication.internalBinaryWrite(message.publications[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.Publications
+ */
+export const Publications = new Publications$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class Publication$Type extends MessageType<Publication> {
+    constructor() {
+        super("omilos_grpc.Publication", [
+            { no: 1, name: "id", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "excerpt", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "author", kind: "message", T: () => Author }
+        ]);
+    }
+    create(value?: PartialMessage<Publication>): Publication {
+        const message = { id: 0, title: "", excerpt: "", url: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<Publication>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Publication): Publication {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* uint64 id */ 1:
+                    message.id = reader.uint64().toNumber();
+                    break;
+                case /* string title */ 2:
+                    message.title = reader.string();
+                    break;
+                case /* string excerpt */ 3:
+                    message.excerpt = reader.string();
+                    break;
+                case /* string url */ 4:
+                    message.url = reader.string();
+                    break;
+                case /* omilos_grpc.Author author */ 5:
+                    message.author = Author.internalBinaryRead(reader, reader.uint32(), options, message.author);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: Publication, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* uint64 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).uint64(message.id);
+        /* string title = 2; */
+        if (message.title !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.title);
+        /* string excerpt = 3; */
+        if (message.excerpt !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.excerpt);
+        /* string url = 4; */
+        if (message.url !== "")
+            writer.tag(4, WireType.LengthDelimited).string(message.url);
+        /* omilos_grpc.Author author = 5; */
+        if (message.author)
+            Author.internalBinaryWrite(message.author, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.Publication
+ */
+export const Publication = new Publication$Type();
+// @generated message type with reflection information, may provide speed optimized methods
 class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
     constructor() {
         super("omilos_grpc.GetCastsRequest", [
@@ -1812,5 +2046,6 @@ export const Omilos = new ServiceType("omilos_grpc.Omilos", [
     { name: "GetNotifications", options: {}, I: GetNotificationsRequest, O: Notifications },
     { name: "GetUser", options: {}, I: GetUserRequest, O: User },
     { name: "GetCast", options: {}, I: CastIdentifier, O: Cast },
-    { name: "GetCasts", options: {}, I: GetCastsRequest, O: Casts }
+    { name: "GetCasts", options: {}, I: GetCastsRequest, O: Casts },
+    { name: "GetPublications", options: {}, I: GetPublicationsRequest, O: Publications }
 ]);
