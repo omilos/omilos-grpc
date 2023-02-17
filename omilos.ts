@@ -239,6 +239,10 @@ export interface Publication {
      * @generated from protobuf field: string platform = 6;
      */
     platform: string;
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp published_at = 7;
+     */
+    publishedAt?: Timestamp;
 }
 /**
  * @generated from protobuf message omilos_grpc.GetCastsRequest
@@ -1305,7 +1309,8 @@ class Publication$Type extends MessageType<Publication> {
             { no: 3, name: "excerpt", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "author", kind: "message", T: () => Author },
-            { no: 6, name: "platform", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 6, name: "platform", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 7, name: "published_at", kind: "message", T: () => Timestamp }
         ]);
     }
     create(value?: PartialMessage<Publication>): Publication {
@@ -1338,6 +1343,9 @@ class Publication$Type extends MessageType<Publication> {
                 case /* string platform */ 6:
                     message.platform = reader.string();
                     break;
+                case /* google.protobuf.Timestamp published_at */ 7:
+                    message.publishedAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.publishedAt);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -1368,6 +1376,9 @@ class Publication$Type extends MessageType<Publication> {
         /* string platform = 6; */
         if (message.platform !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.platform);
+        /* google.protobuf.Timestamp published_at = 7; */
+        if (message.publishedAt)
+            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
