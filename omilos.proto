@@ -114,6 +114,7 @@ message Publication {
     string excerpt = 3;
     string url = 4;
     Author author = 5;
+    string platform = 6;
 }
 
 message GetCastsRequest {

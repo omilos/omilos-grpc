@@ -235,6 +235,10 @@ export interface Publication {
      * @generated from protobuf field: omilos_grpc.Author author = 5;
      */
     author?: Author;
+    /**
+     * @generated from protobuf field: string platform = 6;
+     */
+    platform: string;
 }
 /**
  * @generated from protobuf message omilos_grpc.GetCastsRequest
@@ -1300,11 +1304,12 @@ class Publication$Type extends MessageType<Publication> {
             { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "excerpt", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "author", kind: "message", T: () => Author }
+            { no: 5, name: "author", kind: "message", T: () => Author },
+            { no: 6, name: "platform", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<Publication>): Publication {
-        const message = { id: 0, title: "", excerpt: "", url: "" };
+        const message = { id: 0, title: "", excerpt: "", url: "", platform: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Publication>(this, message, value);
@@ -1329,6 +1334,9 @@ class Publication$Type extends MessageType<Publication> {
                     break;
                 case /* omilos_grpc.Author author */ 5:
                     message.author = Author.internalBinaryRead(reader, reader.uint32(), options, message.author);
+                    break;
+                case /* string platform */ 6:
+                    message.platform = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1357,6 +1365,9 @@ class Publication$Type extends MessageType<Publication> {
         /* omilos_grpc.Author author = 5; */
         if (message.author)
             Author.internalBinaryWrite(message.author, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* string platform = 6; */
+        if (message.platform !== "")
+            writer.tag(6, WireType.LengthDelimited).string(message.platform);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
