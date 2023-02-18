@@ -112,6 +112,10 @@ export interface CastIdentifier {
      * @generated from protobuf field: google.protobuf.StringValue hash = 2;
      */
     hash?: StringValue;
+    /**
+     * @generated from protobuf field: google.protobuf.UInt32Value author_fid = 3;
+     */
+    authorFid?: UInt32Value;
 }
 /**
  * @generated from protobuf message omilos_grpc.GetNotificationsRequest
@@ -892,7 +896,8 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
     constructor() {
         super("omilos_grpc.CastIdentifier", [
             { no: 1, name: "id", kind: "message", T: () => UInt64Value },
-            { no: 2, name: "hash", kind: "message", T: () => StringValue }
+            { no: 2, name: "hash", kind: "message", T: () => StringValue },
+            { no: 3, name: "author_fid", kind: "message", T: () => UInt32Value }
         ]);
     }
     create(value?: PartialMessage<CastIdentifier>): CastIdentifier {
@@ -913,6 +918,9 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
                 case /* google.protobuf.StringValue hash */ 2:
                     message.hash = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.hash);
                     break;
+                case /* google.protobuf.UInt32Value author_fid */ 3:
+                    message.authorFid = UInt32Value.internalBinaryRead(reader, reader.uint32(), options, message.authorFid);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -931,6 +939,9 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
         /* google.protobuf.StringValue hash = 2; */
         if (message.hash)
             StringValue.internalBinaryWrite(message.hash, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.UInt32Value author_fid = 3; */
+        if (message.authorFid)
+            UInt32Value.internalBinaryWrite(message.authorFid, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

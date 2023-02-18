@@ -51,6 +51,7 @@ message LikeCastResponse {}
 message CastIdentifier {
     google.protobuf.UInt64Value id = 1;
     google.protobuf.StringValue hash = 2;
+    google.protobuf.UInt32Value author_fid = 3;
 }
 
 message GetNotificationsRequest {
