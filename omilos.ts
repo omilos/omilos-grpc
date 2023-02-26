@@ -563,7 +563,11 @@ export enum CastStreamType {
     /**
      * @generated from protobuf enum value: BOOKMARKED = 10;
      */
-    BOOKMARKED = 10
+    BOOKMARKED = 10,
+    /**
+     * @generated from protobuf enum value: SEARCH = 11;
+     */
+    SEARCH = 11
 }
 /**
  * @generated from protobuf enum omilos_grpc.NotificationStreamType
