@@ -7,198 +7,207 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 enum ReactionType {
-    UNSPECIFIED_REACTION_TYPE = 0;
-    LIKE = 1;
+  UNSPECIFIED_REACTION_TYPE = 0;
+  LIKE = 1;
 }
 
 enum NotificationType {
-    UNSPECIFIED_NOTIFICATION_TYPE = 0;
-    CAST_MENTION = 1;
-    CAST_LIKE = 2;
-    CAST_REPLY = 3;
+  UNSPECIFIED_NOTIFICATION_TYPE = 0;
+  CAST_MENTION = 1;
+  CAST_LIKE = 2;
+  CAST_REPLY = 3;
 }
+
+enum CastStreamType {
+  UNSPECIFIED_CAST_STREAM_TYPE = 0;
+  CHILDREN = 1;
+  THREAD_CASTS = 2;
+  USER_THREADS = 3;
+  USER_LIKES = 4;
+  USER_REPLIES = 5;
+  LATEST = 6;
+  TRENDING = 7;
+  HIGHLIGHTS = 8;
+  RECOMMENDED = 9;
+  BOOKMARKED = 10;
+  SEARCH = 11;
+}
+
+enum NotificationStreamType {
+  UNSPECIFIED_NOTIFICATION_STREAM_TYPE = 0;
+  ALL = 1;
+  CONVERSATIONS = 2;
+}
+
+message CastIdentifier {
+  google.protobuf.UInt64Value id = 1;
+  google.protobuf.StringValue hash = 2;
+  google.protobuf.UInt32Value author_fid = 3;
+}
+
+message Notifications {
+  repeated Notification notifications = 1;
+}
+
+message Notification {
+  NotificationType type = 1;
+  uint64 cast_id = 2;
+  string actor_display_name = 3;
+  ProfilePicture actor_profile_picture = 4;
+  uint32 actor_fid = 5;
+  google.protobuf.Timestamp timestamp = 6;
+  bool acknowledged = 7;
+}
+
+message UserIdentifier {
+  google.protobuf.UInt32Value fid = 1;
+  google.protobuf.StringValue username = 2;
+}
+
+
+message Publications {
+  repeated Publication publications = 1;
+}
+
+message Publication {
+  uint64 id = 1;
+  string title = 2;
+  string excerpt = 3;
+  string url = 4;
+  Author author = 5;
+  string platform = 6;
+  google.protobuf.Timestamp published_at = 7;
+}
+
+message Casts {
+  repeated Cast casts = 1;
+}
+
+message User {
+  uint32 fid = 1;
+  string username = 2;
+  string display_name = 3;
+  ProfilePicture profile_picture = 4;
+  Profile profile = 5;
+  uint32 follower_count = 6;
+  uint32 following_count = 7;
+}
+
+message Profile {
+  string bio = 1;
+}
+
+message Cast {
+  uint64 id = 1;
+  string hash = 2;
+  string thread_hash = 3;
+  google.protobuf.UInt64Value parent_id = 4;
+  Author author = 5;
+  string text = 6;
+  google.protobuf.Timestamp published_at = 7;
+  uint64 replies = 8;
+  uint64 reactions = 9;
+  uint64 recasts = 10; // TODO
+  uint64 watches = 11;
+  bool recast = 12;
+  ViewerContext viewer_context = 13;
+  google.protobuf.StringValue parent_author_display_name = 14;
+  google.protobuf.UInt64Value parent_author_fid = 15;
+}
+
+message ViewerContext {
+  bool viewed = 1;
+  bool recast = 2;
+  bool watched = 3;
+  bool bookmarked = 4;
+  bool liked = 5;
+}
+
+message Author {
+  uint64 fid = 1;
+  string username = 2;
+  string display_name = 3;
+  ProfilePicture profile_picture = 4;
+  uint64 follower_count = 5;
+  uint64 following_count = 6;
+}
+
+message ProfilePicture {
+  string url = 1;
+  bool verified = 2;
+}
+
 
 message BaseResponse {}
 
 message GetMeRequest {}
 
-message UserCastContextUpdate {
-    CastIdentifier cast = 1;
-    google.protobuf.BoolValue liked = 2;
-    google.protobuf.BoolValue viewed = 3;
-    google.protobuf.BoolValue watched = 4;
-    google.protobuf.BoolValue bookmarked = 5;
+
+message GetCastsRequest {
+  string stream_id = 1;
+  bool next = 2;
+  UserIdentifier user = 3;
+  CastIdentifier cast = 4;
+  google.protobuf.StringValue query = 5;
+  CastStreamType type = 6;
+}
+
+message GetUserRequest {
+  google.protobuf.UInt32Value fid = 1;
+  google.protobuf.StringValue username = 2;
+}
+
+
+message GetPublicationsRequest {
+  string stream_id = 1;
+  bool next = 2;
+  UserIdentifier user = 3;
+}
+
+message GetNotificationsRequest {
+  string stream_id = 1;
+  bool next = 2;
+  NotificationStreamType type = 3;
 }
 
 message LoginRequest {
-    uint64 timestamp = 1;
-    bytes signature = 2;
+  uint64 timestamp = 1;
+  bytes signature = 2;
 }
 
 message LoginResponse {
-    string token = 1;
-    google.protobuf.Timestamp expires_at = 2;
-    User me = 3;
+  string token = 1;
+  google.protobuf.Timestamp expires_at = 2;
+  User me = 3;
 }
 
 message PostCastRequest {
-    string text = 1;
-    google.protobuf.UInt64Value parent_id = 2;
+  string text = 1;
+  google.protobuf.UInt64Value parent_id = 2;
+}
+
+message UserCastContextUpdate {
+  CastIdentifier cast = 1;
+  google.protobuf.BoolValue liked = 2;
+  google.protobuf.BoolValue viewed = 3;
+  google.protobuf.BoolValue watched = 4;
+  google.protobuf.BoolValue bookmarked = 5;
 }
 
 message LikeCastResponse {}
 
-message CastIdentifier {
-    google.protobuf.UInt64Value id = 1;
-    google.protobuf.StringValue hash = 2;
-    google.protobuf.UInt32Value author_fid = 3;
+message SearchCastRequest {
+  string query = 1;
 }
-
-message GetNotificationsRequest {
-    string stream_id = 1;
-    bool next = 2;
-    NotificationStreamType type = 3;
-}
-
-message Notifications {
-    repeated Notification notifications = 1;
-}
-
-message Notification {
-    NotificationType type = 1;
-    uint64 cast_id = 2;
-    string actor_display_name = 3;
-    ProfilePicture actor_profile_picture = 4;
-    uint32 actor_fid = 5;
-    google.protobuf.Timestamp timestamp = 6;
-    bool acknowledged = 7;
-}
-
-message UserIdentifier {
-    google.protobuf.UInt32Value fid = 1;
-    google.protobuf.StringValue username = 2;
-}
-
-enum CastStreamType {
-    UNSPECIFIED_CAST_STREAM_TYPE = 0;
-    CHILDREN = 1;
-    THREAD_CASTS = 2;
-    USER_THREADS = 3;
-    USER_LIKES = 4;
-    USER_REPLIES = 5;
-    LATEST = 6;
-    TRENDING = 7;
-    HIGHLIGHTS = 8;
-    RECOMMENDED = 9;
-    BOOKMARKED = 10;
-}
-
-enum NotificationStreamType {
-    UNSPECIFIED_NOTIFICATION_STREAM_TYPE = 0;
-    ALL = 1;
-    CONVERSATIONS = 2;
-}
-
-message GetPublicationsRequest {
-    string stream_id = 1;
-    bool next = 2;
-    UserIdentifier user = 3;
-}
-
-message Publications {
-    repeated Publication publications = 1;
-}
-
-message Publication {
-    uint64 id = 1;
-    string title = 2;
-    string excerpt = 3;
-    string url = 4;
-    Author author = 5;
-    string platform = 6;
-    google.protobuf.Timestamp published_at = 7;
-}
-
-message GetCastsRequest {
-    string stream_id = 1;
-    bool next = 2;
-    UserIdentifier user = 3;
-    CastIdentifier cast = 4;
-    CastStreamType type = 5;
-}
-
-message GetUserRequest {
-    google.protobuf.UInt32Value fid = 1;
-    google.protobuf.StringValue username = 2;
-}
-
-message Casts {
-    repeated Cast casts = 1;
-}
-
-message User {
-    uint32 fid = 1;
-    string username = 2;
-    string display_name = 3;
-    ProfilePicture profile_picture = 4;
-    Profile profile = 5;
-    uint32 follower_count = 6;
-    uint32 following_count = 7;
-}
-
-message Profile {
-    string bio = 1;
-}
-
-message Cast {
-    uint64 id = 1;
-    string hash = 2;
-    string thread_hash = 3;
-    google.protobuf.UInt64Value parent_id = 4;
-    Author author = 5;
-    string text = 6;
-    google.protobuf.Timestamp published_at = 7;
-    uint64 replies = 8;
-    uint64 reactions = 9;
-    uint64 recasts = 10; // TODO
-    uint64 watches = 11;
-    bool recast = 12;
-    ViewerContext viewer_context = 13;
-    google.protobuf.StringValue parent_author_display_name = 14;
-    google.protobuf.UInt64Value parent_author_fid = 15;
-}
-
-message ViewerContext {
-    bool viewed = 1;
-    bool recast = 2;
-    bool watched = 3;
-    bool bookmarked = 4;
-    bool liked = 5;
-}
-
-message Author {
-    uint64 fid = 1;
-    string username = 2;
-    string display_name = 3;
-    ProfilePicture profile_picture = 4;
-    uint64 follower_count = 5;
-    uint64 following_count = 6;
-}
-
-message ProfilePicture {
-    string url = 1;
-    bool verified = 2;
-}
-
 
 service Omilos {
-    rpc Login(LoginRequest) returns (LoginResponse) {}
-    rpc PostCast(PostCastRequest) returns (Cast) {}
-    rpc UpdateUserCastContext(UserCastContextUpdate) returns (BaseResponse) {}
-    rpc GetMe (GetMeRequest) returns (User) {}
-    rpc GetNotifications (GetNotificationsRequest) returns (Notifications) {}
-    rpc GetUser (GetUserRequest) returns (User) {}
-    rpc GetCast (CastIdentifier) returns (Cast) {}
-    rpc GetCasts (GetCastsRequest) returns (Casts) {}
-    rpc GetPublications (GetPublicationsRequest) returns (Publications) {}
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc PostCast(PostCastRequest) returns (Cast) {}
+  rpc UpdateUserCastContext(UserCastContextUpdate) returns (BaseResponse) {}
+  rpc GetMe (GetMeRequest) returns (User) {}
+  rpc GetNotifications (GetNotificationsRequest) returns (Notifications) {}
+  rpc GetUser (GetUserRequest) returns (User) {}
+  rpc GetCast (CastIdentifier) returns (Cast) {}
+  rpc GetCasts (GetCastsRequest) returns (Casts) {}
+  rpc GetPublications (GetPublicationsRequest) returns (Publications) {}
 }

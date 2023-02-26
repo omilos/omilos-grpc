@@ -2,104 +2,21 @@
 // @generated from protobuf file "omilos.proto" (package "omilos_grpc", syntax proto3)
 // tslint:disable
 import { ServiceType } from "@protobuf-ts/runtime-rpc";
-import { WireType } from "@protobuf-ts/runtime";
 import type { BinaryWriteOptions } from "@protobuf-ts/runtime";
 import type { IBinaryWriter } from "@protobuf-ts/runtime";
-import { UnknownFieldHandler } from "@protobuf-ts/runtime";
+import { WireType } from "@protobuf-ts/runtime";
 import type { BinaryReadOptions } from "@protobuf-ts/runtime";
 import type { IBinaryReader } from "@protobuf-ts/runtime";
+import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
+import { BoolValue } from "./google/protobuf/wrappers";
+import { Timestamp } from "./google/protobuf/timestamp";
 import { UInt32Value } from "./google/protobuf/wrappers";
 import { StringValue } from "./google/protobuf/wrappers";
 import { UInt64Value } from "./google/protobuf/wrappers";
-import { Timestamp } from "./google/protobuf/timestamp";
-import { BoolValue } from "./google/protobuf/wrappers";
-/**
- * @generated from protobuf message omilos_grpc.BaseResponse
- */
-export interface BaseResponse {
-}
-/**
- * @generated from protobuf message omilos_grpc.GetMeRequest
- */
-export interface GetMeRequest {
-}
-/**
- * @generated from protobuf message omilos_grpc.UserCastContextUpdate
- */
-export interface UserCastContextUpdate {
-    /**
-     * @generated from protobuf field: omilos_grpc.CastIdentifier cast = 1;
-     */
-    cast?: CastIdentifier;
-    /**
-     * @generated from protobuf field: google.protobuf.BoolValue liked = 2;
-     */
-    liked?: BoolValue;
-    /**
-     * @generated from protobuf field: google.protobuf.BoolValue viewed = 3;
-     */
-    viewed?: BoolValue;
-    /**
-     * @generated from protobuf field: google.protobuf.BoolValue watched = 4;
-     */
-    watched?: BoolValue;
-    /**
-     * @generated from protobuf field: google.protobuf.BoolValue bookmarked = 5;
-     */
-    bookmarked?: BoolValue;
-}
-/**
- * @generated from protobuf message omilos_grpc.LoginRequest
- */
-export interface LoginRequest {
-    /**
-     * @generated from protobuf field: uint64 timestamp = 1;
-     */
-    timestamp: number;
-    /**
-     * @generated from protobuf field: bytes signature = 2;
-     */
-    signature: Uint8Array;
-}
-/**
- * @generated from protobuf message omilos_grpc.LoginResponse
- */
-export interface LoginResponse {
-    /**
-     * @generated from protobuf field: string token = 1;
-     */
-    token: string;
-    /**
-     * @generated from protobuf field: google.protobuf.Timestamp expires_at = 2;
-     */
-    expiresAt?: Timestamp;
-    /**
-     * @generated from protobuf field: omilos_grpc.User me = 3;
-     */
-    me?: User;
-}
-/**
- * @generated from protobuf message omilos_grpc.PostCastRequest
- */
-export interface PostCastRequest {
-    /**
-     * @generated from protobuf field: string text = 1;
-     */
-    text: string;
-    /**
-     * @generated from protobuf field: google.protobuf.UInt64Value parent_id = 2;
-     */
-    parentId?: UInt64Value;
-}
-/**
- * @generated from protobuf message omilos_grpc.LikeCastResponse
- */
-export interface LikeCastResponse {
-}
 /**
  * @generated from protobuf message omilos_grpc.CastIdentifier
  */
@@ -116,23 +33,6 @@ export interface CastIdentifier {
      * @generated from protobuf field: google.protobuf.UInt32Value author_fid = 3;
      */
     authorFid?: UInt32Value;
-}
-/**
- * @generated from protobuf message omilos_grpc.GetNotificationsRequest
- */
-export interface GetNotificationsRequest {
-    /**
-     * @generated from protobuf field: string stream_id = 1;
-     */
-    streamId: string;
-    /**
-     * @generated from protobuf field: bool next = 2;
-     */
-    next: boolean;
-    /**
-     * @generated from protobuf field: omilos_grpc.NotificationStreamType type = 3;
-     */
-    type: NotificationStreamType;
 }
 /**
  * @generated from protobuf message omilos_grpc.Notifications
@@ -190,23 +90,6 @@ export interface UserIdentifier {
     username?: StringValue;
 }
 /**
- * @generated from protobuf message omilos_grpc.GetPublicationsRequest
- */
-export interface GetPublicationsRequest {
-    /**
-     * @generated from protobuf field: string stream_id = 1;
-     */
-    streamId: string;
-    /**
-     * @generated from protobuf field: bool next = 2;
-     */
-    next: boolean;
-    /**
-     * @generated from protobuf field: omilos_grpc.UserIdentifier user = 3;
-     */
-    user?: UserIdentifier;
-}
-/**
  * @generated from protobuf message omilos_grpc.Publications
  */
 export interface Publications {
@@ -247,44 +130,6 @@ export interface Publication {
      * @generated from protobuf field: google.protobuf.Timestamp published_at = 7;
      */
     publishedAt?: Timestamp;
-}
-/**
- * @generated from protobuf message omilos_grpc.GetCastsRequest
- */
-export interface GetCastsRequest {
-    /**
-     * @generated from protobuf field: string stream_id = 1;
-     */
-    streamId: string;
-    /**
-     * @generated from protobuf field: bool next = 2;
-     */
-    next: boolean;
-    /**
-     * @generated from protobuf field: omilos_grpc.UserIdentifier user = 3;
-     */
-    user?: UserIdentifier;
-    /**
-     * @generated from protobuf field: omilos_grpc.CastIdentifier cast = 4;
-     */
-    cast?: CastIdentifier;
-    /**
-     * @generated from protobuf field: omilos_grpc.CastStreamType type = 5;
-     */
-    type: CastStreamType;
-}
-/**
- * @generated from protobuf message omilos_grpc.GetUserRequest
- */
-export interface GetUserRequest {
-    /**
-     * @generated from protobuf field: google.protobuf.UInt32Value fid = 1;
-     */
-    fid?: UInt32Value;
-    /**
-     * @generated from protobuf field: google.protobuf.StringValue username = 2;
-     */
-    username?: StringValue;
 }
 /**
  * @generated from protobuf message omilos_grpc.Casts
@@ -470,6 +315,174 @@ export interface ProfilePicture {
     verified: boolean;
 }
 /**
+ * @generated from protobuf message omilos_grpc.BaseResponse
+ */
+export interface BaseResponse {
+}
+/**
+ * @generated from protobuf message omilos_grpc.GetMeRequest
+ */
+export interface GetMeRequest {
+}
+/**
+ * @generated from protobuf message omilos_grpc.GetCastsRequest
+ */
+export interface GetCastsRequest {
+    /**
+     * @generated from protobuf field: string stream_id = 1;
+     */
+    streamId: string;
+    /**
+     * @generated from protobuf field: bool next = 2;
+     */
+    next: boolean;
+    /**
+     * @generated from protobuf field: omilos_grpc.UserIdentifier user = 3;
+     */
+    user?: UserIdentifier;
+    /**
+     * @generated from protobuf field: omilos_grpc.CastIdentifier cast = 4;
+     */
+    cast?: CastIdentifier;
+    /**
+     * @generated from protobuf field: google.protobuf.StringValue query = 5;
+     */
+    query?: StringValue;
+    /**
+     * @generated from protobuf field: omilos_grpc.CastStreamType type = 6;
+     */
+    type: CastStreamType;
+}
+/**
+ * @generated from protobuf message omilos_grpc.GetUserRequest
+ */
+export interface GetUserRequest {
+    /**
+     * @generated from protobuf field: google.protobuf.UInt32Value fid = 1;
+     */
+    fid?: UInt32Value;
+    /**
+     * @generated from protobuf field: google.protobuf.StringValue username = 2;
+     */
+    username?: StringValue;
+}
+/**
+ * @generated from protobuf message omilos_grpc.GetPublicationsRequest
+ */
+export interface GetPublicationsRequest {
+    /**
+     * @generated from protobuf field: string stream_id = 1;
+     */
+    streamId: string;
+    /**
+     * @generated from protobuf field: bool next = 2;
+     */
+    next: boolean;
+    /**
+     * @generated from protobuf field: omilos_grpc.UserIdentifier user = 3;
+     */
+    user?: UserIdentifier;
+}
+/**
+ * @generated from protobuf message omilos_grpc.GetNotificationsRequest
+ */
+export interface GetNotificationsRequest {
+    /**
+     * @generated from protobuf field: string stream_id = 1;
+     */
+    streamId: string;
+    /**
+     * @generated from protobuf field: bool next = 2;
+     */
+    next: boolean;
+    /**
+     * @generated from protobuf field: omilos_grpc.NotificationStreamType type = 3;
+     */
+    type: NotificationStreamType;
+}
+/**
+ * @generated from protobuf message omilos_grpc.LoginRequest
+ */
+export interface LoginRequest {
+    /**
+     * @generated from protobuf field: uint64 timestamp = 1;
+     */
+    timestamp: number;
+    /**
+     * @generated from protobuf field: bytes signature = 2;
+     */
+    signature: Uint8Array;
+}
+/**
+ * @generated from protobuf message omilos_grpc.LoginResponse
+ */
+export interface LoginResponse {
+    /**
+     * @generated from protobuf field: string token = 1;
+     */
+    token: string;
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp expires_at = 2;
+     */
+    expiresAt?: Timestamp;
+    /**
+     * @generated from protobuf field: omilos_grpc.User me = 3;
+     */
+    me?: User;
+}
+/**
+ * @generated from protobuf message omilos_grpc.PostCastRequest
+ */
+export interface PostCastRequest {
+    /**
+     * @generated from protobuf field: string text = 1;
+     */
+    text: string;
+    /**
+     * @generated from protobuf field: google.protobuf.UInt64Value parent_id = 2;
+     */
+    parentId?: UInt64Value;
+}
+/**
+ * @generated from protobuf message omilos_grpc.UserCastContextUpdate
+ */
+export interface UserCastContextUpdate {
+    /**
+     * @generated from protobuf field: omilos_grpc.CastIdentifier cast = 1;
+     */
+    cast?: CastIdentifier;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue liked = 2;
+     */
+    liked?: BoolValue;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue viewed = 3;
+     */
+    viewed?: BoolValue;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue watched = 4;
+     */
+    watched?: BoolValue;
+    /**
+     * @generated from protobuf field: google.protobuf.BoolValue bookmarked = 5;
+     */
+    bookmarked?: BoolValue;
+}
+/**
+ * @generated from protobuf message omilos_grpc.LikeCastResponse
+ */
+export interface LikeCastResponse {
+}
+/**
+ * @generated from protobuf message omilos_grpc.SearchCastRequest
+ */
+export interface SearchCastRequest {
+    /**
+     * @generated from protobuf field: string query = 1;
+     */
+    query: string;
+}
+/**
  * @generated from protobuf enum omilos_grpc.ReactionType
  */
 export enum ReactionType {
@@ -570,328 +583,6 @@ export enum NotificationStreamType {
     CONVERSATIONS = 2
 }
 // @generated message type with reflection information, may provide speed optimized methods
-class BaseResponse$Type extends MessageType<BaseResponse> {
-    constructor() {
-        super("omilos_grpc.BaseResponse", []);
-    }
-    create(value?: PartialMessage<BaseResponse>): BaseResponse {
-        const message = {};
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<BaseResponse>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BaseResponse): BaseResponse {
-        return target ?? this.create();
-    }
-    internalBinaryWrite(message: BaseResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.BaseResponse
- */
-export const BaseResponse = new BaseResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GetMeRequest$Type extends MessageType<GetMeRequest> {
-    constructor() {
-        super("omilos_grpc.GetMeRequest", []);
-    }
-    create(value?: PartialMessage<GetMeRequest>): GetMeRequest {
-        const message = {};
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<GetMeRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetMeRequest): GetMeRequest {
-        return target ?? this.create();
-    }
-    internalBinaryWrite(message: GetMeRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.GetMeRequest
- */
-export const GetMeRequest = new GetMeRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class UserCastContextUpdate$Type extends MessageType<UserCastContextUpdate> {
-    constructor() {
-        super("omilos_grpc.UserCastContextUpdate", [
-            { no: 1, name: "cast", kind: "message", T: () => CastIdentifier },
-            { no: 2, name: "liked", kind: "message", T: () => BoolValue },
-            { no: 3, name: "viewed", kind: "message", T: () => BoolValue },
-            { no: 4, name: "watched", kind: "message", T: () => BoolValue },
-            { no: 5, name: "bookmarked", kind: "message", T: () => BoolValue }
-        ]);
-    }
-    create(value?: PartialMessage<UserCastContextUpdate>): UserCastContextUpdate {
-        const message = {};
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<UserCastContextUpdate>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: UserCastContextUpdate): UserCastContextUpdate {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* omilos_grpc.CastIdentifier cast */ 1:
-                    message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
-                    break;
-                case /* google.protobuf.BoolValue liked */ 2:
-                    message.liked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.liked);
-                    break;
-                case /* google.protobuf.BoolValue viewed */ 3:
-                    message.viewed = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.viewed);
-                    break;
-                case /* google.protobuf.BoolValue watched */ 4:
-                    message.watched = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.watched);
-                    break;
-                case /* google.protobuf.BoolValue bookmarked */ 5:
-                    message.bookmarked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.bookmarked);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: UserCastContextUpdate, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* omilos_grpc.CastIdentifier cast = 1; */
-        if (message.cast)
-            CastIdentifier.internalBinaryWrite(message.cast, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue liked = 2; */
-        if (message.liked)
-            BoolValue.internalBinaryWrite(message.liked, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue viewed = 3; */
-        if (message.viewed)
-            BoolValue.internalBinaryWrite(message.viewed, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue watched = 4; */
-        if (message.watched)
-            BoolValue.internalBinaryWrite(message.watched, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue bookmarked = 5; */
-        if (message.bookmarked)
-            BoolValue.internalBinaryWrite(message.bookmarked, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.UserCastContextUpdate
- */
-export const UserCastContextUpdate = new UserCastContextUpdate$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class LoginRequest$Type extends MessageType<LoginRequest> {
-    constructor() {
-        super("omilos_grpc.LoginRequest", [
-            { no: 1, name: "timestamp", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 2, name: "signature", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
-        ]);
-    }
-    create(value?: PartialMessage<LoginRequest>): LoginRequest {
-        const message = { timestamp: 0, signature: new Uint8Array(0) };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<LoginRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LoginRequest): LoginRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* uint64 timestamp */ 1:
-                    message.timestamp = reader.uint64().toNumber();
-                    break;
-                case /* bytes signature */ 2:
-                    message.signature = reader.bytes();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: LoginRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* uint64 timestamp = 1; */
-        if (message.timestamp !== 0)
-            writer.tag(1, WireType.Varint).uint64(message.timestamp);
-        /* bytes signature = 2; */
-        if (message.signature.length)
-            writer.tag(2, WireType.LengthDelimited).bytes(message.signature);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.LoginRequest
- */
-export const LoginRequest = new LoginRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class LoginResponse$Type extends MessageType<LoginResponse> {
-    constructor() {
-        super("omilos_grpc.LoginResponse", [
-            { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "expires_at", kind: "message", T: () => Timestamp },
-            { no: 3, name: "me", kind: "message", T: () => User }
-        ]);
-    }
-    create(value?: PartialMessage<LoginResponse>): LoginResponse {
-        const message = { token: "" };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<LoginResponse>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LoginResponse): LoginResponse {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string token */ 1:
-                    message.token = reader.string();
-                    break;
-                case /* google.protobuf.Timestamp expires_at */ 2:
-                    message.expiresAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
-                    break;
-                case /* omilos_grpc.User me */ 3:
-                    message.me = User.internalBinaryRead(reader, reader.uint32(), options, message.me);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: LoginResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string token = 1; */
-        if (message.token !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.token);
-        /* google.protobuf.Timestamp expires_at = 2; */
-        if (message.expiresAt)
-            Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* omilos_grpc.User me = 3; */
-        if (message.me)
-            User.internalBinaryWrite(message.me, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.LoginResponse
- */
-export const LoginResponse = new LoginResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class PostCastRequest$Type extends MessageType<PostCastRequest> {
-    constructor() {
-        super("omilos_grpc.PostCastRequest", [
-            { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "parent_id", kind: "message", T: () => UInt64Value }
-        ]);
-    }
-    create(value?: PartialMessage<PostCastRequest>): PostCastRequest {
-        const message = { text: "" };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<PostCastRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: PostCastRequest): PostCastRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string text */ 1:
-                    message.text = reader.string();
-                    break;
-                case /* google.protobuf.UInt64Value parent_id */ 2:
-                    message.parentId = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: PostCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string text = 1; */
-        if (message.text !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.text);
-        /* google.protobuf.UInt64Value parent_id = 2; */
-        if (message.parentId)
-            UInt64Value.internalBinaryWrite(message.parentId, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.PostCastRequest
- */
-export const PostCastRequest = new PostCastRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class LikeCastResponse$Type extends MessageType<LikeCastResponse> {
-    constructor() {
-        super("omilos_grpc.LikeCastResponse", []);
-    }
-    create(value?: PartialMessage<LikeCastResponse>): LikeCastResponse {
-        const message = {};
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<LikeCastResponse>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LikeCastResponse): LikeCastResponse {
-        return target ?? this.create();
-    }
-    internalBinaryWrite(message: LikeCastResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.LikeCastResponse
- */
-export const LikeCastResponse = new LikeCastResponse$Type();
-// @generated message type with reflection information, may provide speed optimized methods
 class CastIdentifier$Type extends MessageType<CastIdentifier> {
     constructor() {
         super("omilos_grpc.CastIdentifier", [
@@ -952,67 +643,6 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
  * @generated MessageType for protobuf message omilos_grpc.CastIdentifier
  */
 export const CastIdentifier = new CastIdentifier$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> {
-    constructor() {
-        super("omilos_grpc.GetNotificationsRequest", [
-            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 3, name: "type", kind: "enum", T: () => ["omilos_grpc.NotificationStreamType", NotificationStreamType] }
-        ]);
-    }
-    create(value?: PartialMessage<GetNotificationsRequest>): GetNotificationsRequest {
-        const message = { streamId: "", next: false, type: 0 };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<GetNotificationsRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetNotificationsRequest): GetNotificationsRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string stream_id */ 1:
-                    message.streamId = reader.string();
-                    break;
-                case /* bool next */ 2:
-                    message.next = reader.bool();
-                    break;
-                case /* omilos_grpc.NotificationStreamType type */ 3:
-                    message.type = reader.int32();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: GetNotificationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string stream_id = 1; */
-        if (message.streamId !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
-        /* bool next = 2; */
-        if (message.next !== false)
-            writer.tag(2, WireType.Varint).bool(message.next);
-        /* omilos_grpc.NotificationStreamType type = 3; */
-        if (message.type !== 0)
-            writer.tag(3, WireType.Varint).int32(message.type);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.GetNotificationsRequest
- */
-export const GetNotificationsRequest = new GetNotificationsRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class Notifications$Type extends MessageType<Notifications> {
     constructor() {
@@ -1204,67 +834,6 @@ class UserIdentifier$Type extends MessageType<UserIdentifier> {
  */
 export const UserIdentifier = new UserIdentifier$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class GetPublicationsRequest$Type extends MessageType<GetPublicationsRequest> {
-    constructor() {
-        super("omilos_grpc.GetPublicationsRequest", [
-            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 3, name: "user", kind: "message", T: () => UserIdentifier }
-        ]);
-    }
-    create(value?: PartialMessage<GetPublicationsRequest>): GetPublicationsRequest {
-        const message = { streamId: "", next: false };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<GetPublicationsRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetPublicationsRequest): GetPublicationsRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string stream_id */ 1:
-                    message.streamId = reader.string();
-                    break;
-                case /* bool next */ 2:
-                    message.next = reader.bool();
-                    break;
-                case /* omilos_grpc.UserIdentifier user */ 3:
-                    message.user = UserIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.user);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: GetPublicationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string stream_id = 1; */
-        if (message.streamId !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
-        /* bool next = 2; */
-        if (message.next !== false)
-            writer.tag(2, WireType.Varint).bool(message.next);
-        /* omilos_grpc.UserIdentifier user = 3; */
-        if (message.user)
-            UserIdentifier.internalBinaryWrite(message.user, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.GetPublicationsRequest
- */
-export const GetPublicationsRequest = new GetPublicationsRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
 class Publications$Type extends MessageType<Publications> {
     constructor() {
         super("omilos_grpc.Publications", [
@@ -1400,135 +969,6 @@ class Publication$Type extends MessageType<Publication> {
  * @generated MessageType for protobuf message omilos_grpc.Publication
  */
 export const Publication = new Publication$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
-    constructor() {
-        super("omilos_grpc.GetCastsRequest", [
-            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 3, name: "user", kind: "message", T: () => UserIdentifier },
-            { no: 4, name: "cast", kind: "message", T: () => CastIdentifier },
-            { no: 5, name: "type", kind: "enum", T: () => ["omilos_grpc.CastStreamType", CastStreamType] }
-        ]);
-    }
-    create(value?: PartialMessage<GetCastsRequest>): GetCastsRequest {
-        const message = { streamId: "", next: false, type: 0 };
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<GetCastsRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetCastsRequest): GetCastsRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string stream_id */ 1:
-                    message.streamId = reader.string();
-                    break;
-                case /* bool next */ 2:
-                    message.next = reader.bool();
-                    break;
-                case /* omilos_grpc.UserIdentifier user */ 3:
-                    message.user = UserIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.user);
-                    break;
-                case /* omilos_grpc.CastIdentifier cast */ 4:
-                    message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
-                    break;
-                case /* omilos_grpc.CastStreamType type */ 5:
-                    message.type = reader.int32();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: GetCastsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string stream_id = 1; */
-        if (message.streamId !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
-        /* bool next = 2; */
-        if (message.next !== false)
-            writer.tag(2, WireType.Varint).bool(message.next);
-        /* omilos_grpc.UserIdentifier user = 3; */
-        if (message.user)
-            UserIdentifier.internalBinaryWrite(message.user, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* omilos_grpc.CastIdentifier cast = 4; */
-        if (message.cast)
-            CastIdentifier.internalBinaryWrite(message.cast, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* omilos_grpc.CastStreamType type = 5; */
-        if (message.type !== 0)
-            writer.tag(5, WireType.Varint).int32(message.type);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.GetCastsRequest
- */
-export const GetCastsRequest = new GetCastsRequest$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class GetUserRequest$Type extends MessageType<GetUserRequest> {
-    constructor() {
-        super("omilos_grpc.GetUserRequest", [
-            { no: 1, name: "fid", kind: "message", T: () => UInt32Value },
-            { no: 2, name: "username", kind: "message", T: () => StringValue }
-        ]);
-    }
-    create(value?: PartialMessage<GetUserRequest>): GetUserRequest {
-        const message = {};
-        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
-        if (value !== undefined)
-            reflectionMergePartial<GetUserRequest>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetUserRequest): GetUserRequest {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* google.protobuf.UInt32Value fid */ 1:
-                    message.fid = UInt32Value.internalBinaryRead(reader, reader.uint32(), options, message.fid);
-                    break;
-                case /* google.protobuf.StringValue username */ 2:
-                    message.username = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.username);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: GetUserRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* google.protobuf.UInt32Value fid = 1; */
-        if (message.fid)
-            UInt32Value.internalBinaryWrite(message.fid, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.StringValue username = 2; */
-        if (message.username)
-            StringValue.internalBinaryWrite(message.username, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message omilos_grpc.GetUserRequest
- */
-export const GetUserRequest = new GetUserRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class Casts$Type extends MessageType<Casts> {
     constructor() {
@@ -2068,6 +1508,633 @@ class ProfilePicture$Type extends MessageType<ProfilePicture> {
  * @generated MessageType for protobuf message omilos_grpc.ProfilePicture
  */
 export const ProfilePicture = new ProfilePicture$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class BaseResponse$Type extends MessageType<BaseResponse> {
+    constructor() {
+        super("omilos_grpc.BaseResponse", []);
+    }
+    create(value?: PartialMessage<BaseResponse>): BaseResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<BaseResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: BaseResponse): BaseResponse {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: BaseResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.BaseResponse
+ */
+export const BaseResponse = new BaseResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetMeRequest$Type extends MessageType<GetMeRequest> {
+    constructor() {
+        super("omilos_grpc.GetMeRequest", []);
+    }
+    create(value?: PartialMessage<GetMeRequest>): GetMeRequest {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetMeRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetMeRequest): GetMeRequest {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: GetMeRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetMeRequest
+ */
+export const GetMeRequest = new GetMeRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetCastsRequest$Type extends MessageType<GetCastsRequest> {
+    constructor() {
+        super("omilos_grpc.GetCastsRequest", [
+            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "user", kind: "message", T: () => UserIdentifier },
+            { no: 4, name: "cast", kind: "message", T: () => CastIdentifier },
+            { no: 5, name: "query", kind: "message", T: () => StringValue },
+            { no: 6, name: "type", kind: "enum", T: () => ["omilos_grpc.CastStreamType", CastStreamType] }
+        ]);
+    }
+    create(value?: PartialMessage<GetCastsRequest>): GetCastsRequest {
+        const message = { streamId: "", next: false, type: 0 };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetCastsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetCastsRequest): GetCastsRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string stream_id */ 1:
+                    message.streamId = reader.string();
+                    break;
+                case /* bool next */ 2:
+                    message.next = reader.bool();
+                    break;
+                case /* omilos_grpc.UserIdentifier user */ 3:
+                    message.user = UserIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.user);
+                    break;
+                case /* omilos_grpc.CastIdentifier cast */ 4:
+                    message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
+                    break;
+                case /* google.protobuf.StringValue query */ 5:
+                    message.query = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.query);
+                    break;
+                case /* omilos_grpc.CastStreamType type */ 6:
+                    message.type = reader.int32();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetCastsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string stream_id = 1; */
+        if (message.streamId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
+        /* bool next = 2; */
+        if (message.next !== false)
+            writer.tag(2, WireType.Varint).bool(message.next);
+        /* omilos_grpc.UserIdentifier user = 3; */
+        if (message.user)
+            UserIdentifier.internalBinaryWrite(message.user, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* omilos_grpc.CastIdentifier cast = 4; */
+        if (message.cast)
+            CastIdentifier.internalBinaryWrite(message.cast, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue query = 5; */
+        if (message.query)
+            StringValue.internalBinaryWrite(message.query, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* omilos_grpc.CastStreamType type = 6; */
+        if (message.type !== 0)
+            writer.tag(6, WireType.Varint).int32(message.type);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetCastsRequest
+ */
+export const GetCastsRequest = new GetCastsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetUserRequest$Type extends MessageType<GetUserRequest> {
+    constructor() {
+        super("omilos_grpc.GetUserRequest", [
+            { no: 1, name: "fid", kind: "message", T: () => UInt32Value },
+            { no: 2, name: "username", kind: "message", T: () => StringValue }
+        ]);
+    }
+    create(value?: PartialMessage<GetUserRequest>): GetUserRequest {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetUserRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetUserRequest): GetUserRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* google.protobuf.UInt32Value fid */ 1:
+                    message.fid = UInt32Value.internalBinaryRead(reader, reader.uint32(), options, message.fid);
+                    break;
+                case /* google.protobuf.StringValue username */ 2:
+                    message.username = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.username);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetUserRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* google.protobuf.UInt32Value fid = 1; */
+        if (message.fid)
+            UInt32Value.internalBinaryWrite(message.fid, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue username = 2; */
+        if (message.username)
+            StringValue.internalBinaryWrite(message.username, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetUserRequest
+ */
+export const GetUserRequest = new GetUserRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetPublicationsRequest$Type extends MessageType<GetPublicationsRequest> {
+    constructor() {
+        super("omilos_grpc.GetPublicationsRequest", [
+            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "user", kind: "message", T: () => UserIdentifier }
+        ]);
+    }
+    create(value?: PartialMessage<GetPublicationsRequest>): GetPublicationsRequest {
+        const message = { streamId: "", next: false };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetPublicationsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetPublicationsRequest): GetPublicationsRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string stream_id */ 1:
+                    message.streamId = reader.string();
+                    break;
+                case /* bool next */ 2:
+                    message.next = reader.bool();
+                    break;
+                case /* omilos_grpc.UserIdentifier user */ 3:
+                    message.user = UserIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.user);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetPublicationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string stream_id = 1; */
+        if (message.streamId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
+        /* bool next = 2; */
+        if (message.next !== false)
+            writer.tag(2, WireType.Varint).bool(message.next);
+        /* omilos_grpc.UserIdentifier user = 3; */
+        if (message.user)
+            UserIdentifier.internalBinaryWrite(message.user, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetPublicationsRequest
+ */
+export const GetPublicationsRequest = new GetPublicationsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> {
+    constructor() {
+        super("omilos_grpc.GetNotificationsRequest", [
+            { no: 1, name: "stream_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "next", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "type", kind: "enum", T: () => ["omilos_grpc.NotificationStreamType", NotificationStreamType] }
+        ]);
+    }
+    create(value?: PartialMessage<GetNotificationsRequest>): GetNotificationsRequest {
+        const message = { streamId: "", next: false, type: 0 };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<GetNotificationsRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetNotificationsRequest): GetNotificationsRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string stream_id */ 1:
+                    message.streamId = reader.string();
+                    break;
+                case /* bool next */ 2:
+                    message.next = reader.bool();
+                    break;
+                case /* omilos_grpc.NotificationStreamType type */ 3:
+                    message.type = reader.int32();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetNotificationsRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string stream_id = 1; */
+        if (message.streamId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.streamId);
+        /* bool next = 2; */
+        if (message.next !== false)
+            writer.tag(2, WireType.Varint).bool(message.next);
+        /* omilos_grpc.NotificationStreamType type = 3; */
+        if (message.type !== 0)
+            writer.tag(3, WireType.Varint).int32(message.type);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.GetNotificationsRequest
+ */
+export const GetNotificationsRequest = new GetNotificationsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class LoginRequest$Type extends MessageType<LoginRequest> {
+    constructor() {
+        super("omilos_grpc.LoginRequest", [
+            { no: 1, name: "timestamp", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 2, name: "signature", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+        ]);
+    }
+    create(value?: PartialMessage<LoginRequest>): LoginRequest {
+        const message = { timestamp: 0, signature: new Uint8Array(0) };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<LoginRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LoginRequest): LoginRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* uint64 timestamp */ 1:
+                    message.timestamp = reader.uint64().toNumber();
+                    break;
+                case /* bytes signature */ 2:
+                    message.signature = reader.bytes();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: LoginRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* uint64 timestamp = 1; */
+        if (message.timestamp !== 0)
+            writer.tag(1, WireType.Varint).uint64(message.timestamp);
+        /* bytes signature = 2; */
+        if (message.signature.length)
+            writer.tag(2, WireType.LengthDelimited).bytes(message.signature);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.LoginRequest
+ */
+export const LoginRequest = new LoginRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class LoginResponse$Type extends MessageType<LoginResponse> {
+    constructor() {
+        super("omilos_grpc.LoginResponse", [
+            { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "expires_at", kind: "message", T: () => Timestamp },
+            { no: 3, name: "me", kind: "message", T: () => User }
+        ]);
+    }
+    create(value?: PartialMessage<LoginResponse>): LoginResponse {
+        const message = { token: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<LoginResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LoginResponse): LoginResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string token */ 1:
+                    message.token = reader.string();
+                    break;
+                case /* google.protobuf.Timestamp expires_at */ 2:
+                    message.expiresAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
+                    break;
+                case /* omilos_grpc.User me */ 3:
+                    message.me = User.internalBinaryRead(reader, reader.uint32(), options, message.me);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: LoginResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string token = 1; */
+        if (message.token !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.token);
+        /* google.protobuf.Timestamp expires_at = 2; */
+        if (message.expiresAt)
+            Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* omilos_grpc.User me = 3; */
+        if (message.me)
+            User.internalBinaryWrite(message.me, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.LoginResponse
+ */
+export const LoginResponse = new LoginResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class PostCastRequest$Type extends MessageType<PostCastRequest> {
+    constructor() {
+        super("omilos_grpc.PostCastRequest", [
+            { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "parent_id", kind: "message", T: () => UInt64Value }
+        ]);
+    }
+    create(value?: PartialMessage<PostCastRequest>): PostCastRequest {
+        const message = { text: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<PostCastRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: PostCastRequest): PostCastRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string text */ 1:
+                    message.text = reader.string();
+                    break;
+                case /* google.protobuf.UInt64Value parent_id */ 2:
+                    message.parentId = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: PostCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string text = 1; */
+        if (message.text !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.text);
+        /* google.protobuf.UInt64Value parent_id = 2; */
+        if (message.parentId)
+            UInt64Value.internalBinaryWrite(message.parentId, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.PostCastRequest
+ */
+export const PostCastRequest = new PostCastRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class UserCastContextUpdate$Type extends MessageType<UserCastContextUpdate> {
+    constructor() {
+        super("omilos_grpc.UserCastContextUpdate", [
+            { no: 1, name: "cast", kind: "message", T: () => CastIdentifier },
+            { no: 2, name: "liked", kind: "message", T: () => BoolValue },
+            { no: 3, name: "viewed", kind: "message", T: () => BoolValue },
+            { no: 4, name: "watched", kind: "message", T: () => BoolValue },
+            { no: 5, name: "bookmarked", kind: "message", T: () => BoolValue }
+        ]);
+    }
+    create(value?: PartialMessage<UserCastContextUpdate>): UserCastContextUpdate {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<UserCastContextUpdate>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: UserCastContextUpdate): UserCastContextUpdate {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* omilos_grpc.CastIdentifier cast */ 1:
+                    message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
+                    break;
+                case /* google.protobuf.BoolValue liked */ 2:
+                    message.liked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.liked);
+                    break;
+                case /* google.protobuf.BoolValue viewed */ 3:
+                    message.viewed = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.viewed);
+                    break;
+                case /* google.protobuf.BoolValue watched */ 4:
+                    message.watched = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.watched);
+                    break;
+                case /* google.protobuf.BoolValue bookmarked */ 5:
+                    message.bookmarked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.bookmarked);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: UserCastContextUpdate, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* omilos_grpc.CastIdentifier cast = 1; */
+        if (message.cast)
+            CastIdentifier.internalBinaryWrite(message.cast, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue liked = 2; */
+        if (message.liked)
+            BoolValue.internalBinaryWrite(message.liked, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue viewed = 3; */
+        if (message.viewed)
+            BoolValue.internalBinaryWrite(message.viewed, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue watched = 4; */
+        if (message.watched)
+            BoolValue.internalBinaryWrite(message.watched, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue bookmarked = 5; */
+        if (message.bookmarked)
+            BoolValue.internalBinaryWrite(message.bookmarked, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.UserCastContextUpdate
+ */
+export const UserCastContextUpdate = new UserCastContextUpdate$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class LikeCastResponse$Type extends MessageType<LikeCastResponse> {
+    constructor() {
+        super("omilos_grpc.LikeCastResponse", []);
+    }
+    create(value?: PartialMessage<LikeCastResponse>): LikeCastResponse {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<LikeCastResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: LikeCastResponse): LikeCastResponse {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: LikeCastResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.LikeCastResponse
+ */
+export const LikeCastResponse = new LikeCastResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class SearchCastRequest$Type extends MessageType<SearchCastRequest> {
+    constructor() {
+        super("omilos_grpc.SearchCastRequest", [
+            { no: 1, name: "query", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<SearchCastRequest>): SearchCastRequest {
+        const message = { query: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<SearchCastRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: SearchCastRequest): SearchCastRequest {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string query */ 1:
+                    message.query = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: SearchCastRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string query = 1; */
+        if (message.query !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.query);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.SearchCastRequest
+ */
+export const SearchCastRequest = new SearchCastRequest$Type();
 /**
  * @generated ServiceType for protobuf service omilos_grpc.Omilos
  */
