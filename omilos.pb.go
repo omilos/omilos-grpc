@@ -29,6 +29,7 @@ type ReactionType int32
 const (
 	ReactionType_UNSPECIFIED_REACTION_TYPE ReactionType = 0
 	ReactionType_LIKE                      ReactionType = 1
+	ReactionType_RECAST                    ReactionType = 2
 )
 
 // Enum value maps for ReactionType.
