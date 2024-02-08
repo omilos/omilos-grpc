@@ -113,8 +113,9 @@ message Cast {
   uint64 watches = 13;
   bool recast = 14;
   ViewerContext viewer_context = 15;
-  google.protobuf.StringValue parent_author_display_name = 16;
-  google.protobuf.Int64Value parent_author_fid = 17;
+  Author author = 16;
+  google.protobuf.StringValue parent_author_display_name = 17;
+  google.protobuf.Int64Value parent_author_fid = 18;
 }
 
 message ViewerContext {

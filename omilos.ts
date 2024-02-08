@@ -247,11 +247,15 @@ export interface Cast {
      */
     viewerContext?: ViewerContext;
     /**
-     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 16;
+     * @generated from protobuf field: omilos_grpc.Author author = 16;
+     */
+    author?: Author;
+    /**
+     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 17;
      */
     parentAuthorDisplayName?: StringValue;
     /**
-     * @generated from protobuf field: google.protobuf.Int64Value parent_author_fid = 17;
+     * @generated from protobuf field: google.protobuf.Int64Value parent_author_fid = 18;
      */
     parentAuthorFid?: Int64Value;
 }
@@ -1179,8 +1183,9 @@ class Cast$Type extends MessageType<Cast> {
             { no: 13, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
             { no: 14, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 15, name: "viewer_context", kind: "message", T: () => ViewerContext },
-            { no: 16, name: "parent_author_display_name", kind: "message", T: () => StringValue },
-            { no: 17, name: "parent_author_fid", kind: "message", T: () => Int64Value }
+            { no: 16, name: "author", kind: "message", T: () => Author },
+            { no: 17, name: "parent_author_display_name", kind: "message", T: () => StringValue },
+            { no: 18, name: "parent_author_fid", kind: "message", T: () => Int64Value }
         ]);
     }
     create(value?: PartialMessage<Cast>): Cast {
@@ -1240,10 +1245,13 @@ class Cast$Type extends MessageType<Cast> {
                 case /* omilos_grpc.ViewerContext viewer_context */ 15:
                     message.viewerContext = ViewerContext.internalBinaryRead(reader, reader.uint32(), options, message.viewerContext);
                     break;
-                case /* google.protobuf.StringValue parent_author_display_name */ 16:
+                case /* omilos_grpc.Author author */ 16:
+                    message.author = Author.internalBinaryRead(reader, reader.uint32(), options, message.author);
+                    break;
+                case /* google.protobuf.StringValue parent_author_display_name */ 17:
                     message.parentAuthorDisplayName = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorDisplayName);
                     break;
-                case /* google.protobuf.Int64Value parent_author_fid */ 17:
+                case /* google.protobuf.Int64Value parent_author_fid */ 18:
                     message.parentAuthorFid = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorFid);
                     break;
                 default:
@@ -1303,12 +1311,15 @@ class Cast$Type extends MessageType<Cast> {
         /* omilos_grpc.ViewerContext viewer_context = 15; */
         if (message.viewerContext)
             ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(15, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.StringValue parent_author_display_name = 16; */
+        /* omilos_grpc.Author author = 16; */
+        if (message.author)
+            Author.internalBinaryWrite(message.author, writer.tag(16, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue parent_author_display_name = 17; */
         if (message.parentAuthorDisplayName)
-            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(16, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.Int64Value parent_author_fid = 17; */
+            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Int64Value parent_author_fid = 18; */
         if (message.parentAuthorFid)
-            Int64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(18, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
