@@ -13,26 +13,26 @@ import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MESSAGE_TYPE } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 import { BoolValue } from "./google/protobuf/wrappers";
-import { Timestamp } from "./google/protobuf/timestamp";
 import { UInt32Value } from "./google/protobuf/wrappers";
+import { Timestamp } from "./google/protobuf/timestamp";
 import { StringValue } from "./google/protobuf/wrappers";
-import { UInt64Value } from "./google/protobuf/wrappers";
+import { Int64Value } from "./google/protobuf/wrappers";
 /**
  * @generated from protobuf message omilos_grpc.CastIdentifier
  */
 export interface CastIdentifier {
     /**
-     * @generated from protobuf field: google.protobuf.UInt64Value id = 1;
+     * @generated from protobuf field: google.protobuf.Int64Value id = 1;
      */
-    id?: UInt64Value;
+    id?: Int64Value;
     /**
      * @generated from protobuf field: google.protobuf.StringValue hash = 2;
      */
     hash?: StringValue;
     /**
-     * @generated from protobuf field: google.protobuf.UInt32Value author_fid = 3;
+     * @generated from protobuf field: google.protobuf.Int64Value author_fid = 3;
      */
-    authorFid?: UInt32Value;
+    authorFid?: Int64Value;
 }
 /**
  * @generated from protobuf message omilos_grpc.Notifications
@@ -81,9 +81,9 @@ export interface Notification {
  */
 export interface UserIdentifier {
     /**
-     * @generated from protobuf field: google.protobuf.UInt32Value fid = 1;
+     * @generated from protobuf field: google.protobuf.Int64Value fid = 1;
      */
-    fid?: UInt32Value;
+    fid?: Int64Value;
     /**
      * @generated from protobuf field: google.protobuf.StringValue username = 2;
      */
@@ -187,7 +187,7 @@ export interface Profile {
  */
 export interface Cast {
     /**
-     * @generated from protobuf field: uint64 id = 1;
+     * @generated from protobuf field: int64 id = 1;
      */
     id: number;
     /**
@@ -195,57 +195,65 @@ export interface Cast {
      */
     hash: string;
     /**
-     * @generated from protobuf field: string thread_hash = 3;
+     * @generated from protobuf field: string root_parent_hash = 3;
      */
-    threadHash: string;
+    rootParentHash: string;
     /**
-     * @generated from protobuf field: google.protobuf.UInt64Value parent_id = 4;
+     * @generated from protobuf field: string root_parent_url = 4;
      */
-    parentId?: UInt64Value;
+    rootParentUrl: string;
     /**
-     * @generated from protobuf field: omilos_grpc.Author author = 5;
+     * @generated from protobuf field: google.protobuf.Int64Value root_parent_id = 5;
      */
-    author?: Author;
+    rootParentId?: Int64Value;
     /**
-     * @generated from protobuf field: string text = 6;
+     * @generated from protobuf field: google.protobuf.Int64Value parent_id = 6;
+     */
+    parentId?: Int64Value;
+    /**
+     * @generated from protobuf field: int64 author_id = 7;
+     */
+    authorId: number;
+    /**
+     * @generated from protobuf field: string text = 8;
      */
     text: string;
     /**
-     * @generated from protobuf field: google.protobuf.Timestamp published_at = 7;
+     * @generated from protobuf field: google.protobuf.Timestamp published_at = 9;
      */
     publishedAt?: Timestamp;
     /**
-     * @generated from protobuf field: uint64 replies = 8;
+     * @generated from protobuf field: uint64 replies = 10;
      */
     replies: number;
     /**
-     * @generated from protobuf field: uint64 reactions = 9;
+     * @generated from protobuf field: uint64 reactions = 11;
      */
     reactions: number;
     /**
-     * @generated from protobuf field: uint64 recasts = 10;
+     * @generated from protobuf field: uint64 recasts = 12;
      */
     recasts: number; // TODO
     /**
-     * @generated from protobuf field: uint64 watches = 11;
+     * @generated from protobuf field: uint64 watches = 13;
      */
     watches: number;
     /**
-     * @generated from protobuf field: bool recast = 12;
+     * @generated from protobuf field: bool recast = 14;
      */
     recast: boolean;
     /**
-     * @generated from protobuf field: omilos_grpc.ViewerContext viewer_context = 13;
+     * @generated from protobuf field: omilos_grpc.ViewerContext viewer_context = 15;
      */
     viewerContext?: ViewerContext;
     /**
-     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 14;
+     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 16;
      */
     parentAuthorDisplayName?: StringValue;
     /**
-     * @generated from protobuf field: google.protobuf.UInt64Value parent_author_fid = 15;
+     * @generated from protobuf field: google.protobuf.Int64Value parent_author_fid = 17;
      */
-    parentAuthorFid?: UInt64Value;
+    parentAuthorFid?: Int64Value;
 }
 /**
  * @generated from protobuf message omilos_grpc.ViewerContext
@@ -277,7 +285,7 @@ export interface ViewerContext {
  */
 export interface Author {
     /**
-     * @generated from protobuf field: uint64 fid = 1;
+     * @generated from protobuf field: int64 fid = 1;
      */
     fid: number;
     /**
@@ -439,9 +447,9 @@ export interface PostCastRequest {
      */
     text: string;
     /**
-     * @generated from protobuf field: google.protobuf.UInt64Value parent_id = 2;
+     * @generated from protobuf field: google.protobuf.Int64Value parent_id = 2;
      */
-    parentId?: UInt64Value;
+    parentId?: Int64Value;
 }
 /**
  * @generated from protobuf message omilos_grpc.UserCastContextUpdate
@@ -452,19 +460,15 @@ export interface UserCastContextUpdate {
      */
     cast?: CastIdentifier;
     /**
-     * @generated from protobuf field: google.protobuf.BoolValue liked = 2;
-     */
-    liked?: BoolValue;
-    /**
-     * @generated from protobuf field: google.protobuf.BoolValue viewed = 3;
+     * @generated from protobuf field: google.protobuf.BoolValue viewed = 2;
      */
     viewed?: BoolValue;
     /**
-     * @generated from protobuf field: google.protobuf.BoolValue watched = 4;
+     * @generated from protobuf field: google.protobuf.BoolValue watched = 3;
      */
     watched?: BoolValue;
     /**
-     * @generated from protobuf field: google.protobuf.BoolValue bookmarked = 5;
+     * @generated from protobuf field: google.protobuf.BoolValue bookmarked = 4;
      */
     bookmarked?: BoolValue;
 }
@@ -590,9 +594,9 @@ export enum NotificationStreamType {
 class CastIdentifier$Type extends MessageType<CastIdentifier> {
     constructor() {
         super("omilos_grpc.CastIdentifier", [
-            { no: 1, name: "id", kind: "message", T: () => UInt64Value },
+            { no: 1, name: "id", kind: "message", T: () => Int64Value },
             { no: 2, name: "hash", kind: "message", T: () => StringValue },
-            { no: 3, name: "author_fid", kind: "message", T: () => UInt32Value }
+            { no: 3, name: "author_fid", kind: "message", T: () => Int64Value }
         ]);
     }
     create(value?: PartialMessage<CastIdentifier>): CastIdentifier {
@@ -607,14 +611,14 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* google.protobuf.UInt64Value id */ 1:
-                    message.id = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.id);
+                case /* google.protobuf.Int64Value id */ 1:
+                    message.id = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.id);
                     break;
                 case /* google.protobuf.StringValue hash */ 2:
                     message.hash = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.hash);
                     break;
-                case /* google.protobuf.UInt32Value author_fid */ 3:
-                    message.authorFid = UInt32Value.internalBinaryRead(reader, reader.uint32(), options, message.authorFid);
+                case /* google.protobuf.Int64Value author_fid */ 3:
+                    message.authorFid = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.authorFid);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -628,15 +632,15 @@ class CastIdentifier$Type extends MessageType<CastIdentifier> {
         return message;
     }
     internalBinaryWrite(message: CastIdentifier, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* google.protobuf.UInt64Value id = 1; */
+        /* google.protobuf.Int64Value id = 1; */
         if (message.id)
-            UInt64Value.internalBinaryWrite(message.id, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.id, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
         /* google.protobuf.StringValue hash = 2; */
         if (message.hash)
             StringValue.internalBinaryWrite(message.hash, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.UInt32Value author_fid = 3; */
+        /* google.protobuf.Int64Value author_fid = 3; */
         if (message.authorFid)
-            UInt32Value.internalBinaryWrite(message.authorFid, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.authorFid, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -787,7 +791,7 @@ export const Notification = new Notification$Type();
 class UserIdentifier$Type extends MessageType<UserIdentifier> {
     constructor() {
         super("omilos_grpc.UserIdentifier", [
-            { no: 1, name: "fid", kind: "message", T: () => UInt32Value },
+            { no: 1, name: "fid", kind: "message", T: () => Int64Value },
             { no: 2, name: "username", kind: "message", T: () => StringValue }
         ]);
     }
@@ -803,8 +807,8 @@ class UserIdentifier$Type extends MessageType<UserIdentifier> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* google.protobuf.UInt32Value fid */ 1:
-                    message.fid = UInt32Value.internalBinaryRead(reader, reader.uint32(), options, message.fid);
+                case /* google.protobuf.Int64Value fid */ 1:
+                    message.fid = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.fid);
                     break;
                 case /* google.protobuf.StringValue username */ 2:
                     message.username = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.username);
@@ -821,9 +825,9 @@ class UserIdentifier$Type extends MessageType<UserIdentifier> {
         return message;
     }
     internalBinaryWrite(message: UserIdentifier, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* google.protobuf.UInt32Value fid = 1; */
+        /* google.protobuf.Int64Value fid = 1; */
         if (message.fid)
-            UInt32Value.internalBinaryWrite(message.fid, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.fid, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
         /* google.protobuf.StringValue username = 2; */
         if (message.username)
             StringValue.internalBinaryWrite(message.username, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
@@ -1160,25 +1164,27 @@ export const Profile = new Profile$Type();
 class Cast$Type extends MessageType<Cast> {
     constructor() {
         super("omilos_grpc.Cast", [
-            { no: 1, name: "id", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 1, name: "id", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 2 /*LongType.NUMBER*/ },
             { no: 2, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "thread_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "parent_id", kind: "message", T: () => UInt64Value },
-            { no: 5, name: "author", kind: "message", T: () => Author },
-            { no: 6, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "published_at", kind: "message", T: () => Timestamp },
-            { no: 8, name: "replies", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 9, name: "reactions", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 10, name: "recasts", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 11, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 12, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 13, name: "viewer_context", kind: "message", T: () => ViewerContext },
-            { no: 14, name: "parent_author_display_name", kind: "message", T: () => StringValue },
-            { no: 15, name: "parent_author_fid", kind: "message", T: () => UInt64Value }
+            { no: 3, name: "root_parent_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "root_parent_url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "root_parent_id", kind: "message", T: () => Int64Value },
+            { no: 6, name: "parent_id", kind: "message", T: () => Int64Value },
+            { no: 7, name: "author_id", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 8, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 9, name: "published_at", kind: "message", T: () => Timestamp },
+            { no: 10, name: "replies", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 11, name: "reactions", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 12, name: "recasts", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 13, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 14, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 15, name: "viewer_context", kind: "message", T: () => ViewerContext },
+            { no: 16, name: "parent_author_display_name", kind: "message", T: () => StringValue },
+            { no: 17, name: "parent_author_fid", kind: "message", T: () => Int64Value }
         ]);
     }
     create(value?: PartialMessage<Cast>): Cast {
-        const message = { id: 0, hash: "", threadHash: "", text: "", replies: 0, reactions: 0, recasts: 0, watches: 0, recast: false };
+        const message = { id: 0, hash: "", rootParentHash: "", rootParentUrl: "", authorId: 0, text: "", replies: 0, reactions: 0, recasts: 0, watches: 0, recast: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Cast>(this, message, value);
@@ -1189,50 +1195,56 @@ class Cast$Type extends MessageType<Cast> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* uint64 id */ 1:
-                    message.id = reader.uint64().toNumber();
+                case /* int64 id */ 1:
+                    message.id = reader.int64().toNumber();
                     break;
                 case /* string hash */ 2:
                     message.hash = reader.string();
                     break;
-                case /* string thread_hash */ 3:
-                    message.threadHash = reader.string();
+                case /* string root_parent_hash */ 3:
+                    message.rootParentHash = reader.string();
                     break;
-                case /* google.protobuf.UInt64Value parent_id */ 4:
-                    message.parentId = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
+                case /* string root_parent_url */ 4:
+                    message.rootParentUrl = reader.string();
                     break;
-                case /* omilos_grpc.Author author */ 5:
-                    message.author = Author.internalBinaryRead(reader, reader.uint32(), options, message.author);
+                case /* google.protobuf.Int64Value root_parent_id */ 5:
+                    message.rootParentId = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.rootParentId);
                     break;
-                case /* string text */ 6:
+                case /* google.protobuf.Int64Value parent_id */ 6:
+                    message.parentId = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
+                    break;
+                case /* int64 author_id */ 7:
+                    message.authorId = reader.int64().toNumber();
+                    break;
+                case /* string text */ 8:
                     message.text = reader.string();
                     break;
-                case /* google.protobuf.Timestamp published_at */ 7:
+                case /* google.protobuf.Timestamp published_at */ 9:
                     message.publishedAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.publishedAt);
                     break;
-                case /* uint64 replies */ 8:
+                case /* uint64 replies */ 10:
                     message.replies = reader.uint64().toNumber();
                     break;
-                case /* uint64 reactions */ 9:
+                case /* uint64 reactions */ 11:
                     message.reactions = reader.uint64().toNumber();
                     break;
-                case /* uint64 recasts */ 10:
+                case /* uint64 recasts */ 12:
                     message.recasts = reader.uint64().toNumber();
                     break;
-                case /* uint64 watches */ 11:
+                case /* uint64 watches */ 13:
                     message.watches = reader.uint64().toNumber();
                     break;
-                case /* bool recast */ 12:
+                case /* bool recast */ 14:
                     message.recast = reader.bool();
                     break;
-                case /* omilos_grpc.ViewerContext viewer_context */ 13:
+                case /* omilos_grpc.ViewerContext viewer_context */ 15:
                     message.viewerContext = ViewerContext.internalBinaryRead(reader, reader.uint32(), options, message.viewerContext);
                     break;
-                case /* google.protobuf.StringValue parent_author_display_name */ 14:
+                case /* google.protobuf.StringValue parent_author_display_name */ 16:
                     message.parentAuthorDisplayName = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorDisplayName);
                     break;
-                case /* google.protobuf.UInt64Value parent_author_fid */ 15:
-                    message.parentAuthorFid = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorFid);
+                case /* google.protobuf.Int64Value parent_author_fid */ 17:
+                    message.parentAuthorFid = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorFid);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1246,51 +1258,57 @@ class Cast$Type extends MessageType<Cast> {
         return message;
     }
     internalBinaryWrite(message: Cast, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* uint64 id = 1; */
+        /* int64 id = 1; */
         if (message.id !== 0)
-            writer.tag(1, WireType.Varint).uint64(message.id);
+            writer.tag(1, WireType.Varint).int64(message.id);
         /* string hash = 2; */
         if (message.hash !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.hash);
-        /* string thread_hash = 3; */
-        if (message.threadHash !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.threadHash);
-        /* google.protobuf.UInt64Value parent_id = 4; */
+        /* string root_parent_hash = 3; */
+        if (message.rootParentHash !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.rootParentHash);
+        /* string root_parent_url = 4; */
+        if (message.rootParentUrl !== "")
+            writer.tag(4, WireType.LengthDelimited).string(message.rootParentUrl);
+        /* google.protobuf.Int64Value root_parent_id = 5; */
+        if (message.rootParentId)
+            Int64Value.internalBinaryWrite(message.rootParentId, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Int64Value parent_id = 6; */
         if (message.parentId)
-            UInt64Value.internalBinaryWrite(message.parentId, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* omilos_grpc.Author author = 5; */
-        if (message.author)
-            Author.internalBinaryWrite(message.author, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
-        /* string text = 6; */
+            Int64Value.internalBinaryWrite(message.parentId, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
+        /* int64 author_id = 7; */
+        if (message.authorId !== 0)
+            writer.tag(7, WireType.Varint).int64(message.authorId);
+        /* string text = 8; */
         if (message.text !== "")
-            writer.tag(6, WireType.LengthDelimited).string(message.text);
-        /* google.protobuf.Timestamp published_at = 7; */
+            writer.tag(8, WireType.LengthDelimited).string(message.text);
+        /* google.protobuf.Timestamp published_at = 9; */
         if (message.publishedAt)
-            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
-        /* uint64 replies = 8; */
+            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* uint64 replies = 10; */
         if (message.replies !== 0)
-            writer.tag(8, WireType.Varint).uint64(message.replies);
-        /* uint64 reactions = 9; */
+            writer.tag(10, WireType.Varint).uint64(message.replies);
+        /* uint64 reactions = 11; */
         if (message.reactions !== 0)
-            writer.tag(9, WireType.Varint).uint64(message.reactions);
-        /* uint64 recasts = 10; */
+            writer.tag(11, WireType.Varint).uint64(message.reactions);
+        /* uint64 recasts = 12; */
         if (message.recasts !== 0)
-            writer.tag(10, WireType.Varint).uint64(message.recasts);
-        /* uint64 watches = 11; */
+            writer.tag(12, WireType.Varint).uint64(message.recasts);
+        /* uint64 watches = 13; */
         if (message.watches !== 0)
-            writer.tag(11, WireType.Varint).uint64(message.watches);
-        /* bool recast = 12; */
+            writer.tag(13, WireType.Varint).uint64(message.watches);
+        /* bool recast = 14; */
         if (message.recast !== false)
-            writer.tag(12, WireType.Varint).bool(message.recast);
-        /* omilos_grpc.ViewerContext viewer_context = 13; */
+            writer.tag(14, WireType.Varint).bool(message.recast);
+        /* omilos_grpc.ViewerContext viewer_context = 15; */
         if (message.viewerContext)
-            ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(13, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.StringValue parent_author_display_name = 14; */
+            ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(15, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue parent_author_display_name = 16; */
         if (message.parentAuthorDisplayName)
-            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(14, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.UInt64Value parent_author_fid = 15; */
+            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(16, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Int64Value parent_author_fid = 17; */
         if (message.parentAuthorFid)
-            UInt64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(15, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1380,7 +1398,7 @@ export const ViewerContext = new ViewerContext$Type();
 class Author$Type extends MessageType<Author> {
     constructor() {
         super("omilos_grpc.Author", [
-            { no: 1, name: "fid", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 1, name: "fid", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 2 /*LongType.NUMBER*/ },
             { no: 2, name: "username", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "display_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "profile_picture", kind: "message", T: () => ProfilePicture },
@@ -1400,8 +1418,8 @@ class Author$Type extends MessageType<Author> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* uint64 fid */ 1:
-                    message.fid = reader.uint64().toNumber();
+                case /* int64 fid */ 1:
+                    message.fid = reader.int64().toNumber();
                     break;
                 case /* string username */ 2:
                     message.username = reader.string();
@@ -1430,9 +1448,9 @@ class Author$Type extends MessageType<Author> {
         return message;
     }
     internalBinaryWrite(message: Author, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* uint64 fid = 1; */
+        /* int64 fid = 1; */
         if (message.fid !== 0)
-            writer.tag(1, WireType.Varint).uint64(message.fid);
+            writer.tag(1, WireType.Varint).int64(message.fid);
         /* string username = 2; */
         if (message.username !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.username);
@@ -1942,7 +1960,7 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
     constructor() {
         super("omilos_grpc.PostCastRequest", [
             { no: 1, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "parent_id", kind: "message", T: () => UInt64Value }
+            { no: 2, name: "parent_id", kind: "message", T: () => Int64Value }
         ]);
     }
     create(value?: PartialMessage<PostCastRequest>): PostCastRequest {
@@ -1960,8 +1978,8 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
                 case /* string text */ 1:
                     message.text = reader.string();
                     break;
-                case /* google.protobuf.UInt64Value parent_id */ 2:
-                    message.parentId = UInt64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
+                case /* google.protobuf.Int64Value parent_id */ 2:
+                    message.parentId = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1978,9 +1996,9 @@ class PostCastRequest$Type extends MessageType<PostCastRequest> {
         /* string text = 1; */
         if (message.text !== "")
             writer.tag(1, WireType.LengthDelimited).string(message.text);
-        /* google.protobuf.UInt64Value parent_id = 2; */
+        /* google.protobuf.Int64Value parent_id = 2; */
         if (message.parentId)
-            UInt64Value.internalBinaryWrite(message.parentId, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.parentId, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1996,10 +2014,9 @@ class UserCastContextUpdate$Type extends MessageType<UserCastContextUpdate> {
     constructor() {
         super("omilos_grpc.UserCastContextUpdate", [
             { no: 1, name: "cast", kind: "message", T: () => CastIdentifier },
-            { no: 2, name: "liked", kind: "message", T: () => BoolValue },
-            { no: 3, name: "viewed", kind: "message", T: () => BoolValue },
-            { no: 4, name: "watched", kind: "message", T: () => BoolValue },
-            { no: 5, name: "bookmarked", kind: "message", T: () => BoolValue }
+            { no: 2, name: "viewed", kind: "message", T: () => BoolValue },
+            { no: 3, name: "watched", kind: "message", T: () => BoolValue },
+            { no: 4, name: "bookmarked", kind: "message", T: () => BoolValue }
         ]);
     }
     create(value?: PartialMessage<UserCastContextUpdate>): UserCastContextUpdate {
@@ -2017,16 +2034,13 @@ class UserCastContextUpdate$Type extends MessageType<UserCastContextUpdate> {
                 case /* omilos_grpc.CastIdentifier cast */ 1:
                     message.cast = CastIdentifier.internalBinaryRead(reader, reader.uint32(), options, message.cast);
                     break;
-                case /* google.protobuf.BoolValue liked */ 2:
-                    message.liked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.liked);
-                    break;
-                case /* google.protobuf.BoolValue viewed */ 3:
+                case /* google.protobuf.BoolValue viewed */ 2:
                     message.viewed = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.viewed);
                     break;
-                case /* google.protobuf.BoolValue watched */ 4:
+                case /* google.protobuf.BoolValue watched */ 3:
                     message.watched = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.watched);
                     break;
-                case /* google.protobuf.BoolValue bookmarked */ 5:
+                case /* google.protobuf.BoolValue bookmarked */ 4:
                     message.bookmarked = BoolValue.internalBinaryRead(reader, reader.uint32(), options, message.bookmarked);
                     break;
                 default:
@@ -2044,18 +2058,15 @@ class UserCastContextUpdate$Type extends MessageType<UserCastContextUpdate> {
         /* omilos_grpc.CastIdentifier cast = 1; */
         if (message.cast)
             CastIdentifier.internalBinaryWrite(message.cast, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue liked = 2; */
-        if (message.liked)
-            BoolValue.internalBinaryWrite(message.liked, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue viewed = 3; */
+        /* google.protobuf.BoolValue viewed = 2; */
         if (message.viewed)
-            BoolValue.internalBinaryWrite(message.viewed, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue watched = 4; */
+            BoolValue.internalBinaryWrite(message.viewed, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue watched = 3; */
         if (message.watched)
-            BoolValue.internalBinaryWrite(message.watched, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.BoolValue bookmarked = 5; */
+            BoolValue.internalBinaryWrite(message.watched, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.BoolValue bookmarked = 4; */
         if (message.bookmarked)
-            BoolValue.internalBinaryWrite(message.bookmarked, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+            BoolValue.internalBinaryWrite(message.bookmarked, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -2145,6 +2156,8 @@ export const SearchCastRequest = new SearchCastRequest$Type();
 export const Omilos = new ServiceType("omilos_grpc.Omilos", [
     { name: "Login", options: {}, I: LoginRequest, O: LoginResponse },
     { name: "PostCast", options: {}, I: PostCastRequest, O: Cast },
+    { name: "LikeCast", options: {}, I: CastIdentifier, O: BaseResponse },
+    { name: "RecastCast", options: {}, I: CastIdentifier, O: BaseResponse },
     { name: "UpdateUserCastContext", options: {}, I: UserCastContextUpdate, O: BaseResponse },
     { name: "GetMe", options: {}, I: GetMeRequest, O: User },
     { name: "GetNotifications", options: {}, I: GetNotificationsRequest, O: Notifications },

@@ -22,9 +22,15 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OmilosClient interface {
+	// Auth actions
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	// Hub actions
 	PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error)
+	LikeCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*BaseResponse, error)
+	RecastCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*BaseResponse, error)
+	// Back actions
 	UpdateUserCastContext(ctx context.Context, in *UserCastContextUpdate, opts ...grpc.CallOption) (*BaseResponse, error)
+	// Read
 	GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*User, error)
 	GetNotifications(ctx context.Context, in *GetNotificationsRequest, opts ...grpc.CallOption) (*Notifications, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
@@ -53,6 +59,24 @@ func (c *omilosClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc
 func (c *omilosClient) PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error) {
 	out := new(Cast)
 	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/PostCast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omilosClient) LikeCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*BaseResponse, error) {
+	out := new(BaseResponse)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/LikeCast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *omilosClient) RecastCast(ctx context.Context, in *CastIdentifier, opts ...grpc.CallOption) (*BaseResponse, error) {
+	out := new(BaseResponse)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/RecastCast", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,9 +150,15 @@ func (c *omilosClient) GetPublications(ctx context.Context, in *GetPublicationsR
 // All implementations must embed UnimplementedOmilosServer
 // for forward compatibility
 type OmilosServer interface {
+	// Auth actions
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	// Hub actions
 	PostCast(context.Context, *PostCastRequest) (*Cast, error)
+	LikeCast(context.Context, *CastIdentifier) (*BaseResponse, error)
+	RecastCast(context.Context, *CastIdentifier) (*BaseResponse, error)
+	// Back actions
 	UpdateUserCastContext(context.Context, *UserCastContextUpdate) (*BaseResponse, error)
+	// Read
 	GetMe(context.Context, *GetMeRequest) (*User, error)
 	GetNotifications(context.Context, *GetNotificationsRequest) (*Notifications, error)
 	GetUser(context.Context, *GetUserRequest) (*User, error)
@@ -147,6 +177,12 @@ func (UnimplementedOmilosServer) Login(context.Context, *LoginRequest) (*LoginRe
 }
 func (UnimplementedOmilosServer) PostCast(context.Context, *PostCastRequest) (*Cast, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCast not implemented")
+}
+func (UnimplementedOmilosServer) LikeCast(context.Context, *CastIdentifier) (*BaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LikeCast not implemented")
+}
+func (UnimplementedOmilosServer) RecastCast(context.Context, *CastIdentifier) (*BaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecastCast not implemented")
 }
 func (UnimplementedOmilosServer) UpdateUserCastContext(context.Context, *UserCastContextUpdate) (*BaseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCastContext not implemented")
@@ -214,6 +250,42 @@ func _Omilos_PostCast_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OmilosServer).PostCast(ctx, req.(*PostCastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Omilos_LikeCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CastIdentifier)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).LikeCast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/LikeCast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).LikeCast(ctx, req.(*CastIdentifier))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Omilos_RecastCast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CastIdentifier)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).RecastCast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/RecastCast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).RecastCast(ctx, req.(*CastIdentifier))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -358,6 +430,14 @@ var Omilos_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostCast",
 			Handler:    _Omilos_PostCast_Handler,
+		},
+		{
+			MethodName: "LikeCast",
+			Handler:    _Omilos_LikeCast_Handler,
+		},
+		{
+			MethodName: "RecastCast",
+			Handler:    _Omilos_RecastCast_Handler,
 		},
 		{
 			MethodName: "UpdateUserCastContext",

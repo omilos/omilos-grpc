@@ -40,9 +40,9 @@ enum NotificationStreamType {
 }
 
 message CastIdentifier {
-  google.protobuf.UInt64Value id = 1;
+  google.protobuf.Int64Value id = 1;
   google.protobuf.StringValue hash = 2;
-  google.protobuf.UInt32Value author_fid = 3;
+  google.protobuf.Int64Value author_fid = 3;
 }
 
 message Notifications {
@@ -60,7 +60,7 @@ message Notification {
 }
 
 message UserIdentifier {
-  google.protobuf.UInt32Value fid = 1;
+  google.protobuf.Int64Value fid = 1;
   google.protobuf.StringValue username = 2;
 }
 
@@ -98,21 +98,23 @@ message Profile {
 }
 
 message Cast {
-  uint64 id = 1;
+  int64 id = 1;
   string hash = 2;
-  string thread_hash = 3;
-  google.protobuf.UInt64Value parent_id = 4;
-  Author author = 5;
-  string text = 6;
-  google.protobuf.Timestamp published_at = 7;
-  uint64 replies = 8;
-  uint64 reactions = 9;
-  uint64 recasts = 10; // TODO
-  uint64 watches = 11;
-  bool recast = 12;
-  ViewerContext viewer_context = 13;
-  google.protobuf.StringValue parent_author_display_name = 14;
-  google.protobuf.UInt64Value parent_author_fid = 15;
+  string root_parent_hash = 3;
+  string root_parent_url = 4;
+  google.protobuf.Int64Value root_parent_id = 5;
+  google.protobuf.Int64Value parent_id = 6;
+  int64 author_id = 7;
+  string text = 8;
+  google.protobuf.Timestamp published_at = 9;
+  uint64 replies = 10;
+  uint64 reactions = 11;
+  uint64 recasts = 12; // TODO
+  uint64 watches = 13;
+  bool recast = 14;
+  ViewerContext viewer_context = 15;
+  google.protobuf.StringValue parent_author_display_name = 16;
+  google.protobuf.Int64Value parent_author_fid = 17;
 }
 
 message ViewerContext {
@@ -124,7 +126,7 @@ message ViewerContext {
 }
 
 message Author {
-  uint64 fid = 1;
+  int64 fid = 1;
   string username = 2;
   string display_name = 3;
   ProfilePicture profile_picture = 4;
@@ -183,15 +185,14 @@ message LoginResponse {
 
 message PostCastRequest {
   string text = 1;
-  google.protobuf.UInt64Value parent_id = 2;
+  google.protobuf.Int64Value parent_id = 2;
 }
 
 message UserCastContextUpdate {
   CastIdentifier cast = 1;
-  google.protobuf.BoolValue liked = 2;
-  google.protobuf.BoolValue viewed = 3;
-  google.protobuf.BoolValue watched = 4;
-  google.protobuf.BoolValue bookmarked = 5;
+  google.protobuf.BoolValue viewed = 2;
+  google.protobuf.BoolValue watched = 3;
+  google.protobuf.BoolValue bookmarked = 4;
 }
 
 message LikeCastResponse {}
@@ -201,9 +202,15 @@ message SearchCastRequest {
 }
 
 service Omilos {
+  // Auth actions
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  // Hub actions
   rpc PostCast(PostCastRequest) returns (Cast) {}
+  rpc LikeCast(CastIdentifier) returns (BaseResponse) {}
+  rpc RecastCast(CastIdentifier) returns (BaseResponse) {}
+  // Back actions
   rpc UpdateUserCastContext(UserCastContextUpdate) returns (BaseResponse) {}
+  // Read
   rpc GetMe (GetMeRequest) returns (User) {}
   rpc GetNotifications (GetNotificationsRequest) returns (Notifications) {}
   rpc GetUser (GetUserRequest) returns (User) {}
