@@ -413,6 +413,24 @@ export interface GetNotificationsRequest {
     type: NotificationStreamType;
 }
 /**
+ * @generated from protobuf message omilos_grpc.RegisterRequest
+ */
+export interface RegisterRequest {
+}
+/**
+ * @generated from protobuf message omilos_grpc.RegisterResponse
+ */
+export interface RegisterResponse {
+    /**
+     * @generated from protobuf field: string warpcast_token = 1;
+     */
+    warpcastToken: string;
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp expires_at = 2;
+     */
+    expiresAt?: Timestamp;
+}
+/**
  * @generated from protobuf message omilos_grpc.LoginRequest
  */
 export interface LoginRequest {
@@ -1851,6 +1869,86 @@ class GetNotificationsRequest$Type extends MessageType<GetNotificationsRequest> 
  * @generated MessageType for protobuf message omilos_grpc.GetNotificationsRequest
  */
 export const GetNotificationsRequest = new GetNotificationsRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class RegisterRequest$Type extends MessageType<RegisterRequest> {
+    constructor() {
+        super("omilos_grpc.RegisterRequest", []);
+    }
+    create(value?: PartialMessage<RegisterRequest>): RegisterRequest {
+        const message = {};
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<RegisterRequest>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: RegisterRequest): RegisterRequest {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message: RegisterRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.RegisterRequest
+ */
+export const RegisterRequest = new RegisterRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class RegisterResponse$Type extends MessageType<RegisterResponse> {
+    constructor() {
+        super("omilos_grpc.RegisterResponse", [
+            { no: 1, name: "warpcast_token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "expires_at", kind: "message", T: () => Timestamp }
+        ]);
+    }
+    create(value?: PartialMessage<RegisterResponse>): RegisterResponse {
+        const message = { warpcastToken: "" };
+        globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
+        if (value !== undefined)
+            reflectionMergePartial<RegisterResponse>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: RegisterResponse): RegisterResponse {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string warpcast_token */ 1:
+                    message.warpcastToken = reader.string();
+                    break;
+                case /* google.protobuf.Timestamp expires_at */ 2:
+                    message.expiresAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: RegisterResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string warpcast_token = 1; */
+        if (message.warpcastToken !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.warpcastToken);
+        /* google.protobuf.Timestamp expires_at = 2; */
+        if (message.expiresAt)
+            Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message omilos_grpc.RegisterResponse
+ */
+export const RegisterResponse = new RegisterResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class LoginRequest$Type extends MessageType<LoginRequest> {
     constructor() {

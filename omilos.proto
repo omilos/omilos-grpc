@@ -173,6 +173,14 @@ message GetNotificationsRequest {
   NotificationStreamType type = 3;
 }
 
+message RegisterRequest {
+}
+
+message RegisterResponse {
+  string warpcast_token = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}
+
 message LoginRequest {
   uint64 timestamp = 1;
   bytes signature = 2;
