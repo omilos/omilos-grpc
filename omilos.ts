@@ -2263,6 +2263,7 @@ export const SearchCastRequest = new SearchCastRequest$Type();
  * @generated ServiceType for protobuf service omilos_grpc.Omilos
  */
 export const Omilos = new ServiceType("omilos_grpc.Omilos", [
+    { name: "Register", options: {}, I: RegisterRequest, O: RegisterResponse },
     { name: "Login", options: {}, I: LoginRequest, O: LoginResponse },
     { name: "PostCast", options: {}, I: PostCastRequest, O: Cast },
     { name: "LikeCast", options: {}, I: CastIdentifier, O: BaseResponse },

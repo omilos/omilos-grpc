@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OmilosClient interface {
 	// Auth actions
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	// Hub actions
 	PostCast(ctx context.Context, in *PostCastRequest, opts ...grpc.CallOption) (*Cast, error)
@@ -45,6 +46,15 @@ type omilosClient struct {
 
 func NewOmilosClient(cc grpc.ClientConnInterface) OmilosClient {
 	return &omilosClient{cc}
+}
+
+func (c *omilosClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
+	out := new(RegisterResponse)
+	err := c.cc.Invoke(ctx, "/omilos_grpc.Omilos/Register", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *omilosClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
@@ -151,6 +161,7 @@ func (c *omilosClient) GetPublications(ctx context.Context, in *GetPublicationsR
 // for forward compatibility
 type OmilosServer interface {
 	// Auth actions
+	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	// Hub actions
 	PostCast(context.Context, *PostCastRequest) (*Cast, error)
@@ -172,6 +183,9 @@ type OmilosServer interface {
 type UnimplementedOmilosServer struct {
 }
 
+func (UnimplementedOmilosServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
 func (UnimplementedOmilosServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
@@ -216,6 +230,24 @@ type UnsafeOmilosServer interface {
 
 func RegisterOmilosServer(s grpc.ServiceRegistrar, srv OmilosServer) {
 	s.RegisterService(&Omilos_ServiceDesc, srv)
+}
+
+func _Omilos_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OmilosServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/omilos_grpc.Omilos/Register",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OmilosServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Omilos_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -423,6 +455,10 @@ var Omilos_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "omilos_grpc.Omilos",
 	HandlerType: (*OmilosServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Register",
+			Handler:    _Omilos_Register_Handler,
+		},
 		{
 			MethodName: "Login",
 			Handler:    _Omilos_Login_Handler,

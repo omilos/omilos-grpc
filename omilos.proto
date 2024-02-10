@@ -212,6 +212,7 @@ message SearchCastRequest {
 
 service Omilos {
   // Auth actions
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
   rpc Login(LoginRequest) returns (LoginResponse) {}
   // Hub actions
   rpc PostCast(PostCastRequest) returns (Cast) {}
