@@ -9,6 +9,7 @@ import "google/protobuf/wrappers.proto";
 enum ReactionType {
   UNSPECIFIED_REACTION_TYPE = 0;
   LIKE = 1;
+  RECAST = 2;
 }
 
 enum NotificationType {
@@ -173,23 +174,15 @@ message GetNotificationsRequest {
   NotificationStreamType type = 3;
 }
 
-message RegisterRequest {
-}
-
-message RegisterResponse {
-  string warpcast_token = 1;
-  google.protobuf.Timestamp expires_at = 2;
-}
-
-message LoginRequest {
+message ConnectRequest {
   uint64 timestamp = 1;
   bytes signature = 2;
 }
 
-message LoginResponse {
+message ConnectResponse {
   string token = 1;
   google.protobuf.Timestamp expires_at = 2;
-  User me = 3;
+  bool delegated = 3;
 }
 
 message PostCastRequest {
@@ -212,8 +205,7 @@ message SearchCastRequest {
 
 service Omilos {
   // Auth actions
-  rpc Register(RegisterRequest) returns (RegisterResponse) {}
-  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Connect(ConnectRequest) returns (ConnectResponse) {}
   // Hub actions
   rpc PostCast(PostCastRequest) returns (Cast) {}
   rpc LikeCast(CastIdentifier) returns (BaseResponse) {}
