@@ -181,7 +181,7 @@ message ConnectRequest {
 }
 
 message ConnectResponse {
-  string token = 1;
+  google.protobuf.StringValue token = 1;
   google.protobuf.Timestamp expires_at = 2;
   google.protobuf.StringValue public_key = 3;
 }
