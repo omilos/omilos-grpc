@@ -421,7 +421,11 @@ export interface ConnectRequest {
      */
     timestamp: number;
     /**
-     * @generated from protobuf field: bytes signature = 2;
+     * @generated from protobuf field: uint64 fid = 2;
+     */
+    fid: number;
+    /**
+     * @generated from protobuf field: bytes signature = 3;
      */
     signature: Uint8Array;
 }
@@ -438,9 +442,9 @@ export interface ConnectResponse {
      */
     expiresAt?: Timestamp;
     /**
-     * @generated from protobuf field: bool delegated = 3;
+     * @generated from protobuf field: google.protobuf.StringValue public_key = 3;
      */
-    delegated: boolean;
+    publicKey?: StringValue;
 }
 /**
  * @generated from protobuf message omilos_grpc.PostCastRequest
@@ -1860,11 +1864,12 @@ class ConnectRequest$Type extends MessageType<ConnectRequest> {
     constructor() {
         super("omilos_grpc.ConnectRequest", [
             { no: 1, name: "timestamp", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 2, name: "signature", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+            { no: 2, name: "fid", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 3, name: "signature", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
         ]);
     }
     create(value?: PartialMessage<ConnectRequest>): ConnectRequest {
-        const message = { timestamp: 0, signature: new Uint8Array(0) };
+        const message = { timestamp: 0, fid: 0, signature: new Uint8Array(0) };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<ConnectRequest>(this, message, value);
@@ -1878,7 +1883,10 @@ class ConnectRequest$Type extends MessageType<ConnectRequest> {
                 case /* uint64 timestamp */ 1:
                     message.timestamp = reader.uint64().toNumber();
                     break;
-                case /* bytes signature */ 2:
+                case /* uint64 fid */ 2:
+                    message.fid = reader.uint64().toNumber();
+                    break;
+                case /* bytes signature */ 3:
                     message.signature = reader.bytes();
                     break;
                 default:
@@ -1896,9 +1904,12 @@ class ConnectRequest$Type extends MessageType<ConnectRequest> {
         /* uint64 timestamp = 1; */
         if (message.timestamp !== 0)
             writer.tag(1, WireType.Varint).uint64(message.timestamp);
-        /* bytes signature = 2; */
+        /* uint64 fid = 2; */
+        if (message.fid !== 0)
+            writer.tag(2, WireType.Varint).uint64(message.fid);
+        /* bytes signature = 3; */
         if (message.signature.length)
-            writer.tag(2, WireType.LengthDelimited).bytes(message.signature);
+            writer.tag(3, WireType.LengthDelimited).bytes(message.signature);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -1915,11 +1926,11 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         super("omilos_grpc.ConnectResponse", [
             { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "expires_at", kind: "message", T: () => Timestamp },
-            { no: 3, name: "delegated", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 3, name: "public_key", kind: "message", T: () => StringValue }
         ]);
     }
     create(value?: PartialMessage<ConnectResponse>): ConnectResponse {
-        const message = { token: "", delegated: false };
+        const message = { token: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<ConnectResponse>(this, message, value);
@@ -1936,8 +1947,8 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
                 case /* google.protobuf.Timestamp expires_at */ 2:
                     message.expiresAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
                     break;
-                case /* bool delegated */ 3:
-                    message.delegated = reader.bool();
+                case /* google.protobuf.StringValue public_key */ 3:
+                    message.publicKey = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.publicKey);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -1957,9 +1968,9 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         /* google.protobuf.Timestamp expires_at = 2; */
         if (message.expiresAt)
             Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* bool delegated = 3; */
-        if (message.delegated !== false)
-            writer.tag(3, WireType.Varint).bool(message.delegated);
+        /* google.protobuf.StringValue public_key = 3; */
+        if (message.publicKey)
+            StringValue.internalBinaryWrite(message.publicKey, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

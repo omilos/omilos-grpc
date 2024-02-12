@@ -176,13 +176,14 @@ message GetNotificationsRequest {
 
 message ConnectRequest {
   uint64 timestamp = 1;
-  bytes signature = 2;
+  uint64 fid = 2;
+  bytes signature = 3;
 }
 
 message ConnectResponse {
   string token = 1;
   google.protobuf.Timestamp expires_at = 2;
-  bool delegated = 3;
+  google.protobuf.StringValue public_key = 3;
 }
 
 message PostCastRequest {
