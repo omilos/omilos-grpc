@@ -434,9 +434,9 @@ export interface ConnectRequest {
  */
 export interface ConnectResponse {
     /**
-     * @generated from protobuf field: string token = 1;
+     * @generated from protobuf field: google.protobuf.StringValue token = 1;
      */
-    token: string;
+    token?: StringValue;
     /**
      * @generated from protobuf field: google.protobuf.Timestamp expires_at = 2;
      */
@@ -1924,13 +1924,13 @@ export const ConnectRequest = new ConnectRequest$Type();
 class ConnectResponse$Type extends MessageType<ConnectResponse> {
     constructor() {
         super("omilos_grpc.ConnectResponse", [
-            { no: 1, name: "token", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 1, name: "token", kind: "message", T: () => StringValue },
             { no: 2, name: "expires_at", kind: "message", T: () => Timestamp },
             { no: 3, name: "public_key", kind: "message", T: () => StringValue }
         ]);
     }
     create(value?: PartialMessage<ConnectResponse>): ConnectResponse {
-        const message = { token: "" };
+        const message = {};
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<ConnectResponse>(this, message, value);
@@ -1941,8 +1941,8 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string token */ 1:
-                    message.token = reader.string();
+                case /* google.protobuf.StringValue token */ 1:
+                    message.token = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.token);
                     break;
                 case /* google.protobuf.Timestamp expires_at */ 2:
                     message.expiresAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
@@ -1962,9 +1962,9 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         return message;
     }
     internalBinaryWrite(message: ConnectResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string token = 1; */
-        if (message.token !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.token);
+        /* google.protobuf.StringValue token = 1; */
+        if (message.token)
+            StringValue.internalBinaryWrite(message.token, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
         /* google.protobuf.Timestamp expires_at = 2; */
         if (message.expiresAt)
             Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
