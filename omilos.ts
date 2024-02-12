@@ -445,6 +445,10 @@ export interface ConnectResponse {
      * @generated from protobuf field: google.protobuf.StringValue public_key = 3;
      */
     publicKey?: StringValue;
+    /**
+     * @generated from protobuf field: google.protobuf.StringValue metadata = 4;
+     */
+    metadata?: StringValue;
 }
 /**
  * @generated from protobuf message omilos_grpc.PostCastRequest
@@ -1926,7 +1930,8 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         super("omilos_grpc.ConnectResponse", [
             { no: 1, name: "token", kind: "message", T: () => StringValue },
             { no: 2, name: "expires_at", kind: "message", T: () => Timestamp },
-            { no: 3, name: "public_key", kind: "message", T: () => StringValue }
+            { no: 3, name: "public_key", kind: "message", T: () => StringValue },
+            { no: 4, name: "metadata", kind: "message", T: () => StringValue }
         ]);
     }
     create(value?: PartialMessage<ConnectResponse>): ConnectResponse {
@@ -1950,6 +1955,9 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
                 case /* google.protobuf.StringValue public_key */ 3:
                     message.publicKey = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.publicKey);
                     break;
+                case /* google.protobuf.StringValue metadata */ 4:
+                    message.metadata = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.metadata);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -1971,6 +1979,9 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         /* google.protobuf.StringValue public_key = 3; */
         if (message.publicKey)
             StringValue.internalBinaryWrite(message.publicKey, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue metadata = 4; */
+        if (message.metadata)
+            StringValue.internalBinaryWrite(message.metadata, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
