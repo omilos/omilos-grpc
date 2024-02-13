@@ -195,67 +195,71 @@ export interface Cast {
      */
     hash: string;
     /**
-     * @generated from protobuf field: string root_parent_hash = 3;
+     * @generated from protobuf field: string parent_hash = 3;
+     */
+    parentHash: string;
+    /**
+     * @generated from protobuf field: string root_parent_hash = 4;
      */
     rootParentHash: string;
     /**
-     * @generated from protobuf field: string root_parent_url = 4;
+     * @generated from protobuf field: string root_parent_url = 5;
      */
     rootParentUrl: string;
     /**
-     * @generated from protobuf field: google.protobuf.Int64Value root_parent_id = 5;
+     * @generated from protobuf field: google.protobuf.Int64Value root_parent_id = 6;
      */
     rootParentId?: Int64Value;
     /**
-     * @generated from protobuf field: google.protobuf.Int64Value parent_id = 6;
+     * @generated from protobuf field: google.protobuf.Int64Value parent_id = 7;
      */
     parentId?: Int64Value;
     /**
-     * @generated from protobuf field: int64 author_id = 7;
+     * @generated from protobuf field: int64 author_id = 8;
      */
     authorId: number;
     /**
-     * @generated from protobuf field: string text = 8;
+     * @generated from protobuf field: string text = 9;
      */
     text: string;
     /**
-     * @generated from protobuf field: google.protobuf.Timestamp published_at = 9;
+     * @generated from protobuf field: google.protobuf.Timestamp published_at = 10;
      */
     publishedAt?: Timestamp;
     /**
-     * @generated from protobuf field: uint64 replies = 10;
+     * @generated from protobuf field: uint64 replies = 11;
      */
     replies: number;
     /**
-     * @generated from protobuf field: uint64 reactions = 11;
+     * @generated from protobuf field: uint64 reactions = 12;
      */
     reactions: number;
     /**
-     * @generated from protobuf field: uint64 recasts = 12;
+     * @generated from protobuf field: uint64 recasts = 13;
      */
     recasts: number; // TODO
     /**
-     * @generated from protobuf field: uint64 watches = 13;
+     * @generated from protobuf field: uint64 watches = 14;
      */
     watches: number;
     /**
-     * @generated from protobuf field: bool recast = 14;
+     * @generated from protobuf field: bool recast = 15;
      */
     recast: boolean;
     /**
-     * @generated from protobuf field: omilos_grpc.ViewerContext viewer_context = 15;
+     * @generated from protobuf field: omilos_grpc.ViewerContext viewer_context = 16;
      */
     viewerContext?: ViewerContext;
     /**
-     * @generated from protobuf field: omilos_grpc.Author author = 16;
+     * @generated from protobuf field: omilos_grpc.Author author = 17;
      */
     author?: Author;
     /**
-     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 17;
+     * @generated from protobuf field: google.protobuf.StringValue parent_author_display_name = 18;
      */
     parentAuthorDisplayName?: StringValue;
     /**
-     * @generated from protobuf field: google.protobuf.Int64Value parent_author_fid = 18;
+     * @generated from protobuf field: google.protobuf.Int64Value parent_author_fid = 19;
      */
     parentAuthorFid?: Int64Value;
 }
@@ -1186,26 +1190,27 @@ class Cast$Type extends MessageType<Cast> {
         super("omilos_grpc.Cast", [
             { no: 1, name: "id", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 2 /*LongType.NUMBER*/ },
             { no: 2, name: "hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "root_parent_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "root_parent_url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "root_parent_id", kind: "message", T: () => Int64Value },
-            { no: 6, name: "parent_id", kind: "message", T: () => Int64Value },
-            { no: 7, name: "author_id", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 8, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 9, name: "published_at", kind: "message", T: () => Timestamp },
-            { no: 10, name: "replies", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 11, name: "reactions", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 12, name: "recasts", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 13, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
-            { no: 14, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 15, name: "viewer_context", kind: "message", T: () => ViewerContext },
-            { no: 16, name: "author", kind: "message", T: () => Author },
-            { no: 17, name: "parent_author_display_name", kind: "message", T: () => StringValue },
-            { no: 18, name: "parent_author_fid", kind: "message", T: () => Int64Value }
+            { no: 3, name: "parent_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "root_parent_hash", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "root_parent_url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 6, name: "root_parent_id", kind: "message", T: () => Int64Value },
+            { no: 7, name: "parent_id", kind: "message", T: () => Int64Value },
+            { no: 8, name: "author_id", kind: "scalar", T: 3 /*ScalarType.INT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 9, name: "text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 10, name: "published_at", kind: "message", T: () => Timestamp },
+            { no: 11, name: "replies", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 12, name: "reactions", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 13, name: "recasts", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 14, name: "watches", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 2 /*LongType.NUMBER*/ },
+            { no: 15, name: "recast", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 16, name: "viewer_context", kind: "message", T: () => ViewerContext },
+            { no: 17, name: "author", kind: "message", T: () => Author },
+            { no: 18, name: "parent_author_display_name", kind: "message", T: () => StringValue },
+            { no: 19, name: "parent_author_fid", kind: "message", T: () => Int64Value }
         ]);
     }
     create(value?: PartialMessage<Cast>): Cast {
-        const message = { id: 0, hash: "", rootParentHash: "", rootParentUrl: "", authorId: 0, text: "", replies: 0, reactions: 0, recasts: 0, watches: 0, recast: false };
+        const message = { id: 0, hash: "", parentHash: "", rootParentHash: "", rootParentUrl: "", authorId: 0, text: "", replies: 0, reactions: 0, recasts: 0, watches: 0, recast: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Cast>(this, message, value);
@@ -1222,52 +1227,55 @@ class Cast$Type extends MessageType<Cast> {
                 case /* string hash */ 2:
                     message.hash = reader.string();
                     break;
-                case /* string root_parent_hash */ 3:
+                case /* string parent_hash */ 3:
+                    message.parentHash = reader.string();
+                    break;
+                case /* string root_parent_hash */ 4:
                     message.rootParentHash = reader.string();
                     break;
-                case /* string root_parent_url */ 4:
+                case /* string root_parent_url */ 5:
                     message.rootParentUrl = reader.string();
                     break;
-                case /* google.protobuf.Int64Value root_parent_id */ 5:
+                case /* google.protobuf.Int64Value root_parent_id */ 6:
                     message.rootParentId = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.rootParentId);
                     break;
-                case /* google.protobuf.Int64Value parent_id */ 6:
+                case /* google.protobuf.Int64Value parent_id */ 7:
                     message.parentId = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentId);
                     break;
-                case /* int64 author_id */ 7:
+                case /* int64 author_id */ 8:
                     message.authorId = reader.int64().toNumber();
                     break;
-                case /* string text */ 8:
+                case /* string text */ 9:
                     message.text = reader.string();
                     break;
-                case /* google.protobuf.Timestamp published_at */ 9:
+                case /* google.protobuf.Timestamp published_at */ 10:
                     message.publishedAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.publishedAt);
                     break;
-                case /* uint64 replies */ 10:
+                case /* uint64 replies */ 11:
                     message.replies = reader.uint64().toNumber();
                     break;
-                case /* uint64 reactions */ 11:
+                case /* uint64 reactions */ 12:
                     message.reactions = reader.uint64().toNumber();
                     break;
-                case /* uint64 recasts */ 12:
+                case /* uint64 recasts */ 13:
                     message.recasts = reader.uint64().toNumber();
                     break;
-                case /* uint64 watches */ 13:
+                case /* uint64 watches */ 14:
                     message.watches = reader.uint64().toNumber();
                     break;
-                case /* bool recast */ 14:
+                case /* bool recast */ 15:
                     message.recast = reader.bool();
                     break;
-                case /* omilos_grpc.ViewerContext viewer_context */ 15:
+                case /* omilos_grpc.ViewerContext viewer_context */ 16:
                     message.viewerContext = ViewerContext.internalBinaryRead(reader, reader.uint32(), options, message.viewerContext);
                     break;
-                case /* omilos_grpc.Author author */ 16:
+                case /* omilos_grpc.Author author */ 17:
                     message.author = Author.internalBinaryRead(reader, reader.uint32(), options, message.author);
                     break;
-                case /* google.protobuf.StringValue parent_author_display_name */ 17:
+                case /* google.protobuf.StringValue parent_author_display_name */ 18:
                     message.parentAuthorDisplayName = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorDisplayName);
                     break;
-                case /* google.protobuf.Int64Value parent_author_fid */ 18:
+                case /* google.protobuf.Int64Value parent_author_fid */ 19:
                     message.parentAuthorFid = Int64Value.internalBinaryRead(reader, reader.uint32(), options, message.parentAuthorFid);
                     break;
                 default:
@@ -1288,54 +1296,57 @@ class Cast$Type extends MessageType<Cast> {
         /* string hash = 2; */
         if (message.hash !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.hash);
-        /* string root_parent_hash = 3; */
+        /* string parent_hash = 3; */
+        if (message.parentHash !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.parentHash);
+        /* string root_parent_hash = 4; */
         if (message.rootParentHash !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.rootParentHash);
-        /* string root_parent_url = 4; */
+            writer.tag(4, WireType.LengthDelimited).string(message.rootParentHash);
+        /* string root_parent_url = 5; */
         if (message.rootParentUrl !== "")
-            writer.tag(4, WireType.LengthDelimited).string(message.rootParentUrl);
-        /* google.protobuf.Int64Value root_parent_id = 5; */
+            writer.tag(5, WireType.LengthDelimited).string(message.rootParentUrl);
+        /* google.protobuf.Int64Value root_parent_id = 6; */
         if (message.rootParentId)
-            Int64Value.internalBinaryWrite(message.rootParentId, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.Int64Value parent_id = 6; */
+            Int64Value.internalBinaryWrite(message.rootParentId, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Int64Value parent_id = 7; */
         if (message.parentId)
-            Int64Value.internalBinaryWrite(message.parentId, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
-        /* int64 author_id = 7; */
+            Int64Value.internalBinaryWrite(message.parentId, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
+        /* int64 author_id = 8; */
         if (message.authorId !== 0)
-            writer.tag(7, WireType.Varint).int64(message.authorId);
-        /* string text = 8; */
+            writer.tag(8, WireType.Varint).int64(message.authorId);
+        /* string text = 9; */
         if (message.text !== "")
-            writer.tag(8, WireType.LengthDelimited).string(message.text);
-        /* google.protobuf.Timestamp published_at = 9; */
+            writer.tag(9, WireType.LengthDelimited).string(message.text);
+        /* google.protobuf.Timestamp published_at = 10; */
         if (message.publishedAt)
-            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(9, WireType.LengthDelimited).fork(), options).join();
-        /* uint64 replies = 10; */
+            Timestamp.internalBinaryWrite(message.publishedAt, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* uint64 replies = 11; */
         if (message.replies !== 0)
-            writer.tag(10, WireType.Varint).uint64(message.replies);
-        /* uint64 reactions = 11; */
+            writer.tag(11, WireType.Varint).uint64(message.replies);
+        /* uint64 reactions = 12; */
         if (message.reactions !== 0)
-            writer.tag(11, WireType.Varint).uint64(message.reactions);
-        /* uint64 recasts = 12; */
+            writer.tag(12, WireType.Varint).uint64(message.reactions);
+        /* uint64 recasts = 13; */
         if (message.recasts !== 0)
-            writer.tag(12, WireType.Varint).uint64(message.recasts);
-        /* uint64 watches = 13; */
+            writer.tag(13, WireType.Varint).uint64(message.recasts);
+        /* uint64 watches = 14; */
         if (message.watches !== 0)
-            writer.tag(13, WireType.Varint).uint64(message.watches);
-        /* bool recast = 14; */
+            writer.tag(14, WireType.Varint).uint64(message.watches);
+        /* bool recast = 15; */
         if (message.recast !== false)
-            writer.tag(14, WireType.Varint).bool(message.recast);
-        /* omilos_grpc.ViewerContext viewer_context = 15; */
+            writer.tag(15, WireType.Varint).bool(message.recast);
+        /* omilos_grpc.ViewerContext viewer_context = 16; */
         if (message.viewerContext)
-            ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(15, WireType.LengthDelimited).fork(), options).join();
-        /* omilos_grpc.Author author = 16; */
+            ViewerContext.internalBinaryWrite(message.viewerContext, writer.tag(16, WireType.LengthDelimited).fork(), options).join();
+        /* omilos_grpc.Author author = 17; */
         if (message.author)
-            Author.internalBinaryWrite(message.author, writer.tag(16, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.StringValue parent_author_display_name = 17; */
+            Author.internalBinaryWrite(message.author, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.StringValue parent_author_display_name = 18; */
         if (message.parentAuthorDisplayName)
-            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(17, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.Int64Value parent_author_fid = 18; */
+            StringValue.internalBinaryWrite(message.parentAuthorDisplayName, writer.tag(18, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Int64Value parent_author_fid = 19; */
         if (message.parentAuthorFid)
-            Int64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(18, WireType.LengthDelimited).fork(), options).join();
+            Int64Value.internalBinaryWrite(message.parentAuthorFid, writer.tag(19, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

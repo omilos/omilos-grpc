@@ -101,22 +101,23 @@ message Profile {
 message Cast {
   int64 id = 1;
   string hash = 2;
-  string root_parent_hash = 3;
-  string root_parent_url = 4;
-  google.protobuf.Int64Value root_parent_id = 5;
-  google.protobuf.Int64Value parent_id = 6;
-  int64 author_id = 7;
-  string text = 8;
-  google.protobuf.Timestamp published_at = 9;
-  uint64 replies = 10;
-  uint64 reactions = 11;
-  uint64 recasts = 12; // TODO
-  uint64 watches = 13;
-  bool recast = 14;
-  ViewerContext viewer_context = 15;
-  Author author = 16;
-  google.protobuf.StringValue parent_author_display_name = 17;
-  google.protobuf.Int64Value parent_author_fid = 18;
+  string parent_hash = 3;
+  string root_parent_hash = 4;
+  string root_parent_url = 5;
+  google.protobuf.Int64Value root_parent_id = 6;
+  google.protobuf.Int64Value parent_id = 7;
+  int64 author_id = 8;
+  string text = 9;
+  google.protobuf.Timestamp published_at = 10;
+  uint64 replies = 11;
+  uint64 reactions = 12;
+  uint64 recasts = 13; // TODO
+  uint64 watches = 14;
+  bool recast = 15;
+  ViewerContext viewer_context = 16;
+  Author author = 17;
+  google.protobuf.StringValue parent_author_display_name = 18;
+  google.protobuf.Int64Value parent_author_fid = 19;
 }
 
 message ViewerContext {
