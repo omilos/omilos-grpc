@@ -449,6 +449,10 @@ export interface ConnectResponse {
      * @generated from protobuf field: google.protobuf.StringValue metadata = 4;
      */
     metadata?: StringValue;
+    /**
+     * @generated from protobuf field: omilos_grpc.User user = 5;
+     */
+    user?: User;
 }
 /**
  * @generated from protobuf message omilos_grpc.PostCastRequest
@@ -1931,7 +1935,8 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
             { no: 1, name: "token", kind: "message", T: () => StringValue },
             { no: 2, name: "expires_at", kind: "message", T: () => Timestamp },
             { no: 3, name: "public_key", kind: "message", T: () => StringValue },
-            { no: 4, name: "metadata", kind: "message", T: () => StringValue }
+            { no: 4, name: "metadata", kind: "message", T: () => StringValue },
+            { no: 5, name: "user", kind: "message", T: () => User }
         ]);
     }
     create(value?: PartialMessage<ConnectResponse>): ConnectResponse {
@@ -1958,6 +1963,9 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
                 case /* google.protobuf.StringValue metadata */ 4:
                     message.metadata = StringValue.internalBinaryRead(reader, reader.uint32(), options, message.metadata);
                     break;
+                case /* omilos_grpc.User user */ 5:
+                    message.user = User.internalBinaryRead(reader, reader.uint32(), options, message.user);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -1982,6 +1990,9 @@ class ConnectResponse$Type extends MessageType<ConnectResponse> {
         /* google.protobuf.StringValue metadata = 4; */
         if (message.metadata)
             StringValue.internalBinaryWrite(message.metadata, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* omilos_grpc.User user = 5; */
+        if (message.user)
+            User.internalBinaryWrite(message.user, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

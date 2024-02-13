@@ -185,6 +185,7 @@ message ConnectResponse {
   google.protobuf.Timestamp expires_at = 2;
   google.protobuf.StringValue public_key = 3;
   google.protobuf.StringValue metadata = 4;
+  User user = 5;
 }
 
 message PostCastRequest {
